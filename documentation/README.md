@@ -83,3 +83,29 @@ testing
 - test details go here
 
 other stuff in due time
+
+
+tasks to do
+
+How to add multiple authors for each paper? (will mean multiple lines on child table, but how to get input?)
+
+Add validation method to make sure title of paper is unqiue // stretch goal to see if paper is too similair to another?
+
+add validation method to make sure first_name & Last_name are not duplicated for academics
+
+add method to ask for confirmation for any deletion
+
+change form methods to selectfields
+
+add dynamic select lists to routes.py. Maybe need to alter choices var?
+
+add these things to Jira
+
+add code to create dynamic choices for SelectFields, will choices mess up with more than one select field per page?
+
+add method to do partial search and allow furhter filtering
+
+possible to hyperlink results to take to details of object?
+
+
+
