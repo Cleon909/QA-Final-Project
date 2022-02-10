@@ -6,6 +6,9 @@ app = Flask(__name__)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///data.db" #this will be changed to a cloud hosted server eventually
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config['SECRET_KEY'] = 'Environment_Variable' #this will be changed as well
 
 if __name__ == "__main__":
     app.run(debug=True, host = '0.0.0.0')
+
+from application import routes
