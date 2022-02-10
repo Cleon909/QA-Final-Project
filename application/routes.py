@@ -6,6 +6,7 @@ from forms import SearchDatabaseForm, UpdateAcademicForm, UpdatePaperForm, AddAc
 
 app = Flask(__name__)
 
+
 @app.route('/', methods = ['GET'])
 @app.route('/home', methods = ['GET'])
 def index():
