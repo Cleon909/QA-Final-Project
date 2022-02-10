@@ -14,7 +14,39 @@ def index():
     total_number = {'number_of_academics': Academics.query.all.count(),
     'number_of_papers': Papers.query.count()}
     #here put a method to use each field to further filter the results
-    return
+    academic_search_result = Academics.query.all()
+    paper_search_result = Papers.query.all()
+    academics_ = Academics.query.all()
+    for academic in academics_:
+        form.name.choices.append(
+            (academic.id, f"{academic.name}")
+        )
+    for academic in academics_:
+        form.current_institution.choices.append(
+            (academic.id, f"{academic.current_institution}")
+        )
+    for academic in academics_:
+        form.field_of_study.choices.append(
+            (academic.id, f"{academic.field_of_study}")
+        )
+    papers_ = Papers.query.all()
+    for paper in papers_:
+        form.title.choices.append(
+            (paper.id, f"{paper.title}")
+        )
+    for paper in papers_:
+        form.year_published.choices.append(
+            (paper.id, f"{paper.year_published}")
+        )
+    for paper in papers_:
+        form.title.impact.append(
+            (paper.id, f"{paper.impact}")
+        )
+    for paper in papers_:
+        form.title.field_of_study.append(
+            (paper.id, f"{paper.field_of_study}")
+        )
+    return render_template('index.html', form=form, total_number=total_number, academic_search_result=academic_search_result, paper_search_result=paper_search_result )
 
 @app.route('/update_academic', methods = ['GET, POST'])
 def update_academic():
@@ -47,11 +79,10 @@ def update_paper():
 @app.route('/add_academic')
 def add_academic():
     form = AddAcademicForm()
-    first_name = form.first_name.data
-    last_name = form.last_name.data
+    name = form.name.data
     current_institution = form.current_instition.data
     field_of_study = form.field_of_study.data
-    academic = Academics(first_name, last_name, current_institution, field_of_study)
+    academic = Academics(name, current_institution, field_of_study)
     db.session.add(academic)
     db.session.commit()
     return (url_for('index'))
@@ -61,10 +92,9 @@ def add_paper():
     form = AddPaperForm()
     title = form.title.data
     date_published = form.date_published.data
-    impact = form.impact.data
     field_of_study = form.field_of_study.data
     authors = None # this should feed into a method that should add lines ot the child database , with the same paper_id and a new entry for each academic id
-    paper = Papers(title, date_published, impact, field_of_study)
+    paper = Papers(title, date_published, field_of_study)
     db.session.add(paper) #work out how to add authors to child table
     db.commit()
     return
