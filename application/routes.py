@@ -83,7 +83,7 @@ def delete_academic():
 def delete_paper():
     form = DeletePaperForm()
     list_of_papers = []
-    if form.paper_object.data == None
+    if form.paper_object.data == None:
         list_of_papers = Papers.query.all()
     else:
         list_of_papers = Papers.query.filter_by(id=form.paper_object.data).all()
