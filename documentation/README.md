@@ -107,7 +107,7 @@ add method to do partial search and allow furhter filtering
 
 possible to hyperlink results to take to details of object? could be done using variable in the url, would 
 
-create tests for each file
+create tests for each function
 
 add routes for each page
 

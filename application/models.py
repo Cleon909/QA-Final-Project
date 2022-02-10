@@ -6,8 +6,7 @@ from QA_final_project import db #not sure if this import is correct
 
 class Academics(db.model):
     id = db.Column(db.Integer, primary_key=True)
-    first_name = db.Column(db.String(30), nullable=False)
-    last_name = db.column(db.String(30), nullable=False)
+    name = db.Column(db.String(50), nullable=False)
     current_insitution = db.Column(db.String(30), default='Unkown')
     field_of_study = db.Column(db.String(30), default='Unkown') # this line could be moved to a seperate table
     authors = db.relatioship('authors', backref = 'academicbr')
@@ -26,10 +25,9 @@ class Papers(db.model):
     field_of_study = db.Column(db.String(50), default='Unkown') # this line could be moved to a seperate table
     authors = db.relationship('authors', backref = 'papersbr')
 
-    def __init__(self, title, date_published, impact, field_of_study):
+    def __init__(self, title, year_published, field_of_study):
         self.title = title
         self.year_published = year_published
-        self.impact = impact
         self.field_of_study = field_of_study
 
 class Authors(db.model):
