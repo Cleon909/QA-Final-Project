@@ -46,14 +46,14 @@ searches should cover:
     -   filter all searches on papers (i.e. papers + field of study, or papers + academic etc) by impact. search by the most or least impactful
 
 
-create page
+create page (one for academic and one for paper)
 
     -   academics can be created without any papers but papers must have at least one author (database design doen't mandate this so will have to be explicitle enforced)
     -   academics can have no institution of field of study (polymaths!) // stretch goals is to move field of study to another table and then academics could have multiple fields, papers could also have multiple (epics)
     -   when creating papers multiple authors will have to be selected and these id's will be added to the authors(child) table, along with the paper ids
     -   //stretch goal to add a institution table which would be one to one with academics. would allow use to create instition. otherwise ability to amend would just be to already selected institutions or typing new ones in which would lead to typos and duplicates
 
-update function
+update function (one for academic and one for paper)
 
     -   change academic name (maybe they are trans, got married etc)
     -   change academic's institution (type it in unless I have time for a seperate table, if so then must also be able to add to table)
@@ -63,7 +63,7 @@ update function
     -   change paper impact
     -   change papers title and field of study (shouldn't really be a need to do this, maybe do fix inputting errors?)
 
-delete function
+delete function (one for academic and one for paper)
 
     -   delete academic, however if academic last author related to a paper the paper must be deleted as well. if not then just remove academic and any related objects in the child table
     -   delete paper and any related objects in child table
@@ -95,19 +95,23 @@ add validation method to make sure first_name & Last_name are not duplicated for
 
 add method to ask for confirmation for any deletion
 
-change form methods to selectfields
-
 add dynamic select lists to routes.py. Maybe need to alter choices var?
 
 add these things to Jira
 
 add code to create dynamic choices for SelectFields, will choices mess up with more than one select field per page?
 
+maske sure select field for object return id.
+
 add method to do partial search and allow furhter filtering
 
-possible to hyperlink results to take to details of object? could be done using variable in the url
+possible to hyperlink results to take to details of object? could be done using variable in the url, would 
 
 create tests for each file
+
+add routes for each page
+
+create html templates
 
 
 

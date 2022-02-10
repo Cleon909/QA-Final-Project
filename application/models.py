@@ -21,14 +21,14 @@ class Academics(db.model):
 class Papers(db.model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
-    date_published = db.Column(db.Integer)
+    year_published = db.Column(db.Integer)
     impact = db.Column(db.Integer, default=0)
     field_of_study = db.Column(db.String(50), default='Unkown') # this line could be moved to a seperate table
     authors = db.relationship('authors', backref = 'papersbr')
 
     def __init__(self, title, date_published, impact, field_of_study):
         self.title = title
-        self.date_published = date_published
+        self.year_published = year_published
         self.impact = impact
         self.field_of_study = field_of_study
 
