@@ -1,18 +1,14 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SelectField, SubmitField
 from wtforms.validators import DataRequired, Length, ValidationError, NumberRange
-
+from application.models import Academics, Papers
 
 
 class SearchDatabaseForm(FlaskForm):
     
-    name = SelectField('Name', choices = [])
-    current_institution = SelectField('Current Insitution', choices = [])
-    field_of_study = SelectField('Field of Study', choices = [])
+    name = SelectField('Name', choices = [(g.id, g.name) for g in Academics.query.order_by('name')])
+    title = SelectField('Title of Paper', choices = [(g.id, g.title) for g in Papers.query.order_by('title')])
     submit = SubmitField('')
-    title = SelectField('Title of Paper', choices = [])
-    year_published = SelectField('Year of Publication', choices = [], coerce = int)
-    pfield_of_study = SelectField('Field of Study', choices = [])
 
 class UpdateAcademicForm(FlaskForm):
 
