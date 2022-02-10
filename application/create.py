@@ -1,6 +1,6 @@
 # code to create db and schema and to fill it with some data
 
-from QA_final_project import db
+from application import db
 from models import Academics, Papers, Authors
 
 db.drop_all()

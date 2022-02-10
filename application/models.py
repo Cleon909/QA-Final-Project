@@ -1,7 +1,5 @@
 #define classes for database
-from dataclasses import field
-from re import L
-from QA_final_project import db #not sure if this import is correct
+from application import db 
 
 
 class Academics(db.model):

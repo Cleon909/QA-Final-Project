@@ -1,6 +1,6 @@
 # methods and routing
 from flask import render_template, url_for, redirect, request, Flask
-from QA_final_project import app, db
+from application import app, db
 from models import Academics, Papers, Authors
 from forms import SearchDatabaseForm, UpdateAcademicForm, UpdatePaperForm, AddAcademicForm, AddPaperForm, DeleteAcademicForm, DeletePaperForm 
 
