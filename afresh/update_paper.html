@@ -1,0 +1,18 @@
+{% extends 'layout.html'%}
+
+{% block body %}
+<h1>Update Page</h1>
+<br>
+<h2>Choose Academic to Amend</h2>
+{{ form.academic_object.label }} {{ form.academic_object.name }}
+<br>
+<p><b>What would you like to Amend?</b></p>
+{{ form.name.label }} {{ form.name}}
+<br>
+{{ form.current_institution.label }} {{ form.current_instituion }}
+<br>
+{{ form.field_of_study.label }} {{ form.field_of_study }} 
+<br>
+{{ form.submit }}
+
+{% endblock body %}
