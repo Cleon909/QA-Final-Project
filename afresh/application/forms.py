@@ -8,7 +8,7 @@ class SearchDatabaseForm(FlaskForm):
     
     name = SelectField('Name', choices = [(g.id, g.name) for g in Academics.query.order_by('name')])
     title = SelectField('Title of Paper', choices = [(g.id, g.title) for g in Papers.query.order_by('title')])
-    submit = SubmitField('')
+    submit = SubmitField('Press to submit')
 
 class UpdateAcademicForm(FlaskForm):
 
@@ -16,7 +16,7 @@ class UpdateAcademicForm(FlaskForm):
     name = StringField('Name', validators = [Length(max = 50)])
     current_instition = StringField('Current Insitution', validators = [Length(max = 30)])
     field_of_study = StringField('Field of Study', validators = [Length(max = 30)])
-    submit = SubmitField('')
+    submit = SubmitField('Press to submit')
 
     #maybe add a method to validate that details haven't been changed the same as another academic?
 

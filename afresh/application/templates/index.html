@@ -7,6 +7,8 @@
             <!-- {{ form.hidden_tag() }} -->
             {{ form.name.label }} {{ form.name }}
             <br>
+            <p></p>
+            {{ form.submit }}
         </form>
     </div>
 <h2>Search for Paper</h2>
@@ -15,6 +17,8 @@
         <!-- {{ form.hidden_tag() }} -->
         {{ form.title.label }} {{ form.title }}
         <br>
+        <p></p>
+        {{ form.submit }}
     </form>
 </div>
 <div>
@@ -23,6 +27,7 @@
     <br>
     <p>Total Number of Papers: {{total_number['number_of_papers']}}<p>
         <br>
+
     {% if search_term %}
     <h1>Search Result</h1>
         {% for result in search_term %}
