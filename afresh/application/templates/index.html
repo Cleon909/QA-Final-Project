@@ -30,17 +30,21 @@
 
     {% if academics_result %}
         <h1>Academic's Details</h1>
-        <p><b>Name:</b> {{academics_result.name}}, <b>Institution:</b> {{academics_result.current_institution}}, <b>Field of Study:</b> {{academics_result.field_of_study}}</p>
+        <p><b>Name:</b> {{ academics_result.name }}, <b>Institution:</b> {{ academics_result.current_institution }}, <b>Field of Study:</b> {{ academics_result.field_of_study }}</p>
         <br>
         <p><b>Papers by Author:</b></p>
         {% for paper in papers_by_author %}
         <p><b>Title:</b>{{ paper.title }} <b>Year Published</b> {{ paper.year_published }} <b>Field of Study</b> {{ paper.field_of_study }}</p>
         {% endfor %}
         {% endif %}
+
         {% if papers_result %}
     <div>
         <h1> Paper Details </h1>
         <p><b>Title:</b> {{ papers_result.title }} <b>Year Published:</b> {{ papers_result.year_published }} <b>Field of Study:</b> {{ papers_result.field_of_study }}</p>
+        {% for academic in authors_of_paper %}
+        <p><b>Name:</b> {{ academic.name }}, <b>Institution:</b> {{ academic.current_institution }}, <b>Field of Study</b> {{ academic.field_of_study }}</p>
+        {% endfor %}
         {% endif %}
     </div>
 </div>
