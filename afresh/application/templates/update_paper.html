@@ -3,14 +3,14 @@
 {% block body %}
 <h1>Update Page</h1>
 <br>
-<h2>Choose Academic to Amend</h2>
+<h2>Choose Paper to Amend</h2>
 <form method = 'POST'>
-{{ form.academic_object.label }} {{ form.academic_object.name }}
+{{ form.paper_object.label }} {{ form.paper_object.name }}
 <br>
 <p><b>What would you like to Amend?</b></p>
-{{ form.name.label }} {{ form.name}}
+{{ form.title.label }} {{ title.name}}
 <br>
-{{ form.current_institution.label }} {{ form.current_instituion }}
+{{ form.year_published.label }} {{ form.field_of_study }}
 <br>
 {{ form.field_of_study.label }} {{ form.field_of_study }} 
 <br>
