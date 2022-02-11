@@ -11,12 +11,21 @@ def index():
     form = SearchDatabaseForm()
     form.name.choices = [(g.id, g.name) for g in Academics.query.order_by('name')]
     form.title.choices = [(g.id, g.title) for g in Papers.query.order_by('title')]
+
     if request.method == 'POST':
         total_number = {'number_of_academics': Academics.query.count(),
         'number_of_papers': Papers.query.count()}
         academics_result = Academics.query.filter_by(id=form.name.data).first()
+        #code below uses child table to find papers for author
+        papers_id = [g.paper_id for g in Authors.query.filter_by(academic_id = form.name.data)]
+        papers_by_author = []
+        for pap in papers_id:
+            papers_by_author.append(Papers.query.filter_by(id = pap))
+
+
+
         papers_result = Papers.query.filter_by(id=form.title.data).first()
-        return render_template('index.html',form=form, total_number=total_number, academics_result=academics_result , papers_result=papers_result)
+        return render_template('index.html',form=form, total_number=total_number, academics_result=academics_result, papers_by_author=papers_by_author, papers_result=papers_result)
     else:
         total_number = {'number_of_academics': Academics.query.count(),
         'number_of_papers': Papers.query.count()}

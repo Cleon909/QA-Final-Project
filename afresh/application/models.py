@@ -16,7 +16,6 @@ class Papers(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
     year_published = db.Column(db.Integer)
-    impact = db.Column(db.Integer, default=0)
     field_of_study = db.Column(db.String(50), default='Unkown') # this line could be moved to a seperate table
     authors = db.relationship('Authors', backref = 'papersbr')
 
