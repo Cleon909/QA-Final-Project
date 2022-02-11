@@ -23,23 +23,30 @@ def index():
         return render_template('index.html', form=form, total_number=total_number) 
 
 
-@app.route('/update_academic', methods = ['GET, POST'])
+@app.route('/update_academic', methods = ['GET', 'POST'])
 def update_academic():
-    form = UpdateAcademicForm
-    list_of_academics = []
-    if form.academic_object.data == None:
-        list_of_academics = Academics.query.all()
+    form = UpdateAcademicForm()
+    form.academic_object.choices = [(g.id, g.name) for g in Academics.query.order_by('name')]
+
+    if request.method == 'POST':
+        acad = Academics.query.get(form.academic_object.data)
+        if form.academic_object.name != '':
+            acad.name = form.name.data
+        if form.current_institution.data != '':
+            acad.current_institution = form.current_institution.data
+        if form.field_of_study.data != '':
+            acad.field_of_study = form.field_of_study.data
+        db.session.commit()
+        return render_template('update_academic.html', acad=acad)
     else:
-        Academics.query.filter_by(id=form.academic_object.data).all() #this hopefully will filter by what is entered into field
-    #methods here will post from update fields
-    if len(list_of_academics) == 1:
-        return
-        #then the fields to update will appear and will post to the list_of_academics[0] object. 
-    return
+        init = True
+        return render_template('update_academic.html', form=form, init=init) 
+
+
 
 @app.route('/update_paper', methods = ['GET, POST'])
 def update_paper():
-    form = UpdatePaperForm
+    form = UpdatePaperForm()
     list_of_papers = []
     if form.paper_object.data == None:
         list_of_papers = Papers.query.all()

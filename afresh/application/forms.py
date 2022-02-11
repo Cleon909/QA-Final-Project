@@ -13,9 +13,10 @@ class SearchDatabaseForm(FlaskForm):
 
 class UpdateAcademicForm(FlaskForm):
 
-    academic_object = SelectField('Academic to Update', choices = [], coerce=int) # should return id of academic object
+    academic_object = SelectField('Academic to Update', choices = []) # should return id of academic object
+    
     name = StringField('Name', validators = [Length(max = 50)])
-    current_instition = StringField('Current Insitution', validators = [Length(max = 30)])
+    current_institution = StringField('Current Insitution', validators = [Length(max = 30)])
     field_of_study = StringField('Field of Study', validators = [Length(max = 30)])
     submit = SubmitField('Press to submit')
 

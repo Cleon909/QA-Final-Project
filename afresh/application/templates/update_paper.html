@@ -4,6 +4,7 @@
 <h1>Update Page</h1>
 <br>
 <h2>Choose Academic to Amend</h2>
+<form method = 'POST'>
 {{ form.academic_object.label }} {{ form.academic_object.name }}
 <br>
 <p><b>What would you like to Amend?</b></p>
@@ -14,5 +15,6 @@
 {{ form.field_of_study.label }} {{ form.field_of_study }} 
 <br>
 {{ form.submit }}
+</form>
 
 {% endblock body %}
