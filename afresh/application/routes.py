@@ -21,14 +21,14 @@ def index():
         papers_id = [g.paper_id for g in Authors.query.filter_by(academic_id = form.name.data)]
         papers_by_author = []
         for pap in papers_id:
-            papers_by_author.append(Papers.query.filter_by(id = pap))
+            papers_by_author.append(Papers.query.filter_by(id = pap).first())
 
         papers_result = Papers.query.filter_by(id=form.title.data).first()
          # code below uses child table to find aythors of paper
         acad_id = [g.academic_id for g in Authors.query.filter_by(paper_id = form.title.data)]
         authors_of_paper = []
         for acad in acad_id:
-            authors_of_paper.append(Academics.query.filter_by(id = acad))
+            authors_of_paper.append(Academics.query.filter_by(id = acad).first())
 
         return render_template('index.html',form=form, total_number=total_number, academics_result=academics_result, papers_by_author=papers_by_author, papers_result=papers_result, authors_of_paper=authors_of_paper)
     else:

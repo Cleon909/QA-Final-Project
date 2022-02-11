@@ -42,6 +42,7 @@
     <div>
         <h1> Paper Details </h1>
         <p><b>Title:</b> {{ papers_result.title }} <b>Year Published:</b> {{ papers_result.year_published }} <b>Field of Study:</b> {{ papers_result.field_of_study }}</p>
+        <p><b> Authors of Paper </b></p>
         {% for academic in authors_of_paper %}
         <p><b>Name:</b> {{ academic.name }}, <b>Institution:</b> {{ academic.current_institution }}, <b>Field of Study</b> {{ academic.field_of_study }}</p>
         {% endfor %}
