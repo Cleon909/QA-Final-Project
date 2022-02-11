@@ -48,7 +48,7 @@ def update_academic():
 def update_paper():
     form = UpdatePaperForm()
     form.paper_object.choices = [(g.id, g.title) for g in Papers.query.order_by('title')]
-    
+
     if request.method == 'POST':
         pap = Papers.query.get(form.paper_object.data)
         if form.title.data != '':
@@ -68,16 +68,21 @@ def update_paper():
     return
 
 
-@app.route('/add_academic')
+@app.route('/add_academic', methods = ['GET', 'POST'])
 def add_academic():
     form = AddAcademicForm()
-    name = form.name.data
-    current_institution = form.current_instition.data
-    field_of_study = form.field_of_study.data
-    academic = Academics(name, current_institution, field_of_study)
-    db.session.add(academic)
-    db.session.commit()
-    return (url_for('index'))
+    if request.method == 'POST':
+        name = form.name.data
+        current_institution = form.current_institution.data
+        field_of_study = form.field_of_study.data
+        academic = Academics(name, current_institution, field_of_study)
+        db.session.add(academic)
+        db.session.commit()
+        return render_template('add_academic.html', academic=academic)
+    else:
+        return render_template('add_academic.html', form=form)
+
+
 
 @app.route('/add_paper')
 def add_paper():
