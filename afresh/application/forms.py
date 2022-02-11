@@ -10,6 +10,7 @@ class SearchDatabaseForm(FlaskForm):
     title = SelectField('Title of Paper', choices = [(g.id, g.title) for g in Papers.query.order_by('title')])
     submit = SubmitField('Press to submit')
 
+
 class UpdateAcademicForm(FlaskForm):
 
     academic_object = SelectField('Academic to Update', choices = [], coerce=int) # should return id of academic object

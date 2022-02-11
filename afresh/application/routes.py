@@ -5,17 +5,26 @@ from application.forms import SearchDatabaseForm, UpdateAcademicForm, UpdatePape
 
 
 
-@app.route('/', methods = ['GET'])
-@app.route('/home', methods = ['GET'])
+@app.route('/', methods = ['GET', 'POST'])
+@app.route('/home', methods = ['GET', 'POST'])
 def index():
     form = SearchDatabaseForm()
-    total_number = {'number_of_academics': Academics.query.count(),
-    'number_of_papers': Papers.query.count()}
 
-    if form.validate_on_submit():
-        search_term = Academics.query.filter_by(name=form.name.data).filter_by(current_institution=form.current_institution.data).filter_by(field_of_study=form.field_of_study.data).all()
-        return render_template('index.html',form=form, total_number=total_number, search_term=search_term)
-    return render_template('index.html', form=form, total_number=total_number)
+
+    if request.method == 'POST':
+        total_number = {'number_of_academics': Academics.query.count(),
+        'number_of_papers': Papers.query.count()}
+        academics_result = Academics.query.filter_by(id=form.name.data).first()
+        papers_result = Papers.query.filter_by(id=form.title.data).first()
+        return render_template('index.html',form=form, total_number=total_number, academics_result=academics_result , papers_result=papers_result)
+    else:
+        total_number = {'number_of_academics': Academics.query.count(),
+        'number_of_papers': Papers.query.count()}
+        return render_template('index.html', form=form, total_number=total_number) 
+
+
+
+
 
 @app.route('/update_academic', methods = ['GET, POST'])
 def update_academic():
