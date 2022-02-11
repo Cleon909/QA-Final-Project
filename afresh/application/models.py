@@ -3,13 +3,13 @@ from application import db
 class Academics(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
-    current_insitution = db.Column(db.String(30), default='Unkown')
-    field_of_study = db.Column(db.String(30), default='Unkown') # this line could be moved to a seperate table
+    current_institution = db.Column(db.String(30), default='Unknown')
+    field_of_study = db.Column(db.String(30), default='Unknown') # this line could be moved to a seperate table
     authors = db.relationship('Authors', backref = 'academicbr')
 
-    def __init__(self, name, last_name, current_insitution = None, field_of_study = None):
+    def __init__(self, name, current_insitution, field_of_study):
         self.name = name
-        self.current_insitution = current_insitution
+        self.current_institution = current_insitution
         self.field_of_study = field_of_study
 
 class Papers(db.Model):

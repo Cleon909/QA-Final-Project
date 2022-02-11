@@ -30,17 +30,15 @@
 
     {% if academics_result %}
         <h1>Academic's Details</h1>
-        <br>
-        <p><b>Name:</b> {{academics_result.name}}, <b>Institution:</b> {{academics_result.current_institution}}, <b>Field of Study:</b> {{academics_result.field_of_study}}
+        <p><b>Name:</b> {{academics_result.name}}, <b>Institution:</b> {{academics_result.current_institution}}, <b>Field of Study:</b> {{academics_result.field_of_study}}</p>
+
         <!-- list of papers written by academic go here         -->
+        {% endif %}
+        {% if papers_result %}
     <div>
         <h1> Paper Details </h1>
-        <br>
         <p><b>Title:</b> {{ papers_result.title }} <b>Year Published:</b> {{ papers_result.year_published }} <b>Field of Study:</b> {{ papers_result.field_of_study }}</p>
+        {% endif %}
     </div>
-    {% endif %}
-    
-    <p>
-
 </div>
 {% endblock body %}
