@@ -6,8 +6,8 @@ from application.models import Academics, Papers
 
 class SearchDatabaseForm(FlaskForm):
     
-    name = SelectField('Name', choices = [(g.id, g.name) for g in Academics.query.order_by('name')])
-    title = SelectField('Title of Paper', choices = [(g.id, g.title) for g in Papers.query.order_by('title')])
+    name = SelectField('Name', choices = [])
+    title = SelectField('Title of Paper', choices = [])
     submit = SubmitField('Press to submit')
 
 

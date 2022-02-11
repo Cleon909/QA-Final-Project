@@ -9,8 +9,8 @@ from application.forms import SearchDatabaseForm, UpdateAcademicForm, UpdatePape
 @app.route('/home', methods = ['GET', 'POST'])
 def index():
     form = SearchDatabaseForm()
-
-
+    form.name.choices = [(g.id, g.name) for g in Academics.query.order_by('name')]
+    form.title.choices = [(g.id, g.title) for g in Papers.query.order_by('title')]
     if request.method == 'POST':
         total_number = {'number_of_academics': Academics.query.count(),
         'number_of_papers': Papers.query.count()}
@@ -21,9 +21,6 @@ def index():
         total_number = {'number_of_academics': Academics.query.count(),
         'number_of_papers': Papers.query.count()}
         return render_template('index.html', form=form, total_number=total_number) 
-
-
-
 
 
 @app.route('/update_academic', methods = ['GET, POST'])

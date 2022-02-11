@@ -1,7 +1,7 @@
 {% extends 'layout.html'%}
 
 {% block body %}
-<h2>Search of Academic</h2>
+<h2>Search for Academic</h2>
     <div class = 'form'>
         <form method="POST" action="">
             <!-- {{ form.hidden_tag() }} -->
@@ -23,20 +23,20 @@
 </div>
 <div>
     <h1> Search Results</h1>
-    <p>Total Number of Academics: {{total_number['number_of_academics']}}<p> 
+    <p><b>Total Number of Academics:</b> {{total_number['number_of_academics']}}<p> 
     <br>
-    <p>Total Number of Papers: {{total_number['number_of_papers']}}<p>
+    <p><b>Total Number of Papers:</b> {{total_number['number_of_papers']}}<p>
     <br>
 
     {% if academics_result %}
         <h1>Academic's Details</h1>
         <br>
-        <p>Name: {{academics_result.name}}, Institution: {{academics_result.current_institution}}, Field of Study: {{academics_result.field_of_study}}
+        <p><b>Name:</b> {{academics_result.name}}, <b>Institution:</b> {{academics_result.current_institution}}, <b>Field of Study:</b> {{academics_result.field_of_study}}
         <!-- list of papers written by academic go here         -->
     <div>
         <h1> Paper Details </h1>
         <br>
-        <p>Title: {{ papers_result.title }} Year Published: {{ papers_result.year_published }} Field of Study: {{ papers_result.field_of_study }}</p>
+        <p><b>Title:</b> {{ papers_result.title }} <b>Year Published:</b> {{ papers_result.year_published }} <b>Field of Study:</b> {{ papers_result.field_of_study }}</p>
     </div>
     {% endif %}
     
