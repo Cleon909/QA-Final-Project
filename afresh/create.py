@@ -49,7 +49,7 @@ paper1 = Papers('Nihilism and dialectic appropriation', 1985, 'Advanced Semiotic
 db.session.add(paper1)
 paper2 = Papers('Marxist capitalism in the works of Gaiman', 2020, 'The Occult')
 db.session.add(paper2)
-paper3 = Papers('Postpatriarchial libertarianism in the works of Glass', 2010, 'Compter Science and Etymology')
+paper3 = Papers('Bob Diamond and Metasemiotics in Finance', 2010, 'Compter Science and Etymology')
 db.session.add(paper3)
 paper4 = Papers('Postpatriarchial libertarianism in the works of Glass', 1999, 'Music and the Movement of the Spheres')
 db.session.add(paper4)

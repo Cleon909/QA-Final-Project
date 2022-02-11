@@ -30,7 +30,7 @@ def update_academic():
 
     if request.method == 'POST':
         acad = Academics.query.get(form.academic_object.data)
-        if form.academic_object.name != '':
+        if form.name != '':
             acad.name = form.name.data
         if form.current_institution.data != '':
             acad.current_institution = form.current_institution.data
@@ -44,15 +44,25 @@ def update_academic():
 
 
 
-@app.route('/update_paper', methods = ['GET, POST'])
+@app.route('/update_paper', methods = ['GET', 'POST'])
 def update_paper():
     form = UpdatePaperForm()
-    list_of_papers = []
-    if form.paper_object.data == None:
-        list_of_papers = Papers.query.all()
+    form.paper_object.choices = [(g.id, g.title) for g in Papers.query.order_by('title')]
+    
+    if request.method == 'POST':
+        pap = Papers.query.get(form.paper_object.data)
+        if form.title.data != '':
+            pap.title = form.title.data
+        if form.year_published.data != '':
+            pap.year_published = form.year_published.data
+        if form.field_of_study.data != '':
+            pap.field_of_study = form.field_of_study.data
+        db.session.commit()
+        return render_template('update_paper.html', pap=pap)
     else:
-        Papers.query.filter_by(id=form.paper_object.data).all()
-    if len(list_of_papers) == 1:
+        init = True
+        return render_template('update_paper.html', form=form, init=init)
+
         return
         #code here to amend the object
     return

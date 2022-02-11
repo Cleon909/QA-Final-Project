@@ -11,14 +11,17 @@
         <p><b>What would you like to Amend?</b></p>
         {{ form.name.label }} {{ form.name}}
         <br>
+        <p></p>
         {{ form.current_institution.label }} {{ form.current_institution }}
         <br>
+        <p></p>
         {{ form.field_of_study.label }} {{ form.field_of_study }} 
         <br>
+        <p></p>
         {{ form.submit }}
     </form>
 {% endif %}
 {% if acad %}
-<h1>Academic Updated: {{ acad.name }}, {{ acad.current_institution }}, {{ acad.field_of_study }}</h1>
+<h2>Academic Updated: {{ acad.name }}, {{ acad.current_institution }}, {{ acad.field_of_study }}</h1>
 {% endif %}
 {% endblock body %}

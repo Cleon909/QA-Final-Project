@@ -25,10 +25,10 @@ class UpdateAcademicForm(FlaskForm):
 class UpdatePaperForm(FlaskForm):
     
     paper_object = SelectField('Paper to update', choices = [], coerce = int) 
-    title = StringField('Title of Paper', validators = [Length(max = 30)])
-    year_published = IntegerField('Year of Publication', validators = [NumberRange(min = 1457, max = 2023)])
+    title = StringField('Title of Paper')
+    year_published = SelectField('Year of Publication', choices = [i for i in range(1453, 2023)])
     field_of_study = StringField('Field of Study', validators = [Length(max = 30)])
-    submit = SubmitField('')
+    submit = SubmitField('Press to Submit')
 
 class AddAcademicForm(FlaskForm):
     
