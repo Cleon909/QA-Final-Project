@@ -1,8 +1,0 @@
-Flask
-Flask-SQLAlchemy
-Flask-WTF
-itsdangerous
-Jinja2
-MarkupSafe
-SQLAlchemy
-WTForms

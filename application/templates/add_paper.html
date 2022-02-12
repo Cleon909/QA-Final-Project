@@ -1,4 +1,31 @@
 {% extends 'layout.html'%}
 
 {% block body %}
+{% if form %}
+<h2>Add an Paper</h2>
+<form method = 'POST'>
+<br>
+{{ form.title.label }} {{ form.title }}
+<br>
+<p></p>
+{{ form.year_published.label }} {{ form.year_published }}
+<br>
+<p></p>
+{{ form.field_of_study.label }} {{ form.field_of_study }}
+<br>
+{{ form.no_of_authors.label }} {{ form.no_of_authors }}
+{{ form.authors1.label }} {{ form.authors1 }} {{ form.authors2 }} {{ form.authors3}} {{form.authors4}}
+<br>
+{{ form.submit }}
+</form>
+{% endif %}
+{% if paper %}
+<h2>Paper created</h2>
+<p><b>Title:</b> {{paper.title}} <b>Year Published:</b> {{ paper.year_published }} Field of Study: {{ paper.field_of_study }}</p><br>
+<p>Authors:</p>
+{% for a in academic_authors %}
+{{ a.name }}
+<p></p>
+{% endfor %}
+{% endif %}
 {% endblock body %}
