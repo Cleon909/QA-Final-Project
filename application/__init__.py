@@ -9,5 +9,4 @@ app.config['SECRET_KEY'] = "abcd"
 
 db = SQLAlchemy(app)
 
-
 from application import routes
