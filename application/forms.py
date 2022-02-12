@@ -28,6 +28,11 @@ class UpdatePaperForm(FlaskForm):
     title = StringField('Title of Paper')
     year_published = SelectField('Year of Publication', choices = [i for i in range(1453, 2023)])
     field_of_study = StringField('Field of Study', validators = [Length(max = 30)])
+    no_of_authors = SelectField('Number of Authors', choices = [1,2,3,4])
+    author1 = SelectField('Author', choices =[])
+    author2 = SelectField('Author', choices =[])
+    author3 = SelectField('Author', choices =[])
+    author4 = SelectField('Author', choices =[])
     submit = SubmitField('Press to Submit')
 
 class AddAcademicForm(FlaskForm):
