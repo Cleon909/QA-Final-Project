@@ -2,8 +2,10 @@
 
 {% block body %}
 {% if form %}
-<h2>Add an Paper</h2>
+<h1>Add a Paper</h1>
 <form method = 'POST'>
+<br>
+<h2> Add paper's details</h2>
 <br>
 {{ form.title.label }} {{ form.title }}
 <br>
@@ -13,9 +15,13 @@
 <p></p>
 {{ form.field_of_study.label }} {{ form.field_of_study }}
 <br>
+<p></p>
 {{ form.no_of_authors.label }} {{ form.no_of_authors }}
+<br>
+<p></p>
 {{ form.authors1.label }} {{ form.authors1 }} {{ form.authors2 }} {{ form.authors3}} {{form.authors4}}
 <br>
+<p></p>
 {{ form.submit }}
 </form>
 {% endif %}
