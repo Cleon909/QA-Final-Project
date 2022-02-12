@@ -1,18 +1,15 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SelectField, SubmitField
 from wtforms.validators import DataRequired, Length, ValidationError, NumberRange
-
+from application.models import Academics, Papers
 
 
 class SearchDatabaseForm(FlaskForm):
     
     name = SelectField('Name', choices = [])
-    current_institution = SelectField('Current Insitution', choices = [])
-    field_of_study = SelectField('Field of Study', choices = [])
-    submit = SubmitField('')
     title = SelectField('Title of Paper', choices = [])
-    year_published = SelectField('Year of Publication', choices = [], coerce = int)
-    pfield_of_study = SelectField('Field of Study', choices = [])
+    submit = SubmitField('Press to submit')
+
 
 class UpdateAcademicForm(FlaskForm):
 
@@ -20,7 +17,7 @@ class UpdateAcademicForm(FlaskForm):
     name = StringField('Name', validators = [Length(max = 50)])
     current_instition = StringField('Current Insitution', validators = [Length(max = 30)])
     field_of_study = StringField('Field of Study', validators = [Length(max = 30)])
-    submit = SubmitField('')
+    submit = SubmitField('Press to submit')
 
     #maybe add a method to validate that details haven't been changed the same as another academic?
 
