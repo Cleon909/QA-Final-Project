@@ -1,4 +1,27 @@
 {% extends 'layout.html'%}
 
 {% block body %}
+<h1>Update Page</h1>
+<br>
+{% if init %}
+    <h2>Choose Paper to Amend</h2>
+    <form method = 'POST'>
+        {{ form.paper_object.label }} {{ form.paper_object }}
+        <br>
+        <p><b>What would you like to Amend?</b></p>
+        {{ form.title.label }} {{ form.title}}
+        <br>
+        <p></p>
+        {{ form.year_published.label }} {{ form.year_published }}
+        <br>
+        <p></p>
+        {{ form.field_of_study.label }} {{ form.field_of_study }} 
+        <br>
+        <p></p>
+        {{ form.submit }}
+    </form>
+{% endif %}
+{% if pap %}
+<h2> Paper Updated: {{ pap.title }}, {{ pap.year_published }},  {{ pap.field_of_study }}</h2>
+{% endif %}
 {% endblock body %}

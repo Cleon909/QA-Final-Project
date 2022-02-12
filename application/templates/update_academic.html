@@ -1,4 +1,27 @@
 {% extends 'layout.html'%}
 
 {% block body %}
+<h1>Update Page</h1>
+<br>
+{% if init %}
+    <h2>Choose Academic to Amend</h2>
+    <form method = 'POST', action = ''>
+        {{ form.academic_object.label }} {{ form.academic_object }}
+        <br>
+        <p><b>What would you like to Amend?</b></p>
+        {{ form.name.label }} {{ form.name}}
+        <br>
+        <p></p>
+        {{ form.current_institution.label }} {{ form.current_institution }}
+        <br>
+        <p></p>
+        {{ form.field_of_study.label }} {{ form.field_of_study }} 
+        <br>
+        <p></p>
+        {{ form.submit }}
+    </form>
+{% endif %}
+{% if acad %}
+<h2>Academic Updated: {{ acad.name }}, {{ acad.current_institution }}, {{ acad.field_of_study }}</h1>
+{% endif %}
 {% endblock body %}

@@ -1,36 +1,34 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SelectField, SubmitField
 from wtforms.validators import DataRequired, Length, ValidationError, NumberRange
-
+from application.models import Academics, Papers
 
 
 class SearchDatabaseForm(FlaskForm):
     
     name = SelectField('Name', choices = [])
-    current_institution = SelectField('Current Insitution', choices = [])
-    field_of_study = SelectField('Field of Study', choices = [])
-    submit = SubmitField('')
     title = SelectField('Title of Paper', choices = [])
-    year_published = SelectField('Year of Publication', choices = [], coerce = int)
-    pfield_of_study = SelectField('Field of Study', choices = [])
+    submit = SubmitField('Press to submit')
+
 
 class UpdateAcademicForm(FlaskForm):
 
-    academic_object = SelectField('Academic to Update', choices = [], coerce=int) # should return id of academic object
+    academic_object = SelectField('Academic to Update', choices = []) # should return id of academic object
+    
     name = StringField('Name', validators = [Length(max = 50)])
-    current_instition = StringField('Current Insitution', validators = [Length(max = 30)])
+    current_institution = StringField('Current Insitution', validators = [Length(max = 30)])
     field_of_study = StringField('Field of Study', validators = [Length(max = 30)])
-    submit = SubmitField('')
+    submit = SubmitField('Press to submit')
 
     #maybe add a method to validate that details haven't been changed the same as another academic?
 
 class UpdatePaperForm(FlaskForm):
     
     paper_object = SelectField('Paper to update', choices = [], coerce = int) 
-    title = StringField('Title of Paper', validators = [Length(max = 30)])
-    year_published = IntegerField('Year of Publication', validators = [NumberRange(min = 1457, max = 2023)])
+    title = StringField('Title of Paper')
+    year_published = SelectField('Year of Publication', choices = [i for i in range(1453, 2023)])
     field_of_study = StringField('Field of Study', validators = [Length(max = 30)])
-    submit = SubmitField('')
+    submit = SubmitField('Press to Submit')
 
 class AddAcademicForm(FlaskForm):
     
