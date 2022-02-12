@@ -8,30 +8,24 @@
 {{ form.title.label }} {{ form.title }}
 <br>
 <p></p>
-{{ form.year_of_published.label }} {{ form.year_published }}
+{{ form.year_published.label }} {{ form.year_published }}
 <br>
 <p></p>
 {{ form.field_of_study.label }} {{ form.field_of_study }}
 <br>
 {{ form.no_of_authors.label }} {{ form.no_of_authors }}
-{% if form.no_of_authors.data = 1 %}
-{{ form.author1.label }} {{ form.author1 }}
-{% endif %}
-{{ form.no_of_authors.label }} {{ form.no_of_authors }}
-{% if form.no_of_authors.data = 2 %}
-{{ form.author1.label }} {{ form.author1 }} {{ form.author2 }}
-{% endif %}
-{% if form.no_of_authors = 3 %}
-{{ form.author1.label }} {{ form.author1 }} {{ form.author2 }} {{ form.author3}}
-{% endif %}
-{% if form.no_of_authors = 4 %}
-{{ form.author1.label }} {{ form.author1 }} {{ form.author2 }} {{ form.author3}} {{form.author4}}
+{{ form.authors1.label }} {{ form.authors1 }} {{ form.authors2 }} {{ form.authors3}} {{form.authors4}}
+<br>
 {{ form.submit }}
 </form>
 {% endif %}
 {% if paper %}
 <h2>Paper created</h2>
-<p><b>Title:</b> {{paper.title}} <b>Year Published:</b> Field of Study: {{ paper.field_of_study }}</p><br>
-<p>Authors: {{author1.name}} {{author2.name}} {{author3.name}} {{author4.name}}</p>
+<p><b>Title:</b> {{paper.title}} <b>Year Published:</b> {{ paper.year_published }} Field of Study: {{ paper.field_of_study }}</p><br>
+<p>Authors:</p>
+{% for a in authors %}
+{{ a.name }}
+<p></p>
+{% endfor %}
 {% endif %}
 {% endblock body %}

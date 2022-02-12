@@ -84,17 +84,41 @@ def add_academic():
 
 
 
-@app.route('/add_paper')
+@app.route('/add_paper', methods = ['GET', 'POST'])
 def add_paper():
     form = AddPaperForm()
-    title = form.title.data
-    date_published = form.date_published.data
-    field_of_study = form.field_of_study.data
-    authors = None # this should feed into a method that should add lines ot the child database , with the same paper_id and a new entry for each academic id
-    paper = Papers(title, date_published, field_of_study)
-    db.session.add(paper) #work out how to add authors to child table
-    db.commit()
-    return
+    form.authors1.choices = [(g.id, g.name) for g in Academics.query.order_by('name')] 
+    form.authors2.choices = [(g.id, g.name) for g in Academics.query.order_by('name')]
+    form.authors3.choices = [(g.id, g.name) for g in Academics.query.order_by('name')]
+    form.authors4.choices = [(g.id, g.name) for g in Academics.query.order_by('name')]
+    if request.method == 'POST':
+        title = form.title.data
+        year_published = form.year_published.data
+        field_of_study = form.field_of_study.data
+        paper = Papers(title, year_published, field_of_study)
+        db.session.add(paper) #work out how to add authors to child table
+        db.session.commit()
+        authors = []
+        if form.no_of_authors.data == 1 or form.no_of_authors.data == 2 or form.no_of_authors.data == 3 or form.no_of_authors.data == 4:
+            author1 = Authors(form.authors1.data, paper.id)
+            authors.append(author1)
+            db.session.add(author1)
+        if form.no_of_authors.data == 2 or form.no_of_authors.data == 3 or form.no_of_authors.data == 4:
+            author2 = Authors(form.authors1.data, paper.id)
+            db.session.add(author2)
+            authors.append(author2)
+        if form.no_of_authors.data == 3 or form.no_of_authors.data == 4:
+            author3 = Authors(form.authors1.data, paper.id)
+            db.session.add(author3)
+            authors.append(author3)
+        if form.no_of_authors.data == 4:
+            author4 = Authors(form.authors1.data, paper.id)
+            db.session.add(author4)
+            authors.append(author4)
+            db.session.commit()
+        return render_template('add_paper.html', paper=paper, authors=authors)
+    else:
+        return render_template('add_paper.html', form=form)
 
 @app.route('/delete_academic')
 def delete_academic():

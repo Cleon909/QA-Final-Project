@@ -42,11 +42,12 @@ class AddPaperForm(FlaskForm):
     title = StringField('Title of Paper', validators = [Length(max = 30), DataRequired()])
     year_published = SelectField('Year of Publication', choices = [i for i in range (1453, 2023)])
     field_of_study = StringField('Field of Study', validators = [Length(max = 30)])
+    no_of_authors = SelectField('Number of Authors', choices = [1,2,3,4])
     authors1 = SelectField('Authors', choices = [])#should return id of academic object
     authors2 = SelectField('Authors', choices = [])
     authors3= SelectField('Authors', choices = [])
     authors4= SelectField('Authors', choices = [])
-    submit = SubmitField('')
+    submit = SubmitField('Press to add paper')
 
 class DeleteAcademicForm(FlaskForm):
     #work out here how to allow for partial seraches in each of the fields
