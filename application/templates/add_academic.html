@@ -1,0 +1,25 @@
+{% extends 'layout.html'%}
+{% block body %}
+{% if form %}
+<h1>Add an Academic</h1>
+<form method = 'POST'>
+<br>
+<h2>Add academic's details</h2>
+<br>
+{{ form.name.label }} {{ form.name }}
+<br>
+<p></p>
+{{ form.current_institution.label }} {{ form.current_institution }}
+<br>
+<p></p>
+{{ form.field_of_study.label }} {{ form.field_of_study }}
+<br>
+<p></p>
+{{ form.submit }}
+</form>
+{% endif %}
+{% if academic %}
+<h2>Academic created</h2>
+<p>{{ academic.name }}, Institution: {{ academic.current_institution }}, Field of Study: {{ academic.field_of_study }}</p>
+{% endif %}
+{% endblock body %}

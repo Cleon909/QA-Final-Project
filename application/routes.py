@@ -62,6 +62,12 @@ def update_academic():
 def update_paper():
     form = UpdatePaperForm()
     form.paper_object.choices = [(g.id, g.title) for g in Papers.query.order_by('title')]
+    choices = [(g.id, g.name) for g in Academics.query.order_by('name')]
+    form.author1.choices = choices
+    form.author2.choices = choices
+    form.author3.choices = choices
+    form.author4.choices = choices
+
     if request.method == 'POST':
         pap = Papers.query.get(form.paper_object.data)
         if form.title.data != '':
@@ -71,14 +77,60 @@ def update_paper():
         if form.field_of_study.data != '':
             pap.field_of_study = form.field_of_study.data
         db.session.commit()
-        return render_template('update_paper.html', pap=pap)
+        for aut in Authors.query.filter_by(paper_id=pap.id).all():
+            db.session.delete(aut)            
+        authors = []
+        if form.no_of_authors.data == '1':
+            author1 = Authors(form.author1.data, pap.id)
+            db.session.add(author1)
+            db.session.commit()
+            authors.append(author1)
+        if form.no_of_authors.data == '2':
+            author1 = Authors(form.author1.data, pap.id)
+            db.session.add(author1)
+            db.session.commit()
+            authors.append(author1)
+            author2 = Authors(form.author2.data, pap.id)
+            db.session.add(author2)
+            db.session.commit()
+            authors.append(author2)
+        if form.no_of_authors.data == '3':
+            author1 = Authors(form.author1.data, pap.id)
+            db.session.add(author1)
+            db.session.commit()
+            authors.append(author1)
+            author2 = Authors(form.author2.data, pap.id)
+            db.session.add(author2)
+            db.session.commit()
+            authors.append(author2)
+            author3 = Authors(form.author3.data, pap.id)
+            db.session.add(author3)
+            db.session.commit()
+            authors.append(author3)
+        if form.no_of_authors.data == '4':
+            author1 = Authors(form.author1.data, pap.id)
+            db.session.add(author1)
+            db.session.commit()
+            authors.append(author1)
+            author2 = Authors(form.author2.data, pap.id)
+            db.session.add(author2)
+            db.session.commit()
+            authors.append(author2)
+            author3 = Authors(form.author3.data, pap.id)
+            db.session.add(author3)
+            db.session.commit()
+            authors.append(author3)
+            author4 = Authors(form.author4.data, pap.id)
+            db.session.add(author4)
+            db.session.commit()
+            authors.append(author4)
+        a_authors = []
+        for author in authors:
+            a_authors.append(Academics.query.filter_by(id=author.academic_id).first())
+        return render_template('update_paper.html', pap=pap, authors=a_authors)    
     else:
         init = True
         return render_template('update_paper.html', form=form, init=init)
-
-        return
-        #code here to amend the object
-    return
 
 
 @app.route('/add_academic', methods = ['GET', 'POST'])

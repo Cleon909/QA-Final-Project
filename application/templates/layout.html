@@ -9,7 +9,7 @@
 <body>
     <div class="header">
         <h1> Nonsense Academic Database</h1>
-        <div id = "links">
+        <div id = "links" style="text-align: center; display: flex; justify-content: space-around">
             <a href="{{ url_for('index') }}">Home</a>
             <a href="{{ url_for('update_academic') }}">Update an Academic's Details</a>
             <a href="{{ url_for('update_paper') }}">Update a Papers Details</a>
@@ -24,7 +24,7 @@
         {% block body %}
         {% endblock body %}
     </div>
-    <div id="footer">
+    <div id="footer" style="position: fixed; bottom:0%">
         <p>Michael Corcoran</p>
     </div>
 </body>
