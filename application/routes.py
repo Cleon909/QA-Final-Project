@@ -223,9 +223,9 @@ def delete_academic():
     deleted = True
     if request.method == 'POST': 
         a_to_del = Academics.query.filter_by(id=form.name.data).first()
-        file = open('debug.txt', 'w')
-        file.write(str(a_to_del.name))
-        file.close()
+        pap_to_del = Authors.query.filter_by(academic_id=form.name.data)
+        for pap in pap_to_del:
+            db.session.delete(pap)
         db.session.delete(a_to_del)
         db.session.commit()
         return render_template ('del_academic.html', deleted=deleted)
@@ -251,5 +251,5 @@ def delete_paper():
 
 @app.route('/about')
 def about():
-    return
+    return render_template('about.html')
 
