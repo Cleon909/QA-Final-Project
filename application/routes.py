@@ -232,16 +232,22 @@ def delete_academic():
     else:
         return render_template('del_academic.html', form=form)
 
-@app.route('/delete_paper')
+@app.route('/delete_paper', methods = ['POST', 'GET'])
 def delete_paper():
     form = DeletePaperForm()
-    list_of_papers = []
-    if form.paper_object.data == None:
-        list_of_papers = Papers.query.all()
+    deleted = True
+    form.title.choices = [(g.id, g.title) for g in Papers.query.order_by('title')]
+    if request.method == 'POST':
+        p_to_del = Papers.query.filter_by(id=form.title.data).first()
+        auth_to_del = Authors.query.filter_by(paper_id=form.title.data).all()
+        for aut in auth_to_del:
+            db.session.delete(aut)
+        db.session.delete(p_to_del)
+        db.session.commit()
+        return render_template('del_paper.html', deleted=deleted)
     else:
-        list_of_papers = Papers.query.filter_by(id=form.paper_object.data).all()
-    # method to delete
-    return
+        return render_template('del_paper.html', form=form) 
+        
 
 @app.route('/about')
 def about():
