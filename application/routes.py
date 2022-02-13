@@ -216,16 +216,21 @@ def add_paper():
     else:
         return render_template('add_paper.html', form=form)
 
-@app.route('/delete_academic')
+@app.route('/delete_academic', methods = ['GET', 'POST'])
 def delete_academic():
     form = DeleteAcademicForm()
-    list_of_academics = []
-    if form.academic_object.data == None:
-        list_of_objects = Academics.query.all()
+    form.name.choices = [(g.id, g.name) for g in Academics.query.order_by('name')]
+    deleted = True
+    if request.method == 'POST': 
+        a_to_del = Academics.query.filter_by(id=form.name.data).first()
+        file = open('debug.txt', 'w')
+        file.write(str(a_to_del.name))
+        file.close()
+        db.session.delete(a_to_del)
+        db.session.commit()
+        return render_template ('del_academic.html', deleted=deleted)
     else:
-        list_of_objects = Academics.query.filter_by(id=form.academic.data)
-    # method to delete here
-    return
+        return render_template('del_academic.html', form=form)
 
 @app.route('/delete_paper')
 def delete_paper():

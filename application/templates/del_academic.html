@@ -1,23 +1,17 @@
 {% extends 'layout.html'%}
 {% block body %}
 {% if form %}
-<h2>Add an Academic</h2>
+<h2>Delete an Academic</h2>
+<h3>Pick Academic to delete</h3>
 <form method = 'POST'>
 <br>
 {{ form.name.label }} {{ form.name }}
 <br>
 <p></p>
-{{ form.current_institution.label }} {{ form.current_institution }}
-<br>
-<p></p>
-{{ form.field_of_study.label }} {{ form.field_of_study }}
-<br>
-<p></p>
 {{ form.submit }}
 </form>
 {% endif %}
-{% if academic %}
-<h2>Academic created</h2>
-<p>{{ academic.name }}, Institution: {{ academic.current_institution }}, Field of Study: {{ academic.field_of_study }}</p>
+{% if deleted %}
+<h2>Academic Deleted</h2>
 {% endif %}
 {% endblock body %}
