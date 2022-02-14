@@ -2,6 +2,8 @@ from flask import url_for
 from flask_testing import TestCase
 from application import app, db
 from application.models import Academics, Papers, Authors
+from application.forms import SearchDatabaseForm, UpdateAcademicForm, UpdatePaperForm, AddAcademicForm, AddPaperForm, DeleteAcademicForm, DeletePaperForm 
+
 
 class TestBase(TestCase):
     def create_app(self):
@@ -28,7 +30,18 @@ class TestDelete(TestBase):
     
     def test_delete_academic(self):
         response = self.client.post(url_for('delete_academic'),
-        data = dict(id=1,academic_id=1),
-        follow_redirects=True)
+        data = dict(name = 1),
+        follow_redirects = True)
+        self.assertEqual(response.status_code, 200)
+        assert len(Academics.query.all()) == 0
+        assert len(Authors.query.all()) ==0
+    
+    def test_delete_academic(self):
+        response = self.client.post(url_for('delete_paper'),
+        data = dict(name = 1),
+        follow_redirects = True)
+        self.assertEqual(response.status_code, 200)
+        assert len(Papers.query.all()) == 0
+        assert len(Authors.query.all()) ==0
 
 
