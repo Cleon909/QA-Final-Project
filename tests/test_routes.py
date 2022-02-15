@@ -31,22 +31,18 @@ class TestDelete(TestBase):
     
     def test_delete_academic(self):
         #test deletes the academic and paper objects created in setUp() and checks no objects are found
-        response = self.client.post(url_for('delete_academic'),
-        data = dict(a_to_del = Academics.query.filter_by(id=1).all(), 
-        pap_to_del = Authors.query.filter_by(paper_id=1).all()),
-        follow_redirects = True)
+        response = self.client.post('/delete_academic',
+        data = {'name' : 1})
         self.assertEqual(response.status_code, 200)
         assert len(Academics.query.all()) == 0
-        assert len(Authors.query.all()) ==0
+        assert len(Authors.query.all()) == 0
     
     def test_delete_paper(self):
         #test deletes the academic and author objects created in setUp() and checks no objects are found
-        response = self.client.post(url_for('delete_paper'),
-        data = dict(p_to_del = Papers.query.filter_by(id=1).all(), 
-        auth_to_del = Authors.query.filter_by(paper_id=1).all()),
-        follow_redirects = True)
+        response = self.client.post('/delete_paper',
+        data = {'title': 1})
         self.assertEqual(response.status_code, 200)
         assert len(Papers.query.all()) == 0
-        assert len(Authors.query.all()) ==0
+        assert len(Authors.query.all()) == 0
 
 

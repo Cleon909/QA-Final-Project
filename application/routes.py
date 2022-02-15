@@ -240,13 +240,12 @@ def delete_paper():
     deleted = True
     form.title.choices = [(g.id, g.title) for g in Papers.query.order_by('title')]
     if request.method == 'POST':
-        auth_to_del = Authors.query.filter_by(paper_id=form.title.data).all()
+        auth_to_del = Authors.query.filter_by(paper_id=form.title.data)
         for aut in auth_to_del:
             db.session.delete(aut)
         p_to_del = Papers.query.filter_by(id=form.title.data)
         for pap in p_to_del:
             db.session.delete(pap)
- 
         db.session.commit()
         return render_template('del_paper.html', deleted=deleted)
     else:
