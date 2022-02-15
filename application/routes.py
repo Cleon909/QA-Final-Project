@@ -221,12 +221,14 @@ def delete_academic():
     form = DeleteAcademicForm()
     form.name.choices = [(g.id, g.name) for g in Academics.query.order_by('name')]
     deleted = True
-    if request.method == 'POST': 
-        a_to_del = Academics.query.filter_by(id=form.name.data).first()
+    if request.method == 'POST':
         pap_to_del = Authors.query.filter_by(academic_id=form.name.data)
         for pap in pap_to_del:
-            db.session.delete(pap)
-        db.session.delete(a_to_del)
+            db.session.delete(pap) 
+        a_to_del = Academics.query.filter_by(id=form.name.data)
+        for aca in a_to_del:
+            db.session.delete(aca)
+
         db.session.commit()
         return render_template ('del_academic.html', deleted=deleted)
     else:
@@ -238,11 +240,13 @@ def delete_paper():
     deleted = True
     form.title.choices = [(g.id, g.title) for g in Papers.query.order_by('title')]
     if request.method == 'POST':
-        p_to_del = Papers.query.filter_by(id=form.title.data).first()
         auth_to_del = Authors.query.filter_by(paper_id=form.title.data).all()
         for aut in auth_to_del:
             db.session.delete(aut)
-        db.session.delete(p_to_del)
+        p_to_del = Papers.query.filter_by(id=form.title.data)
+        for pap in p_to_del:
+            db.session.delete(pap)
+ 
         db.session.commit()
         return render_template('del_paper.html', deleted=deleted)
     else:
