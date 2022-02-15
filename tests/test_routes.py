@@ -1,9 +1,7 @@
 from flask import url_for
 from flask_testing import TestCase
-from application import app, db
+from application import app, db, routes
 from application.models import Academics, Papers, Authors
-from application.forms import SearchDatabaseForm, UpdateAcademicForm, UpdatePaperForm, AddAcademicForm, AddPaperForm, DeleteAcademicForm, DeletePaperForm 
-
 
 class TestBase(TestCase):
     def create_app(self):
@@ -18,9 +16,12 @@ class TestBase(TestCase):
         db.create_all()
         academic1 = Academics('An Academic', 'An Institution', 'A Field of Study')
         paper1 = Papers('A Paper', '2000', 'Another field of study')
-        db.session.add(academic1, paper1)
+        author1 = Authors(1, 1)
+        db.session.add(academic1)
+        db.session.add(paper1)
+        db.session.add(author1)
         db.session.commit()
-        author1 = Authors(academic1.id, paper1.id)
+      
 
     def tearDown(self):
         db.session.remove()
@@ -29,6 +30,7 @@ class TestBase(TestCase):
 class TestDelete(TestBase):
     
     def test_delete_academic(self):
+        #test deletes the academic and paper objects created in setUp() and checks no objects are found
         response = self.client.post(url_for('delete_academic'),
         data = dict(name = 1),
         follow_redirects = True)
@@ -37,6 +39,7 @@ class TestDelete(TestBase):
         assert len(Authors.query.all()) ==0
     
     def test_delete_academic(self):
+        #test deletes the academic and author objects created in setUp() and checks no objects are found
         response = self.client.post(url_for('delete_paper'),
         data = dict(name = 1),
         follow_redirects = True)
