@@ -104,4 +104,13 @@ class TestCreate(TestBase):
         assert auth2.paper_id == 1
 
 
-    # def test_index_page(self):
+    def test_index_page(self):
+        response = self.client.post('/',
+        data = { 'name':1, 'title':1 })
+        self.assertEqual(response.status_code,200)
+        self.assertIn(b'Academic A', response.data)
+        self.assertIn(b'Institution A', response.data)
+        self.assertIn(b'Field of Study A', response.data)
+        self.assertIn(b'A Paper', response.data)
+        self.assertIn(b'2000', response.data)
+        self.assertIn(b'Another field of study', response.data)
