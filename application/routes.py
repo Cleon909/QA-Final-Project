@@ -226,8 +226,6 @@ def delete_academic():
         for pap in pap_to_del:
             db.session.delete(pap) 
         a_to_del = Academics.query.filter_by(id=form.name.data).first()
-        # for aca in a_to_del:
-        #     db.session.delete(aca)
         db.session.delete(a_to_del)
         db.session.commit()
         return render_template ('del_academic.html', deleted=deleted)
@@ -251,8 +249,6 @@ def delete_paper():
     else:
         return render_template('del_paper.html', form=form) 
         
-
 @app.route('/about')
 def about():
     return render_template('about.html')
-
