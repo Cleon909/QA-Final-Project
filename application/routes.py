@@ -225,10 +225,10 @@ def delete_academic():
         pap_to_del = Authors.query.filter_by(academic_id=form.name.data)
         for pap in pap_to_del:
             db.session.delete(pap) 
-        a_to_del = Academics.query.filter_by(id=form.name.data)
-        for aca in a_to_del:
-            db.session.delete(aca)
-
+        a_to_del = Academics.query.filter_by(id=form.name.data).first()
+        # for aca in a_to_del:
+        #     db.session.delete(aca)
+        db.session.delete(a_to_del)
         db.session.commit()
         return render_template ('del_academic.html', deleted=deleted)
     else:
