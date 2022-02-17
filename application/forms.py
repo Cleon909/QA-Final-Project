@@ -15,7 +15,7 @@ class UpdateAcademicForm(FlaskForm):
 
     academic_object = SelectField('Academic to Update', choices = []) # should return id of academic object
     
-    name = StringField('Name', validators = [Length(max = 50)])
+    name = StringField('Name', validators = [Length(max = 50), DataRequired()])
     current_institution = StringField('Current Insitution', validators = [Length(max = 30)])
     field_of_study = StringField('Field of Study', validators = [Length(max = 30)])
     submit = SubmitField('Press to submit')
@@ -25,7 +25,7 @@ class UpdateAcademicForm(FlaskForm):
 class UpdatePaperForm(FlaskForm):
     
     paper_object = SelectField('Paper to update', choices = [], coerce = int) 
-    title = StringField('Title of Paper')
+    title = StringField('Title of Paper', validators = [DataRequired()])
     year_published = SelectField('Year of Publication', choices = [i for i in range(1453, 2023)])
     field_of_study = StringField('Field of Study', validators = [Length(max = 30)])
     no_of_authors = SelectField('Number of Authors', choices = [1,2,3,4])
