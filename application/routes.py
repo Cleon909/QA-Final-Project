@@ -72,10 +72,9 @@ def update_paper():
         pap = Papers.query.get(form.paper_object.data)
         if form.title.data != '':
             pap.title = form.title.data
-        if form.year_published.data != '':
-            pap.year_published = form.year_published.data
         if form.field_of_study.data != '':
             pap.field_of_study = form.field_of_study.data
+        pap.year_published = form.year_published.data
         db.session.commit()
         for aut in Authors.query.filter_by(paper_id=pap.id).all():
             db.session.delete(aut)            
