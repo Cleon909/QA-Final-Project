@@ -1,6 +1,7 @@
 #!/bin/bash
 cd ..
-python3 venv venv
+pwd
+python3 -m venv venv
 source venv/scripts/activate
 pip install -r requirements.txt
 export DATABASE_URI
