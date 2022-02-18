@@ -19,5 +19,5 @@ ExecStart=/usr/bin/python3 /home/jenkins/.jenkins/workspace.deployment_test/app.
 WantedBy=multi-user.target
 EOF
 sudo systemctl daemon-reload
-sudo systemctl enable app.py
-sudo systemctl1 restart app.py
+sudo systemctl enable QAapplication
+sudo systemctl1 restart QAapplication
