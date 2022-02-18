@@ -5,8 +5,7 @@ python3 -m venv venv
 pip install -r requirements.txt
 export DATABASE_URI
 export SECRET_KEY
-pwd
-python3 create.db
+python3 create.py
 sudo tee /etc/systemd/system/QAapplication.service << EOF > /dev/null
 [Unit]
 Description=QA Project Webb App
