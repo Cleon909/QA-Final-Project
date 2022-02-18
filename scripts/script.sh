@@ -1,5 +1,4 @@
 #!/bin/bash
-
 cd ..
 python venv venv
 source venv/scripts/activate
