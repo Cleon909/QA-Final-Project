@@ -6,6 +6,7 @@
 {% if init %}
     <h2>Choose Academic to Amend</h2>
     <form method = 'POST', action = ''>
+        {{ form.hidden_tag() }}
         {{ form.academic_object.label }} {{ form.academic_object }}
         <br>
         <p><b>What would you like to Amend?</b></p>

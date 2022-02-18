@@ -6,6 +6,7 @@
 {% if init %}
     <h2>Choose Paper to Amend</h2>
     <form method = 'POST'>
+        {{ form.hidden_tag() }}
         {{ form.paper_object.label }} {{ form.paper_object }}
         <br>
         <p><b>What would you like to Amend?</b></p>

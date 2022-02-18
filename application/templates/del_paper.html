@@ -4,6 +4,7 @@
 {% if form %}
 <h2>Delete a Paper</h2>
 <form method = 'POST'>
+{{ form.hidden_tag() }}
 <br>
 {{ form.title.label }} {{ form.title }}
 <br>

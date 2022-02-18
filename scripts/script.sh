@@ -1,9 +1,9 @@
 #!/bin/bash
 cd ..
-python venv venv
+python3 venv venv
 source venv/scripts/activate
 pip install -r requirements.txt
-python create.py
-python -m pytest
-
 export DATABASE_URI
+export SECRET_KEY
+python3 create.py
+python3 app.py
