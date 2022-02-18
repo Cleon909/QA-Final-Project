@@ -16,7 +16,7 @@ User=jenkins
 Environment=SECRET_KEY='abcd'
 Environment=DATABASE_URI='sqlite:///data.db'
 WorkingDirectory=/home/jenkins/.jenkins/workspace/deployment_test
-ExecStart=/usr/bin/python3 /home/jenkins/.jenkins/workspace/deployment_test/app.py
+ExecStart= /home/jenkins.jenkins/workspace/venv/bin/python3 /home/jenkins/.jenkins/workspace/deployment_test/app.py
 
 [Install]
 WantedBy=multi-user.target
