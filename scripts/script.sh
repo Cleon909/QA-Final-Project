@@ -3,7 +3,6 @@ pwd
 python3 -m venv venv
 . ./../venv/bin/activate
 pip install -r requirements.txt
-pip freeze
 python3 create.py
 python3 -m pytest
 
@@ -16,7 +15,7 @@ User=jenkins
 Environment=SECRET_KEY='abcd'
 Environment=DATABASE_URI='sqlite:///data.db'
 WorkingDirectory=/home/jenkins/.jenkins/workspace/deployment_test
-ExecStart= /home/jenkins.jenkins/workspace/venv/bin/python3 /home/jenkins/.jenkins/workspace/deployment_test/app.py
+ExecStart=/home/jenkins/.jenkins/workspace/venv/bin/python3 /home/jenkins/.jenkins/workspace/deployment_test/app.py
 
 [Install]
 WantedBy=multi-user.target
