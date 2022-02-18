@@ -2,7 +2,7 @@
 cd ..
 pwd
 python3 -m venv venv
-source venv/scripts/activate
+source venv/bin/activate
 pip install -r requirements.txt
 export DATABASE_URI
 export SECRET_KEY
