@@ -20,4 +20,4 @@ WantedBy=multi-user.target
 EOF
 sudo systemctl daemon-reload
 sudo systemctl enable QAapplication
-sudo systemctl1 restart QAapplication
+sudo systemctl restart QAapplication
