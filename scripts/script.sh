@@ -1,5 +1,5 @@
 #!/bin/bash
-pwd
+
 python3 -m venv venv
 . ./../venv/bin/activate
 pip install -r requirements.txt
@@ -12,10 +12,8 @@ Description=QA Project Webb App
 
 [Service]
 User=jenkins
-Environment=SECRET_KEY='abcd'
-Environment=DATABASE_URI='sqlite:///data.db'
 WorkingDirectory=/home/jenkins/.jenkins/workspace/deployment_test
-ExecStart=/home/jenkins/.jenkins/workspace/venv/bin/python3 /home/jenkins/.jenkins/workspace/deployment_test/app.py
+ExecStart=/home/jenkins/.jenkins/workspace/web_app_test/venv/bin/python3 /home/jenkins/.jenkins/workspace/web_app_test/app.py
 
 [Install]
 WantedBy=multi-user.target
