@@ -4,7 +4,6 @@ python3 -m venv venv
 . ./../venv/bin/activate
 pip install -r requirements.txt
 python3 create.py
-python3 -m pytest
 
 sudo tee /etc/systemd/system/QAapplication.service << EOF > /dev/null
 [Unit]
