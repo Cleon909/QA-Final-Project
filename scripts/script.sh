@@ -12,7 +12,7 @@ Description=QA Project Webb App
 [Service]
 User=jenkins
 WorkingDirectory=/home/jenkins/.jenkins/workspace/deployment_test
-ExecStart=/home/jenkins/.jenkins/workspace/web_app_test/venv/bin/python3 /home/jenkins/.jenkins/workspace/web_app_test/app.py
+ExecStart=/home/jenkins/.jenkins/workspace/web_app_deploy/venv/bin/python3 /home/jenkins/.jenkins/workspace/web_app_deploy/app.py
 
 [Install]
 WantedBy=multi-user.target
