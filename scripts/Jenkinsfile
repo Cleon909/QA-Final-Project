@@ -26,11 +26,11 @@ pipeline {
         stage('Deploy') {
             steps {
                 if (APP_RUN == "True") {
-                sh """
-                . ./venv/bin/activate
-                python3 create.py
-                python3 app.py"""
-                }
+                    sh """
+                    . ./venv/bin/activate
+                    python3 create.py
+                    python3 app.py"""
+                    }
             }
         }
         stage('post build') {
