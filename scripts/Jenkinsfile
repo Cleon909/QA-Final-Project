@@ -24,10 +24,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                if APP_RUN == true: {
                 sh """python3 create.py
-                python3 app.py"""
-                }
+                python3 app.py""
             }
         }
         stage('post build') {
