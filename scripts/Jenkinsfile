@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        SECRET_KEY = credentials('DATABASE_URI')
-        DATABASE_URI = credentials('SECRET_KEY')
+        SECRET_KEY = credentials('SECRET_KEY')
+        DATABASE_URI = credentials('DATABASE_URI')
     }
 
     stages {
@@ -33,7 +33,6 @@ pipeline {
         stage('post build') {
             steps{
                 junit 'unittest.xml'
-                cobertura coberturaReportFile: 'coverage.xml'
             }
         }
     }   
