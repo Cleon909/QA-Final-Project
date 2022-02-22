@@ -37,7 +37,7 @@ pipeline {
         }
         stage('post build') {
             steps{
-                junit 'unittest.xml'
+                junit 'unittests.xml'
             }
         }
     }   
