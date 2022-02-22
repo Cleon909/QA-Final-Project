@@ -20,7 +20,7 @@ pipeline {
                 sh""" 
                 . ./venv/bin/activate
                 python3 -m pytest --junitxml unittests.xml
-                python3 -m pytest --cov-report xml:coverage.xml --cov=application
+                python3 -m pytest --cov-report xml:coverage.xml
                 """ 
             }
         }
