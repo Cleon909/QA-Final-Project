@@ -31,9 +31,7 @@ pipeline {
         stage('post build') {
             steps{
                 junit 'unittest.xml'
-                cobertura(
-                    coberturaREportFile: 'coverage.xml'
-                )
+                cobertura coberturaReportFile: 'coverage.xml'
             }
         }
     }   
