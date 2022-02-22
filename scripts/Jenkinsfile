@@ -3,6 +3,7 @@ pipeline {
     environment {
         SECRET_KEY = credentials('SECRET_KEY')
         DATABASE_URI = credentials('DATABASE_URI')
+        APP_RUN = "False"
     }
 
     stages {
@@ -24,10 +25,12 @@ pipeline {
         }
         stage('Deploy') {
             steps {
+                if (APP_RUN == "True") {
                 sh """
                 . ./venv/bin/activate
                 python3 create.py
                 python3 app.py"""
+                }
             }
         }
         stage('post build') {
