@@ -25,7 +25,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh """python3 create.py
-                python3 app.py""
+                python3 app.py"""
             }
         }
         stage('post build') {
