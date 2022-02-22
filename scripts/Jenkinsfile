@@ -16,14 +16,17 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh""" /home/jenkins/.jenkins/workspace/pipeline-test/bin/venv/python3 -m pytest --junitxml unittests.xml
-                /home/jenkins/.jenkins/workspace/pipeline-test/venv/bin/python3 -m pytest --cov-report xml:coverage.xml""" 
-
+                sh""" 
+                . ./venv/bin/activate
+                python3 -m pytest --junitxml unittests.xml
+                python3 -m pytest --cov-report xml:coverage.xml""" 
             }
         }
         stage('Deploy') {
             steps {
-                sh """python3 create.py
+                sh """
+                . ./venv/bin/activate
+                python3 create.py
                 python3 app.py"""
             }
         }
