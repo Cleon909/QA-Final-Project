@@ -13,11 +13,6 @@ pipeline {
                 python3 -m venv venv
                 . ./venv/bin/activate
                 pip3 install -r requirements.txt
-                sudo apt-get update
-                sudo apt install curl -y
-                curl https://get.docker.com | sudo bash
-                sudo usermod -aG docker jenkins
-                sudo systemctl restart jenkins
                 """
             }
         }
