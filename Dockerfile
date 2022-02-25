@@ -3,4 +3,4 @@ copy . .
 RUN pip install -r requirements.txt
 ENV DATABASE_URI=sqlite:///data.db
 RUN python3 create.py
-ENTRYPOINT ["puthon3", "app.py"]
+ENTRYPOINT ["python3", "app.py"]
