@@ -18,8 +18,8 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh""" /home/jenkins/.jenkins/workspace/pipeline-test/venv/python3 -m pytest --junitxml unittests.xml
-                /home/jenkins/.jenkins/workspace/pipeline-test/venv/python3 -m pytest --cov-report xml:coverage.xml""" 
+                sh""" /home/jenkins/.jenkins/workspace/pipeline-test/venv/bin/python3 -m pytest --junitxml unittests.xml
+                /home/jenkins/.jenkins/workspace/pipeline-test/venv/bin/python3 -m pytest --cov-report xml:coverage.xml""" 
 
             }
         }
