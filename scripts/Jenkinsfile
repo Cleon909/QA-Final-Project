@@ -35,9 +35,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                if (APP_RUN == 'True') {
                 sh """docker run --name myapp -e DATABASE_URI=sqlite:///data.db -e SECRET_KEY=abcd -d -p 5000:5000 myapp"""
-                }
             }
         }
         stage('post build') {
