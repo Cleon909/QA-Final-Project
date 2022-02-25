@@ -1,18 +1,24 @@
 pipeline {
     agent any
     environment {
-        SECRET_KEY = credentials('DATABASE_URI')
-        DATABASE_URI = credentials('SECRET_KEY')
+        SECRET_KEY = credentials('SECRET_KEY')
+        DATABASE_URI = credentials('DATABASE_URI')
         APP_RUN = True
     }
 
     stages {
-        stage('Build') {
+        stage('Setup') {
             steps {
                 sh """sudo apt install python3-venv -y
                 python3 -m venv venv
                 . ./venv/bin/activate
-                pip3 install -r requirements.txt"""
+                pip3 install -r requirements.txt
+                sudo apt-get update
+                sudo apt install curl -y
+                curl https://get.docker.com | sudo bash
+                sudo usermod -aG docker jenkins
+                sudo systemctl restart jenkins
+                """
             }
         }
         stage('Test') {
@@ -22,11 +28,15 @@ pipeline {
 
             }
         }
+        stage('Build') {
+            steps {sh"""docker build -t myapp ."""
+
+            }
+        }
         stage('Deploy') {
             steps {
                 if APP_RUN == true: {
-                sh """python3 create.py
-                python3 app.py"""
+                sh """docker run --name myapp -e DATABASE_URI=sqlite:///data.db -e SECRET_KEY=abcd -d -p 5000:5000 myapp"""
                 }
             }
         }
