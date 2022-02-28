@@ -40,7 +40,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh """docker build -t corcoran909/myapp .
-                docker build -t createdb /db/."""
+                docker build -t createdb db/."""
             }
         }
         stage('push'){
