@@ -47,9 +47,8 @@ pipeline {
                 docker network ls | grep mynetwork > /dev/null || docker network create mynetwork
                 docker rm -f myapp
                 docker rm -f app-db
-                docker run --name app-db -p 3306:3306 -e MYSQL_ROOT_PASSWORD=$DBCR -e MYSQL_DATABASE=mydatabase -d mysql
-                docker network connect mynetwork app-db
-                docker run --name myapp -e DATABASE_URI=$DATABASE_URI -e SECRET_KEY=$SECRET_KEY -d -p 5000:5000 corcoran909/myapp
+                docker run --network --mynetwork --name app-db -p 3306:3306 -e MYSQL_ROOT_PASSWORD=$DBCR -e MYSQL_DATABASE=mydatabase -d mysql
+                docker run --network mynetwork --name myapp -e DATABASE_URI=$DATABASE_URI -e SECRET_KEY=$SECRET_KEY -d -p 5000:5000 corcoran909/myapp
                 """
             }
         }
