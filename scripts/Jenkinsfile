@@ -45,7 +45,7 @@ pipeline {
                 sh """
                 docker network create mynetwork
                 docker run --name myapp -e DATABASE_URI=$DATABASE_URI -e SECRET_KEY=$SECRET_KEY -d -p 5000:5000 corcoran909/myapp
-                docker run --name database -p 3306:3306 -e MYSQL_ROOT_PASSWORD=database-pw-d mysql
+                docker run --name database -p 3306:3306 -e MYSQL_ROOT_PASSWORD=database-pw -d mysql
                 docker network connect mynetwork myapp
                 docker network connect mynetwork database
                 . ./venv/bin/activate
