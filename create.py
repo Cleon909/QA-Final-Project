@@ -3,7 +3,7 @@ from application.models import Academics, Papers, Authors
 import sqlalchemy
 import pymysql
 
-engine = sqlalchemy.create_engine('mysql+pymysql://root:${SQLPWD}')
+engine = sqlalchemy.create_engine('mysql+pymysql://root:${SQLPWD}@appdb')
 engine.execute("CREATE DATABASE db")
 engine.execute("USE db")
 
