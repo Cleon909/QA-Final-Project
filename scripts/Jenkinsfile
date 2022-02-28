@@ -34,8 +34,12 @@ pipeline {
         stage('Deploy Network and Database') {
             steps {
                 sh """docker network ls | grep mynetwork > /dev/null || docker network create mynetwork
-                docker rm -f app-db
-                docker run --network mynetwork --name app-db -p 3306:3306 -e MYSQL_ROOT_PASSWORD=$DBCR -e MYSQL_DATABASE=mydatabase -d mysql
+                // docker rm -f app-db
+                // docker run --network mynetwork --name app-db -p 3306:3306 -e MYSQL_ROOT_PASSWORD=$DBCR -e MYSQL_DATABASE=mydatabase -d mysql
+                // docker exec -it app-db mysql -u root -p
+                // echo "password\n"
+                // echo "create database datadb"
+                // echo "exit"
                 """
             }
         }
