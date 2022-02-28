@@ -4,7 +4,7 @@ pipeline {
         SECRET_KEY = credentials('SECRET_KEY')
         DATABASE_URI = credentials('DATABASE_URI')
         //DOCKER_LOGIN = credentials('DOCKERHUB')
-        DBCR= credentials('SQLPWD')
+        SQLPWD= credentials('SQLPWD')
         APP_RUN = 'True'
     }
 
@@ -36,9 +36,11 @@ pipeline {
 
         stage('Deploy Network and Database') {
             steps {
+                withCredentials([string(credentialsId: 'SQLPWD', variable: 'SQLPWD')]) {
                 sh """docker network ls | grep mynetwork > /dev/null || docker network create mynetwork
-                docker run --network mynetwork --name appdb -e MYSQL_ROOT_PASSWORD=$SQLPWD -d mysql
+                docker run --network mynetwork --name appdb -e MYSQL_ROOT_PASSWORD=${SQLPWD} -d mysql
                 """
+                }
             }
         }
 
