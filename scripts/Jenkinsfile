@@ -49,6 +49,7 @@ pipeline {
                 docker network connect mynetwork myapp
                 docker network connect mynetwork app-db
                 . ./venv/bin/activate
+                pwd
                 python3 create.py"""
             }
         }
