@@ -37,7 +37,7 @@ pipeline {
         }
         stage('push'){
             steps{
-                sh 'docker push corcoran909/myapp:latest'
+                sh 'docker push myapp:latest'
             }
         }
         stage('Deploy') {
