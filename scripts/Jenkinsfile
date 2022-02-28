@@ -19,8 +19,9 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh""" /home/jenkins/.jenkins/workspace/docker-hub-test/venv/bin/python3 -m pytest --junitxml unittests.xml
-                /home/jenkins/.jenkins/workspace/docker-hub-test/venv/bin/python3 -m pytest --cov-report xml:coverage.xml""" 
+                sh""" . ./venv/bin/activate
+                python3 -m pytest --junitxml unittests.xml
+                python3 -m pytest --cov-report xml:coverage.xml""" 
 
             }
         }
