@@ -1,7 +1,6 @@
 from application import db
 from application.models import Academics, Papers, Authors
 
-db.drop_all()
 db.create_all()
 
 academic1 = Academics('Bob Dole', 'University of Bradford', 'Metaphysics')
