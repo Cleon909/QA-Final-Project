@@ -4,7 +4,7 @@ pipeline {
         SECRET_KEY = credentials('SECRET_KEY')
         DATABASE_URI = credentials('DATABASE_URI')
         DOCKER_LOGIN = credentials('dockerhub-login')
-        DBCR= credentials('database_cr')
+        DBCR= credentials('Database_cr')
         APP_RUN = 'True'
     }
 
