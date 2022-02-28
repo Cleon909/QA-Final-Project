@@ -32,12 +32,12 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh"""docker build -t myapp ."""
+                sh"""docker build -t corcoran909/myapp ."""
             }
         }
         stage('push'){
             steps{
-                sh 'docker push myapp:latest'
+                sh 'docker push corcoran909/myapp:latest'
             }
         }
         stage('Deploy') {
