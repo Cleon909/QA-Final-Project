@@ -4,6 +4,7 @@ pipeline {
         SECRET_KEY = credentials('SECRET_KEY')
         DATABASE_URI = credentials('DATABASE_URI')
         DOCKER_LOGIN = credentials('dockerhub-login')
+        DBCR= credentials('database_cr')
         APP_RUN = 'True'
     }
 
@@ -45,7 +46,7 @@ pipeline {
                 sh """
                 docker network create mynetwork
                 docker run --name myapp -e DATABASE_URI=$DATABASE_URI -e SECRET_KEY=$SECRET_KEY -d -p 5000:5000 corcoran909/myapp
-                docker run --name app-db -p 3306:3306 -d mysql
+                docker run --name app-db -p 3306:3306 -e MYSQL_ROOT_PASSWORD=$DBCR MYSQL_DATABASE=mydatabase -e -d mysql
                 docker network connect mynetwork myapp
                 docker network connect mynetwork app-db
                 . ./venv/bin/activate
