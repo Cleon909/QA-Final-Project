@@ -39,7 +39,8 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh """docker build -t corcoran909/myapp ."""
+                sh """docker build -t corcoran909/myapp .
+                docker build -t createdb /db/."""
             }
         }
         stage('push'){
@@ -51,6 +52,7 @@ pipeline {
             steps {
                 sh """
                 docker rm -f myapp
+                docker run --network mynetwork --name createdb -e DATABASE_URI=$DATABASE_URI -d createdb 
                 docker run --network mynetwork --name myapp -e DATABASE_URI=$DATABASE_URI -e SECRET_KEY=$SECRET_KEY -d -p 5000:5000 corcoran909/myapp
                 """
             }
