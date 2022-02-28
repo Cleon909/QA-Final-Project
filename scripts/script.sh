@@ -1,27 +1,46 @@
 #!/bin/bash
-pwd
-python3 -m venv venv
-. ./../venv/bin/activate
-pip install -r requirements.txt
-python3 create.py
-python3 -m pytest
-
-sudo tee /etc/systemd/system/QAapplication.service << EOF > /dev/null
+if type apt > /dev/null; then
+    pkg_mgr=apt
+    java="openjdk-8-jre"
+elif type yum /dev/null; then
+    pkg_mgr=yum
+    java="java"
+fi
+echo "updating and installing dependencies"
+sudo ${pkg_mgr} update
+sudo ${pkg_mgr} install -y ${java} wget git > /dev/null
+echo "configuring jenkins user"
+sudo useradd -m -s /bin/bash jenkins
+echo "downloading latest jenkins WAR"
+sudo su - jenkins -c "curl -L https://updates.jenkins-ci.org/latest/jenkins.war --output jenkins.war"
+echo "setting up jenkins service"
+sudo tee /etc/systemd/system/jenkins.service << EOF > /dev/null
 [Unit]
-Description=QA Project Webb App
+Description=Jenkins Server
 
 [Service]
 User=jenkins
-Environment=SECRET_KEY='abcd'
-Environment=DATABASE_URI='sqlite:///data.db'
-WorkingDirectory=/home/jenkins/.jenkins/workspace/deployment_test
-ExecStart=/home/jenkins/.jenkins/workspace/venv/bin/python3 /home/jenkins/.jenkins/workspace/deployment_test/app.py
+WorkingDirectory=/home/jenkins
+ExecStart=/usr/bin/java -jar /home/jenkins/jenkins.war
 
 [Install]
 WantedBy=multi-user.target
 EOF
+sudo ${pkg_mgr} install curl -y
+curl https://get.docker.com | sudo bash
+sudo usermod -aG docker $(whoami)
+sudo usermod -aG docker jenkins
 sudo systemctl daemon-reload
-sudo systemctl enable QAapplication.service
-sudo systemctl restart QAapplication.service
-export DATABASE_URI
-export SECRET_KEY
+sudo systemctl enable jenkins
+sudo systemctl restart jenkins
+sudo su - jenkins << EOF
+until [ -f .jenkins/secrets/initialAdminPassword ]; do
+    sleep 1
+    echo "waiting for initial admin password"
+done
+until [[ -n "\$(cat  .jenkins/secrets/initialAdminPassword)" ]]; do
+    sleep 1
+    echo "waiting for initial admin password"
+done
+echo "initial admin password: \$(cat .jenkins/secrets/initialAdminPassword)"
+EOF
