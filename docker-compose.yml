@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  webapp:
+    build: .
+    container_name: myapp
+    ports:
+    - target: 5000
+    published: 5000
+  depends_on:
+    - "db"
+  database:
+    container_name: db
+    image: mysql:latest
+    
+  

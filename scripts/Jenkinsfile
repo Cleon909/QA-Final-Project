@@ -18,7 +18,7 @@ pipeline {
                 """
             }
         }
-
+/*
         stage('Test') {
             steps {
                 sh """ . ./venv/bin/activate
@@ -28,35 +28,32 @@ pipeline {
             }
         }
 
-        /*stage('login') {
+        stage('login') {
             steps {
                 sh 'echo $DOCKER_LOGIN_PSW | docker login -u $DOCKER_LOGIN_USR --password-stdin'
             }
         }*/
 
-        stage('Deploy Network and Database') {
+        stage('docker-compose') {
             steps {
-                withCredentials([string(credentialsId: 'SQLPWD', variable: 'SQLPWD')]) {
-                sh """docker network ls | grep mynetwork > /dev/null || docker network create mynetwork
-                docker rm -f appdb
-                docker run --network mynetwork --name appdb -e MYSQL_ROOT_PASSWORD=${SQLPWD} -d mysql
+                sh """docker-compose up -d
+                docker exec -it myapp python3 create.py 
                 """
-                }
             }
         }
-
+/*
         stage('Build') {
             steps {
                 sh """docker build -t corcoran909/myapp ."""
             }
         }
 
-        /*stage('push'){
+        stage('push'){
             steps{
                 sh 'docker push corcoran909/myapp:latest'
             }
         }*/
-
+/*
         stage('Deploy') {
             steps {
                 sh """
@@ -65,7 +62,7 @@ pipeline {
                 """
             }
         }
-
+        
         stage('post build') {
             steps{
                 junit 'unittests.xml'
@@ -73,6 +70,6 @@ pipeline {
 archiveArtifacts artifacts: '*.xml', followSymlinks: false
                 
             }
-        }
+        }*/
     }   
 }

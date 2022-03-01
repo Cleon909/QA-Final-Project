@@ -14,7 +14,7 @@ class Academics(db.Model):
 
 class Papers(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(50), nullable=False)
+    title = db.Column(db.String(100), nullable=False)
     year_published = db.Column(db.Integer)
     field_of_study = db.Column(db.String(50), default='Unkown') # this line could be moved to a seperate table
     authors = db.relationship('Authors', backref = 'papersbr')
