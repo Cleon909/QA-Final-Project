@@ -19,7 +19,7 @@ pipeline {
                 """
             }
         }
-
+/*
         stage('Test') {
             steps {
                 sh """ . ./venv/bin/activate
@@ -27,7 +27,7 @@ pipeline {
                 python3 -m pytest --cov-report xml:coverage.xml""" 
             }
         }
-
+*/
 /*        stage('login') {
             steps {
                 sh 'echo $DOCKER_LOGIN_PSW | docker login -u $DOCKER_LOGIN_USR --password-stdin'
@@ -67,6 +67,7 @@ pipeline {
             }
         }
         */
+        /*
         stage('post build') {
             steps{
                 junit 'unittests.xml'
@@ -74,6 +75,6 @@ pipeline {
 archiveArtifacts artifacts: '*.xml', followSymlinks: false
                 
             }
-        }
+        }*/
     }   
 }
