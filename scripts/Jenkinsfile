@@ -37,14 +37,15 @@ pipeline {
 
         stage('docker-compose') {
             steps {
-                sh """pwd
-                docker-compose up -d
-                docker exec -it myapp python3 create.py 
-                """
+                sh "docker-compose up -d"
             }
         }
-/*
-        stage('Build') {
+         stage('create database') {
+            steps {
+                sh"docker exec -it myapp python3 create.py"
+            }
+}
+/*        stage('Build') {
             steps {
                 sh """docker build -t corcoran909/myapp ."""
             }
