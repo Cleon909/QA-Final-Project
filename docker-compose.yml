@@ -6,6 +6,10 @@ services:
     ports:
     - target: 5000
       published: 5000
+    environment:
+      DATABASE_URI_CREATE: ${DATABASE_URI_CREATE}
+      SECRET_KEY: ${SECRET_KEY}
+      DATABASE_URI: ${DATABASE_URI}
     depends_on:
     - appdb
   database:
@@ -14,7 +18,7 @@ services:
     ports:
       - target: 3306
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: ${SQLPWD}
       
     
   

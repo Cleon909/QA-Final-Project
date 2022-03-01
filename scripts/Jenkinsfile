@@ -5,6 +5,7 @@ pipeline {
         DATABASE_URI = credentials('DATABASE_URI')
         //DOCKER_LOGIN = credentials('DOCKERHUB')
         SQLPWD= credentials('SQLPWD')
+        DATABASE_URI_CREATE = credentials('DATABASE_URI_CREATE')
         APP_RUN = 'True'
     }
 
