@@ -1,15 +1,20 @@
-version: "3.8"
+  version: "3.8"
 services:
   webapp:
     build: .
     container_name: myapp
     ports:
     - target: 5000
-    published: 5000
-  depends_on:
-    - "db"
+      published: 5000
+    depends_on:
+    - appdb
   database:
     container_name: db
     image: mysql:latest
+    ports:
+      - target: 3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      
     
   
