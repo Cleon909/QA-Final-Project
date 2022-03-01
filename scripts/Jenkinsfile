@@ -42,7 +42,7 @@ pipeline {
 
         stage('create database') {
             steps {
-                sleep time: 120, unit: 'seconds'
+                sleep time: 120, 
                 sh"""#!/bin/bash
                 docker exec myapp python3 create.py
                 """
