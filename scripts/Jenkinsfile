@@ -42,7 +42,7 @@ pipeline {
         }
          stage('create database') {
             steps {
-                sh"docker exec myapp -c 'usr/bin/python3; create.py'"
+                sh"docker -i exec myapp python3 create.py"
             }
 }
 /*        stage('Build') {
