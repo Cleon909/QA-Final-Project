@@ -39,14 +39,14 @@ pipeline {
                 sh "docker-compose up -d"
             }
         }
-        
+
          stage('create database') {
             steps {
                 sh"""#!/bin/bash
                 docker exec myapp python3 create.py
                 """
             }
-}
+        }
 /*        stage('Build') {
             steps {
                 sh """docker build -t corcoran909/myapp ."""
@@ -74,6 +74,6 @@ pipeline {
 archiveArtifacts artifacts: '*.xml', followSymlinks: false
                 
             }
-        }
+        }*/
     }   
 }
