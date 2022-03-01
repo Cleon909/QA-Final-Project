@@ -2,10 +2,12 @@ from application import db
 from application.models import Academics, Papers, Authors
 import sqlalchemy
 import pymysql
+from os import getenv
 
-engine = sqlalchemy.create_engine('mysql+pymysql://root:abc@appdb')
-engine.execute("CREATE DATABASE db")
-engine.execute("USE db")
+
+engine = sqlalchemy.create_engine(getenv('DATABASE_URI_CREATE'))
+engine.execute("CREATE DATABASE appdb")
+engine.execute("USE appdb")
 
 db.create_all()
 
