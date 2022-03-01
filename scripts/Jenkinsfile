@@ -37,7 +37,8 @@ pipeline {
 
         stage('docker-compose') {
             steps {
-                sh """docker-compose up -d
+                sh """pwd
+                docker-compose up -d
                 docker exec -it myapp python3 create.py 
                 """
             }
