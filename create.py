@@ -6,7 +6,7 @@ import pymysql
 from os import getenv
 
 engine = sqlalchemy.create_engine(getenv('DATABASE_URI_CREATE'))
-if not sqlalchemy_utils.database_exists(getenv('DATABASE_URI')):
+if not sqlalchemy_utils.functions.database_exists(getenv('DATABASE_URI')):
     engine.execute("CREATE DATABASE appdb")
 else:
     engine.execute("USE appdb")
