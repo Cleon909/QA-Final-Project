@@ -23,4 +23,4 @@ WTForms==3.0.1
 pytest-cov
 PyMySQL
 cryptography
-
+sqlalchemy_utils

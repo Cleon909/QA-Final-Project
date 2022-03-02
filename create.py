@@ -1,13 +1,15 @@
 from application import db
 from application.models import Academics, Papers, Authors
 import sqlalchemy
+import sqlalchemy_utils
 import pymysql
 from os import getenv
 
-
 engine = sqlalchemy.create_engine(getenv('DATABASE_URI_CREATE'))
-engine.execute("CREATE DATABASE appdb")
-engine.execute("USE appdb")
+if not sqlalchemy_utils.database_exists(getenv('DATABASE_URI')):
+    engine.execute("CREATE DATABASE appdb")
+else:
+    engine.execute("USE appdb")
 
 db.create_all()
 
