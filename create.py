@@ -5,11 +5,10 @@ import sqlalchemy_utils
 import pymysql
 from os import getenv
 
-engine = sqlalchemy.create_engine(getenv('DATABASE_URI_CREATE'))
+
 if not sqlalchemy_utils.functions.database_exists(getenv('DATABASE_URI')):
-    engine.execute("CREATE DATABASE appdb")
-else:
-    engine.execute("USE appdb")
+    sqlalchemy_utils.functions.create_database(getenv("DATABASE_URI"))
+
 
 db.create_all()
 
