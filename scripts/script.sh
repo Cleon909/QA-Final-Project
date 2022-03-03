@@ -26,13 +26,20 @@ ExecStart=/usr/bin/java -jar /home/jenkins/jenkins.war
 [Install]
 WantedBy=multi-user.target
 EOF
-sudo ${pkg_mgr} install curl -y
+sudo ${pkg_mgr} install curl jq -y
+#install docker
 curl https://get.docker.com | sudo bash
+#add users to docker group
 sudo usermod -aG docker $(whoami)
 sudo usermod -aG docker jenkins
+#download docker-compose
+version=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | jq -r '.tag_name')
+sudo curl -L "https://github.com/docker/compose/releases/download/${version}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+#restart jenkins to allow user changes to take effect and enable it as a service
 sudo systemctl daemon-reload
 sudo systemctl enable jenkins
 sudo systemctl restart jenkins
+#displays paaword for setup
 sudo su - jenkins << EOF
 until [ -f .jenkins/secrets/initialAdminPassword ]; do
     sleep 1
