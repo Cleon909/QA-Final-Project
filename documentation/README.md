@@ -108,6 +108,12 @@ Home page is also the main search page. The databse is auto populated with some 
 - Basic information about the app
 
 ### CI/CD Pipeline
+Prequisites:  
+-   VM with Jenkins (plugin cobertura) and docker installed
+-   4 VMs with docker installed 
+-   All VMs to be on the same Vnet (Azure does this by default)
+
+Pipeline process:  
 -   Git sends an changes to the dev branch to Jenkins
 -   Jenkins runs unit tests if they fail it sends an email to the developer (me!)
 -   If the tests pass Jenkins builds containers for the mysql database and web apps and pushes them to docker hub
