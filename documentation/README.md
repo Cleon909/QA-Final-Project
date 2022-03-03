@@ -108,11 +108,17 @@ Home page is also the main search page. The databse is auto populated with some 
 - Basic information about the app
 
 ### CI/CD Pipeline
-The pipeline picks the code from github, runs unti and coverage tests, if the tests fail the pipeline stops, and sends an email to the developer (me in this case). 
-ADD STEPS TO THE PIPELINE ONCE it becomes clear.
+-   Git sends an changes to the dev branch to Jenkins
+-   Jenkins runs unit tests if they fail it sends an email to the developer (me!)
+-   If the tests pass Jenkins builds containers for the mysql database and web apps and pushes them to docker hub
+-   Jenkins SSHs into vm sets up manager node (installing Docker) and then SSHs into the two worker nodes )also installing Docker) to set up the swarm
+-   jenkins pulls down the images from dockerhub and sets up a mysql service with one container, attached to a volume, and N number of web-app containers.
+- Jenkins then SSHs into another VM to set up docker and a NGINX container to act as a load balancer and reverse proxy 
 
 
 ### Docker deployment
+-   Docker will be installed on 4 VM's, three to be part of a docker swarm and another to be a load balancer and reverse proxy running NGINX
+-   The docker swarm will contain one mysql database linked to a volume for data persistance and 10 web-app containers.
 
 
 ### Project Planning an Development
@@ -135,6 +141,7 @@ make it so that papers can't be authorless
 failed tests send email to user
 
 tests are run in a container
+
 
 
 Things found hard
