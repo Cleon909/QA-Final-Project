@@ -3,13 +3,12 @@
 Links to Jira and Risk assesment go here.
 
 ## Contents
-1. Brief
-2. WEB APP DESIGN
-3. Database Schema
-4. HTML Templates
-5. CI pipeline
-6. Docker Deployment
-7. Project Planning and development
+1. Brief (#brief)
+2. Database Design (#database-design)
+3. HTML Templates (#html-templates)
+4. CI/CD pipeline (#ci/cd-pipeline)
+5. Docker Deployment
+6. Project Planning and development
 
 
 
@@ -37,7 +36,7 @@ Links to Jira and Risk assesment go here.
 -   A video to be provided with evidence of the application and the CI/CD pipeline working.
 
 
-## Nonsense Academic Journal Database
+## Database Design
 
 this is a many to many relational database, which as SQL doesn't accompdate contains a child table.
 The database holds nonsesical academic papers, some with multiple authors, and with academics who author many papers.
@@ -107,7 +106,7 @@ Home page is also the main search page. The databse is auto populated with some 
 ### About Page
 - Basic information about the app
 
-### CI/CD Pipeline
+## CI/CD Pipeline
 -   Git sends an changes to the dev branch to Jenkins
 -   Jenkins runs unit tests if they fail it sends an email to the developer (me!)
 -   If the tests pass Jenkins builds containers for the mysql database and web apps and pushes them to docker hub
@@ -118,12 +117,15 @@ Home page is also the main search page. The databse is auto populated with some 
 
 ### Docker deployment
 -   Docker will be installed on 4 VM's, three to be part of a docker swarm and another to be a load balancer and reverse proxy running NGINX
--   The docker swarm will contain one mysql database linked to a volume for data persistance and 10 web-app containers.
+-   The docker swarm will contain one mysql database linked to a volume for data persistance and a number of web-app containers.
+
+    
 
 
-### Project Planning an Development
+## Project Planning and Version Source Control
 
-
+Thr project planning was done on Jira, originally using sprints but that was cumbersum and unwieldy for a team of one. It was difficult to judge what would be a simple task or something that would take hours to make work.  
+in Github I split the dev branch from the main, and then split feature branches from the dev branch. Early on I mistakenly created new feature branches whithout merging the previous features back which caused me a lot of headaches, and merge conflicts, once I realised and tried to merge them alltogether. However this did giver me some good experience of dealing with merge conflicts and motivation to avoid them in the future!
 
 
 tasks to do
@@ -151,7 +153,6 @@ Git branching - forgot to merge then branched new features from dev branch which
 unit testing - struggled to understand exactly what to pass in a dictionary for post tests
 
 sqlcontainer - wanted to prepopulate container with information. 
-
 
 
 
