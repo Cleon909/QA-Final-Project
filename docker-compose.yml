@@ -1,24 +1,20 @@
 version: "3.8"
 services:
   webapp:
-    build: .
-    container_name: myapp
+    image: corcoran909/webapp
     ports:
     - target: 5000
       published: 5000
-    environment:
-      DATABASE_URI_CREATE: ${DATABASE_URI_CREATE}
-      SECRET_KEY: ${SECRET_KEY}
-      DATABASE_URI: ${DATABASE_URI}
-    depends_on:
-    - appdb
-  database:
-    container_name: db
-    image: mysql:latest
+    deploy:
+      replicas: 1
+  db:
+    image: corcoran909/mysql
+    deploy:
+      replicas: 1
     ports:
       - target: 3306
-    environment:
-      MYSQL_ROOT_PASSWORD: ${SQLPWD}
+      - published: 3006
+    
       
     
   
