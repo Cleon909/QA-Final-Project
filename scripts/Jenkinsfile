@@ -3,12 +3,11 @@ pipeline {
     environment {
         SECRET_KEY = credentials('SECRET_KEY')
         DATABASE_URI = credentials('DATABASE_URI')
-        //DOCKER_LOGIN = credentials('DOCKERHUB')
+        DOCKER_LOGIN = credentials('DOCKERHUB_LOGIN')
         SQLPWD= credentials('SQLPWD')
-        DATABASE_URI_CREATE = credentials('DATABASE_URI_CREATE')
         APP_RUN = 'True'
     }
-
+// This stage creates virtual environment for the python container
     stages {
         stage('Setup') {
             steps {
@@ -19,6 +18,7 @@ pipeline {
                 """
             }
         }
+// This stage runs unit tests and saves them to files to be picked up post build 
         stage('Test') {
             steps {
                 sh """ . ./venv/bin/activate
@@ -26,49 +26,40 @@ pipeline {
                 python3 -m pytest --cov-report xml:coverage.xml --cov=tests/""" 
             }
         }
-
-/*        stage('login') {
+// This stage builds the two containers and pushes to docker hub
+        stage('build and push') {
             steps {
-                sh 'echo $DOCKER_LOGIN_PSW | docker login -u $DOCKER_LOGIN_USR --password-stdin'
-            }
-        }*/
-
-        stage('docker-compose') {
-            steps {
-                sh "docker-compose up -d"
+                sh """echo $DOCKER_LOGIN_PSW | docker login -u $DOCKER_LOGIN_USR --password-stdin
+                docker build -t corcoran909/webapp .
+                docker push corcoran909/webapp
+                cd db/
+                docker build -t corcoran909/webapp
+                docker push corcoran909/webapp"""
             }
         }
-
-        stage('create database') {
+// This stage copies a compose file into the manager node sshs into manager node of swarm and sets up the docker stack
+        stage('deploy') {
             steps {
-                sleep time: 60 
-                sh"""#!/bin/bash
-                docker exec myapp python3 create.py
+                sh """scp scripts/docker-compose.yml jenkins@10.0.0.9:
+                ssh jenkins@10.0.0.9
+                sleep 3s
+                docker stack compose --compose-file docker-compose.yml webapp
+                exit
                 """
             }
         }
-/*        stage('Build') {
-            steps {
-                sh """docker build -t corcoran909/myapp ."""
-            }
-        }
-
-        stage('push'){
+// This stage copies a conf file into the vm, sshs into the vm and sets up a load balancer with a nginx server
+        stage('create nginx load balancer'){
             steps{
-                sh 'docker push corcoran909/myapp:latest'
+                sh """cps  scripts/nginx.conf jenkins@GETAVMWITHIPADDRESS!
+                ssh jenkins@GETANIP!
+                sleep 3s
+                docker run -d -p 80:80 --name nginx --mount type=bind,source=${pwd}/nginx.conf,target=/etc/nginx/nginx.conf nginx
+                exit"""
             }
         }
-        stage('Deploy') {
-            steps {
-                sh """
-                docker rm -f myapp
-                docker run --network mynetwork --name myapp -d -p 5000:5000 corcoran909/myapp
-                """
-            }
-        }
-        */
     
-        stage('post build') {
+        stage('post build - test results') {
             steps{
                 junit 'unittests.xml'
                 cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
