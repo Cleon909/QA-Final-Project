@@ -3,13 +3,13 @@
 Links to Jira and Risk assesment go here.
 
 ## Contents
-1. Brief (#brief)
-2. Project Design (#project-design)
-3. Database Design (#databse-design)
-4. HTML Templates (#html-templates)
-5. CI/CD pipeline (#ci/cd-pipeline)
-6. Docker Deployment (#docker-deployment)
-7. Project Planning and Version Source Control(#project-planning-and-version-source-control)
+1. [Brief](#brief)
+2. [Project Design](#project-design)
+3. [Database Design](#databse-design)
+4. [HTML Templates](#html-templates)
+5. [CI/CD pipeline](#ci/cd-pipeline)
+6. [Docker Deployment](#docker-deployment)
+7. [Project Planning and Version Source Control](#project-planning-and-version-source-control)
 
 
 ## <a name="brief"></a>Brief
