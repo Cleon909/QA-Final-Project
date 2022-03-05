@@ -1,6 +1,6 @@
 from flask_testing import TestCase
 from application import app, db, routes
-from application.models import Academics, Papers, authors
+from application.models import Academics, Papers, Authors
 
 class TestBase(TestCase):
     def create_app(self):
@@ -19,7 +19,7 @@ class TestBase(TestCase):
         academic3 = Academics('Academic C', 'Institution C', 'Field of Study C')
         academic4 = Academics('Academic D', 'Institution D', 'Field of Study D')
         paper1 = Papers('A Paper', '2000', 'Another field of study')
-        author1 = authors(1, 1)
+        author1 = Authors(1, 1)
         db.session.add(academic1)
         db.session.add(academic2)
         db.session.add(academic3)
@@ -41,7 +41,7 @@ class TestPostResponse(TestBase):
         data = {'name' : 1})
         self.assertEqual(response.status_code, 200)
         assert len(Academics.query.all()) == 3
-        assert len(authors.query.all()) == 0
+        assert len(Authors.query.all()) == 0
     
     def test_delete_paper(self):
         #test deletes the paper and author objects created in setUp() and checks no objects are found
@@ -49,7 +49,7 @@ class TestPostResponse(TestBase):
         data = {'title': 1})
         self.assertEqual(response.status_code, 200)
         assert len(Papers.query.all()) == 0
-        assert len(authors.query.all()) == 0
+        assert len(Authors.query.all()) == 0
 
     def test_create_academic(self):
         #tests that an academic is created with the correct attributes for the object
@@ -64,45 +64,45 @@ class TestPostResponse(TestBase):
     def test_create_paper_1(self):
         #tests that a paper is created with the correct attributes and is also linked to the one author
         response = self.client.post('/add_paper',
-        data = {'title':'Another Paper', 'year_published':2000, 'field_of_study':'Another Field of Study', 'authors1': 1, 'no_of_authors': '1'})
+        data = {'title':'Another Paper', 'year_published':2000, 'field_of_study':'Another Field of Study', 'Authors1': 1, 'no_of_Authors': '1'})
         test = Papers.query.filter_by(id=2).first()
         self.assertEqual(response.status_code, 200)
         assert test.title == 'Another Paper'
         assert test.year_published == 2000
         assert test.field_of_study == 'Another Field of Study'
-        auth1 = authors.query.filter_by(id=2).first()
+        auth1 = Authors.query.filter_by(id=2).first()
         assert auth1.academic_id == 1
         assert auth1.paper_id == 2
         
 
     def test_create_paper_2(self):
-        #tests that a paper is created with the correct attributes and is also linked to two authors
+        #tests that a paper is created with the correct attributes and is also linked to two Authors
         response = self.client.post('/add_paper',
-        data = {'title':'Another Paper', 'year_published':2000, 'field_of_study':'Another Field of Study', 'authors1': 1, 'no_of_authors': '2', 'authors2': 2})
+        data = {'title':'Another Paper', 'year_published':2000, 'field_of_study':'Another Field of Study', 'Authors1': 1, 'no_of_Authors': '2', 'Authors2': 2})
         test = Papers.query.filter_by(id=2).first()
         self.assertEqual(response.status_code, 200)
         assert test.title == 'Another Paper'
         assert test.year_published == 2000
         assert test.field_of_study == 'Another Field of Study'
-        auth1 = authors.query.filter_by(id=2).first()
-        auth2 = authors.query.filter_by(id=3).first()
+        auth1 = Authors.query.filter_by(id=2).first()
+        auth2 = Authors.query.filter_by(id=3).first()
         assert auth1.academic_id == 1
         assert auth1.paper_id == 2
         assert auth2.academic_id == 2
         assert auth2.paper_id == 2
 
     def test_create_paper_3(self):
-        #tests that a paper is created with the correct attributes and is also linked to three authors
+        #tests that a paper is created with the correct attributes and is also linked to three Authors
         response = self.client.post('/add_paper',
-        data = {'title':'Another Paper', 'year_published':2000, 'field_of_study':'Another Field of Study', 'authors1': 1, 'no_of_authors': '3', 'authors2': 2, 'authors3':3})
+        data = {'title':'Another Paper', 'year_published':2000, 'field_of_study':'Another Field of Study', 'Authors1': 1, 'no_of_Authors': '3', 'Authors2': 2, 'Authors3':3})
         test = Papers.query.filter_by(id=2).first()
         self.assertEqual(response.status_code, 200)
         assert test.title == 'Another Paper'
         assert test.year_published == 2000
         assert test.field_of_study == 'Another Field of Study'
-        auth1 = authors.query.filter_by(id=2).first()
-        auth2 = authors.query.filter_by(id=3).first()
-        auth3 = authors.query.filter_by(id=4).first()
+        auth1 = Authors.query.filter_by(id=2).first()
+        auth2 = Authors.query.filter_by(id=3).first()
+        auth3 = Authors.query.filter_by(id=4).first()
         assert auth1.academic_id == 1
         assert auth1.paper_id == 2
         assert auth2.academic_id == 2
@@ -111,18 +111,18 @@ class TestPostResponse(TestBase):
         assert auth3.paper_id == 2
 
     def test_create_paper_4(self):
-        #tests that a paper is created with the correct attributes and is also linked to the two authors
+        #tests that a paper is created with the correct attributes and is also linked to the two Authors
         response = self.client.post('/add_paper',
-        data = {'title':'Another Paper', 'year_published':2000, 'field_of_study':'Another Field of Study', 'authors1': 1, 'no_of_authors': '4', 'authors2': 2, 'authors3':3, 'authors4':4})
+        data = {'title':'Another Paper', 'year_published':2000, 'field_of_study':'Another Field of Study', 'Authors1': 1, 'no_of_Authors': '4', 'Authors2': 2, 'Authors3':3, 'Authors4':4})
         test = Papers.query.filter_by(id=2).first()
         self.assertEqual(response.status_code, 200)
         assert test.title == 'Another Paper'
         assert test.year_published == 2000
         assert test.field_of_study == 'Another Field of Study'
-        auth1 = authors.query.filter_by(id=2).first()
-        auth2 = authors.query.filter_by(id=3).first()
-        auth3 = authors.query.filter_by(id=4).first()
-        auth4 = authors.query.filter_by(id=5).first()
+        auth1 = Authors.query.filter_by(id=2).first()
+        auth2 = Authors.query.filter_by(id=3).first()
+        auth3 = Authors.query.filter_by(id=4).first()
+        auth4 = Authors.query.filter_by(id=5).first()
         assert auth1.academic_id == 1
         assert auth1.paper_id == 2
         assert auth2.academic_id == 2
@@ -143,47 +143,47 @@ class TestPostResponse(TestBase):
         assert acad.field_of_study == 'Different FOD'
 
     def test_update_paper_1(self):
-        #tests that updates to Papers fields and linked authors are saved into database
+        #tests that updates to Papers fields and linked Authors are saved into database
         response = self.client.post('/update_paper',
-        data = {'paper_object': '1', 'title':'Different Title', 'year_published':'1900', 'field_of_study':'Different FOD', 'no_of_authors':'1', 'author1':'3'})
+        data = {'paper_object': '1', 'title':'Different Title', 'year_published':'1900', 'field_of_study':'Different FOD', 'no_of_Authors':'1', 'author1':'3'})
         self.assertEqual(response.status_code, 200)
         pap = Papers.query.filter_by(id=1).first()
         assert pap.title == 'Different Title'
         assert pap.year_published == 1900
         assert pap.field_of_study == 'Different FOD'
-        auth1 = authors.query.filter_by(id=2).first()
-        auth2 = authors.query.filter_by(id=3).first()
+        auth1 = Authors.query.filter_by(id=2).first()
+        auth2 = Authors.query.filter_by(id=3).first()
         assert auth1.academic_id == 3
         assert auth1.paper_id == 1
 
     def test_update_paper_2(self):
-        #tests that updates to Papers fields and linked authors are saved into database
+        #tests that updates to Papers fields and linked Authors are saved into database
         response = self.client.post('/update_paper',
-        data = {'paper_object': '1', 'title':'Different Title', 'year_published':'1900', 'field_of_study':'Different FOD', 'no_of_authors':'2', 'author1':'3', 'author2':'4'})
+        data = {'paper_object': '1', 'title':'Different Title', 'year_published':'1900', 'field_of_study':'Different FOD', 'no_of_Authors':'2', 'author1':'3', 'author2':'4'})
         self.assertEqual(response.status_code, 200)
         pap = Papers.query.filter_by(id=1).first()
         assert pap.title == 'Different Title'
         assert pap.year_published == 1900
         assert pap.field_of_study == 'Different FOD'
-        auth1 = authors.query.filter_by(id=2).first()
-        auth2 = authors.query.filter_by(id=3).first()
+        auth1 = Authors.query.filter_by(id=2).first()
+        auth2 = Authors.query.filter_by(id=3).first()
         assert auth1.academic_id == 3
         assert auth1.paper_id == 1
         assert auth2.academic_id == 4
         assert auth2.paper_id == 1
 
     def test_update_paper_3(self):
-        #tests that updates to Papers fields and linked authors are saved into database
+        #tests that updates to Papers fields and linked Authors are saved into database
         response = self.client.post('/update_paper',
-        data = {'paper_object': '1', 'title':'Different Title', 'year_published':'1900', 'field_of_study':'Different FOD', 'no_of_authors':'3', 'author1':'3', 'author2':'4', 'author3':'1'})
+        data = {'paper_object': '1', 'title':'Different Title', 'year_published':'1900', 'field_of_study':'Different FOD', 'no_of_Authors':'3', 'author1':'3', 'author2':'4', 'author3':'1'})
         self.assertEqual(response.status_code, 200)
         pap = Papers.query.filter_by(id=1).first()
         assert pap.title == 'Different Title'
         assert pap.year_published == 1900
         assert pap.field_of_study == 'Different FOD'
-        auth1 = authors.query.filter_by(id=2).first()
-        auth2 = authors.query.filter_by(id=3).first()
-        auth3 = authors.query.filter_by(id=4).first()
+        auth1 = Authors.query.filter_by(id=2).first()
+        auth2 = Authors.query.filter_by(id=3).first()
+        auth3 = Authors.query.filter_by(id=4).first()
         assert auth1.academic_id == 3
         assert auth1.paper_id == 1
         assert auth2.academic_id == 4
@@ -192,18 +192,18 @@ class TestPostResponse(TestBase):
         assert auth3.paper_id == 1
 
     def test_update_paper_4(self):
-        #tests that updates to Papers fields and linked authors are saved into database
+        #tests that updates to Papers fields and linked Authors are saved into database
         response = self.client.post('/update_paper',
-        data = {'paper_object': '1', 'title':'Different Title', 'year_published':'1900', 'field_of_study':'Different FOD', 'no_of_authors':'4', 'author1':'3', 'author2':'4', 'author3':'1', 'author4':'2'})
+        data = {'paper_object': '1', 'title':'Different Title', 'year_published':'1900', 'field_of_study':'Different FOD', 'no_of_Authors':'4', 'author1':'3', 'author2':'4', 'author3':'1', 'author4':'2'})
         self.assertEqual(response.status_code, 200)
         pap = Papers.query.filter_by(id=1).first()
         assert pap.title == 'Different Title'
         assert pap.year_published == 1900
         assert pap.field_of_study == 'Different FOD'
-        auth1 = authors.query.filter_by(id=2).first()
-        auth2 = authors.query.filter_by(id=3).first()
-        auth3 = authors.query.filter_by(id=4).first()
-        auth4 = authors.query.filter_by(id=5).first()
+        auth1 = Authors.query.filter_by(id=2).first()
+        auth2 = Authors.query.filter_by(id=3).first()
+        auth3 = Authors.query.filter_by(id=4).first()
+        auth4 = Authors.query.filter_by(id=5).first()
         assert auth1.academic_id == 3
         assert auth1.paper_id == 1
         assert auth2.academic_id == 4
