@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SelectField, SubmitField
 from wtforms.validators import DataRequired, Length, ValidationError, NumberRange
-from application.models import Acedemics, Papers
+from application.models import Academics, Papers
 
 
 class SearchDatabaseForm(FlaskForm):
