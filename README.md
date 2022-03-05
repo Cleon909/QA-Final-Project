@@ -4,13 +4,12 @@ Links to Jira and Risk assesment go here.
 
 ## Contents
 1. Brief (#brief)
-2. Database Design (#database-design)
-3. HTML Templates (#html-templates)
-4. CI/CD pipeline (#ci/cd-pipeline)
-5. Docker Deployment
-6. Project Planning and development
-
-
+2. Project Design (#project-design)
+3. Database Design (#databse-design)
+4. HTML Templates (#html-templates)
+5. CI/CD pipeline (#ci/cd-pipeline)
+6. Docker Deployment
+7. Project Planning and development
 
 
 ## Brief
@@ -23,6 +22,8 @@ Links to Jira and Risk assesment go here.
     -   The Database must contain two tables with a relationship, either one-to-many or many-to-many (This project uses many-to-many)
     -   pytest to be used to write unit tests with the aim of acheiving high coverage.
 
+<br>
+
 -   Create a continuous integration CI/CD^[2]^ using Jenkins. 
     -   The pipeline must:
         -   Run unit tests.
@@ -31,34 +32,24 @@ Links to Jira and Risk assesment go here.
         -   Deploy to a swarm
             -   hosted in the cloud
             -   at least one manager node and one worker node, neither of whch are the Jenkins server
-        -   use a webhook from a remote repository to trigger the pipeline 
+        -   use a webhook from a remote repository to trigger the pipeline
+        
+<br> 
+
 -   All code, configuration files, and any related scripts to be contained in a Github repository with a write up of the project in a README.md file.
 -   A video to be provided with evidence of the application and the CI/CD pipeline working.
 
+<br>
 
-## Database Design
-
-this is a many to many relational database, which as SQL doesn't accompdate contains a child table.
-The database holds nonsesical academic papers, some with multiple authors, and with academics who author many papers.
-I originally planned for a few different attributes to each table to add a bit of detail to the information, but scaled it back as it didn't add much, and wasn't interesting.
-
-Original Entity Relationship Diagram
-
-<img src-"Academic_literature_ERD(old).png" alt="original ERD" width="200"/>
-<img src-"Academic_literature_ERD.png" alt="original ERD" width="200"/>
-
-![original ERD](Academic_literature_ERD(old).png)
-
-![updated ERD](Academic_literature_ERD.png)
+## Project Design
 
 ### The application was designed to fulfill the must have features as given by the brief:
 -   Two tables with a relationship between them
     -   Application has an Academics and a Papers Table
 -   Front end to interact with database using SQLAlchemy
     -   Front end comprises of a home page in which the user can search the database and return the linked relational entries on the other table, as well as pages that allow to create, delete and update objects.
--   INFO HERE ON DATABASE
--   INFO HERE ON JENKINS
--   INFO HERE ON DOCKER SWARM
+-   Jenkins is the CI/CD server it automates testing and deployment to docker swarm
+-   The Docker swarm runs on at least one manager node and currently two worker nodes, it runs a MYSQL Container and a number of front end containers. 
 
 ### It also has some features that went above the basic brief but add add functionality(should have):
 -   Ability for the user to update every attribute for an object in both tables
@@ -66,19 +57,31 @@ Original Entity Relationship Diagram
 -   Some extra attributes beyond the titles and the authors
 -   CAN'T DELETE LAST AUTHOR OF PAPER
 -   INTEGRATION TESTING 
--   MAYBE SOMETHING HERE ON DEPLOYMENT IF I CAN GO BEYOND THE BASICS
+-   The docker swarm is on three nodes with have no public IP adresses, with the only access to the internet cotrolled by NGINX container sat on a seperate VM.  
 
 ### If there was more time or the database would ever actually be used here are some fetaures it could have:
 -   Ability to filter search results, i.e. all papers from a certain year, or all authors in certain field of study.
 -   create seperate tables to track institutions and fields of study rather than have them entered via string each time they are created or updated
 -   ability to hyperlink names of objects to a search for that attribute
 -   run tests in a container rather than on jenkins server
--   SOME DEPLOYMENT STUFF IF NECESSARY
 
 ### There were some intital ideas I had on the design of the web application that I decided where unecessary(Will not have):
 -   Impact (a measure of how important a paper is in it's field) dropped as it added little
 -   First and Last name of Academics merged into one field as it added no extra information
 -   Date of publication changed to year of publication as that level of detail is not needed for fictional documents
+
+## Database design
+
+this is a many to many relational database, which as SQL doesn't accompdate contains a child table.
+The database holds nonsesical academic papers, some with multiple authors, and with academics who author many papers.
+I originally planned for a few different attributes to each table to add a bit of detail to the information, but scaled it back as it didn't add much, and wasn't interesting.
+
+### <p align="center">Original Entity Relationship Diagram/New Entity Diagram</p>
+
+<img src="documentation/Academic_literature_ERD(old).png" alt="original ERD" width="450"/>
+<img src="documentation/Academic_literature_ERD.png" alt="original ERD" width="450"/>
+
+<br>
 
 ## HTML Page functionality
 
@@ -106,17 +109,18 @@ Home page is also the main search page. The databse is auto populated with some 
 ### About Page
 - Basic information about the app
 
-<<<<<<< HEAD
-## CI/CD Pipeline
-=======
 ### CI/CD Pipeline
 Prequisites:  
 -   VM with Jenkins (plugin cobertura) and docker installed
 -   4 VMs with docker installed 
 -   All VMs to be on the same Vnet (Azure does this by default)
 
+### <p align="center">CI/CD Pipeline Diagram</P>
+<p align="center"><img src='documentation/ci_pipeline.png' alt="ci pipeline diagram" width=600 /></p>
+
+
+
 Pipeline process:  
->>>>>>> 4d7a93f4378ccd4c671caaaa5bfd466cd2515323
 -   Git sends an changes to the dev branch to Jenkins
 -   Jenkins runs unit tests if they fail it sends an email to the developer (me!)
 -   If the tests pass Jenkins builds containers for the mysql database and web apps and pushes them to docker hub
@@ -129,6 +133,8 @@ Pipeline process:
 -   Docker will be installed on 4 VM's, three to be part of a docker swarm and another to be a load balancer and reverse proxy running NGINX
 -   The docker swarm will contain one mysql database linked to a volume for data persistance and a number of web-app containers.
 
+### <p align="center">Deployment Diagram</p>
+<p align="center"><img src="documentation/Deployed_Components.png"  alt="docker diagram" height="500"/></p>
     
 
 
