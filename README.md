@@ -78,8 +78,10 @@ I originally planned for a few different attributes to each table to add a bit o
 
 ### <p align="center">Original Entity Relationship Diagram</p>
 
-<p align="center"> <img src="documentation/Academic_literature_ERD(old).png" alt="original ERD" width="450"/> </P>  
+<p align="center"> <img src="documentation/Academic_literature_ERD(old).png" alt="original ERD" width="450"/> </P>
+
 ### <p align="center">New Entity Diagram</p>
+
 <p align="center"> <img src="documentation/Academic_literature_ERD.png" alt="original ERD" width="450"/> </p>
 
 <br>
