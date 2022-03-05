@@ -3,7 +3,7 @@ pipeline {
     environment {
         SECRET_KEY = credentials('SECRET_KEY')
         DATABASE_URI = credentials('DATABASE_URI')
-        DOCKER_LOGIN = credentials('DOCKERHUB_LOGIN')
+        DOCKER_LOGIN = credentials('DOCKER_LOGIN')
         SQLPWD= credentials('SQLPWD')
         APP_RUN = 'True'
     }
