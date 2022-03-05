@@ -8,14 +8,14 @@ Links to Jira and Risk assesment go here.
 3. Database Design (#databse-design)
 4. HTML Templates (#html-templates)
 5. CI/CD pipeline (#ci/cd-pipeline)
-6. Docker Deployment
-7. Project Planning and development
+6. Docker Deployment (#docker-deployment)
+7. Project Planning and Version Source Control(#project-planning-and-version-source-control)
 
 
-## Brief
+## <a name="brief"></a>Brief
 -   Create a web application that integrates with a database and demonstrates CRUD functionality.
     -   To be a monolithic Flask application that serves both front and back end of the application.
-    -   Front end to use HTML templates to serve web pages that allow the user to perform CRUD^[1]^ functionality with   information from the database
+    -   Front end to use HTML templates to serve web pages that allow the user to perform CRUD functionality with information from the database
     -   Frontend of application to use SQLAlchemy to model an integrate with database
     -   Application to be hosted in a container to allow it to be deployed in a docker swarm    
     -   Application must interface with a seperate database service, either a MySQL container or possibly MySQL Database for Azure.
@@ -24,7 +24,7 @@ Links to Jira and Risk assesment go here.
 
 <br>
 
--   Create a continuous integration CI/CD^[2]^ using Jenkins. 
+-   Create a continuous integration CI/CD using Jenkins. 
     -   The pipeline must:
         -   Run unit tests.
         -   Build Dockers images
@@ -41,7 +41,7 @@ Links to Jira and Risk assesment go here.
 
 <br>
 
-## Project Design
+## <a name="project-design"></a>Project Design
 
 ### The application was designed to fulfill the must have features as given by the brief:
 -   Two tables with a relationship between them
@@ -70,7 +70,7 @@ Links to Jira and Risk assesment go here.
 -   First and Last name of Academics merged into one field as it added no extra information
 -   Date of publication changed to year of publication as that level of detail is not needed for fictional documents
 
-## Database design
+## <a name="database-design"></a>Database design
 
 this is a many to many relational database, which as SQL doesn't accompdate contains a child table.
 The database holds nonsesical academic papers, some with multiple authors, and with academics who author many papers.
@@ -86,7 +86,7 @@ I originally planned for a few different attributes to each table to add a bit o
 
 <br>
 
-## HTML Page functionality
+## <a name="html-templates"></a>HTML Page functionality
 
 Home page is also the main search page. The databse is auto populated with some data (20 objects in each table). The search functions are done through select fields, with the update, and create functions done through entering strings. 
 
@@ -112,7 +112,7 @@ Home page is also the main search page. The databse is auto populated with some 
 ### About Page
 - Basic information about the app
 
-### CI/CD Pipeline
+### <a name="ci.cd-pipeline"></a>CI/CD Pipeline
 Prequisites:  
 -   VM with Jenkins (plugin cobertura) and docker installed
 -   4 VMs with docker installed 
@@ -132,7 +132,7 @@ Pipeline process:
 - Jenkins then SSHs into another VM to set up docker and a NGINX container to act as a load balancer and reverse proxy 
 
 
-### Docker deployment
+### <a name="docker-deployment"></a>Docker deployment
 -   Docker will be installed on 4 VM's, three to be part of a docker swarm and another to be a load balancer and reverse proxy running NGINX
 -   The docker swarm will contain one mysql database linked to a volume for data persistance and a number of web-app containers.
 
@@ -141,7 +141,7 @@ Pipeline process:
     
 
 
-## Project Planning and Version Source Control
+## <a name="project-planning-and-version-source-control"></a>Project Planning and Version Source Control
 
 Thr project planning was done on Jira, originally using sprints but that was cumbersum and unwieldy for a team of one. It was difficult to judge what would be a simple task or something that would take hours to make work.  
 in Github I split the dev branch from the main, and then split feature branches from the dev branch. Early on I mistakenly created new feature branches whithout merging the previous features back which caused me a lot of headaches, and merge conflicts, once I realised and tried to merge them alltogether. However this did giver me some good experience of dealing with merge conflicts and motivation to avoid them in the future!
