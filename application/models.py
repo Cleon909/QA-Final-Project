@@ -26,8 +26,8 @@ class Papers(db.Model):
 
 class Authors(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    academic_id = db.Column(db.Integer, db.ForeignKey('Academics.id'), nullable=False) 
-    paper_id = db.Column(db.Integer, db.ForeignKey('Papers.id'), nullable=False) 
+    academic_id = db.Column(db.Integer, db.ForeignKey(Academics.id), nullable=False) 
+    paper_id = db.Column(db.Integer, db.ForeignKey(Papers.id), nullable=False) 
 
     def __init__(self, academic_id, paper_id):
         self.academic_id = academic_id
