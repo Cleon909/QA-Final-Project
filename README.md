@@ -76,10 +76,11 @@ this is a many to many relational database, which as SQL doesn't accompdate cont
 The database holds nonsesical academic papers, some with multiple authors, and with academics who author many papers.
 I originally planned for a few different attributes to each table to add a bit of detail to the information, but scaled it back as it didn't add much, and wasn't interesting.
 
-### <p align="center">Original Entity Relationship Diagram/New Entity Diagram</p>
+### <p align="center">Original Entity Relationship Diagram</p>
 
-<img src="documentation/Academic_literature_ERD(old).png" alt="original ERD" width="450"/>
-<img src="documentation/Academic_literature_ERD.png" alt="original ERD" width="450"/>
+<p align="center"> <img src="documentation/Academic_literature_ERD(old).png" alt="original ERD" width="450"/> </P>  
+### <p align="center">New Entity Diagram</p>
+<p align="center"> <img src="documentation/Academic_literature_ERD.png" alt="original ERD" width="450"/> </p>
 
 <br>
 
@@ -134,7 +135,7 @@ Pipeline process:
 -   The docker swarm will contain one mysql database linked to a volume for data persistance and a number of web-app containers.
 
 ### <p align="center">Deployment Diagram</p>
-<p align="center"><img src="documentation/Deployed_Components.png"  alt="docker diagram" height="500"/></p>
+<p align="center"><img src="documentation/Deployed_Components.png"  alt="docker diagram" height="400"/></p>
     
 
 
