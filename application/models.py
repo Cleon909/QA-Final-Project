@@ -17,7 +17,7 @@ class Papers(db.Model):
     title = db.Column(db.String(100), nullable=False)
     year_published = db.Column(db.Integer)
     field_of_study = db.Column(db.String(50), default='Unkown') # this line could be moved to a seperate table
-    Authors = db.relationship('Authors', backref = 'Papersbr')
+    Authors = db.relationship('Authors', backref = 'papersbr')
 
     def __init__(self, title, year_published, field_of_study):
         self.title = title
