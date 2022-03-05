@@ -13,27 +13,27 @@ def index():
     form.title.choices = [(g.id, g.title) for g in Papers.query.order_by('title')]
 
     if request.method == 'POST':
-        total_number = {'number_of_Academics': Academics.query.count(),
-        'number_of_Papers': Papers.query.count()}
-        Academics_result = Academics.query.filter_by(id=form.name.data).first()
+        total_number = {'number_of_academics': Academics.query.count(),
+        'number_of_papers': Papers.query.count()}
+        academics_result = Academics.query.filter_by(id=form.name.data).first()
 
-        #code below uses child table to find Papers for author
-        Papers_id = [g.paper_id for g in Authors.query.filter_by(academic_id = form.name.data)]
-        Papers_by_author = []
-        for pap in Papers_id:
-            Papers_by_author.append(Papers.query.filter_by(id = pap).first())
+        #code below uses child table to find papers for author
+        papers_id = [g.paper_id for g in Authors.query.filter_by(academic_id = form.name.data)]
+        papers_by_author = []
+        for pap in papers_id:
+            papers_by_author.append(Papers.query.filter_by(id = pap).first())
 
-        Papers_result = Papers.query.filter_by(id=form.title.data).first()
+        papers_result = Papers.query.filter_by(id=form.title.data).first()
          # code below uses child table to find aythors of paper
         acad_id = [g.academic_id for g in Authors.query.filter_by(paper_id = form.title.data)]
-        Authors_of_paper = []
+        authors_of_paper = []
         for acad in acad_id:
-            Authors_of_paper.append(Academics.query.filter_by(id = acad).first())
+            authors_of_paper.append(Academics.query.filter_by(id = acad).first())
 
-        return render_template('index.html',form=form, total_number=total_number, Academics_result=Academics_result, Papers_by_author=Papers_by_author, Papers_result=Papers_result, Authors_of_paper=Authors_of_paper)
+        return render_template('index.html',form=form, total_number=total_number, academics_result=academics_result, papers_by_author=papers_by_author, papers_result=papers_result, authors_of_paper=authors_of_paper)
     else:
-        total_number = {'number_of_Academics': Academics.query.count(),
-        'number_of_Papers': Papers.query.count()}
+        total_number = {'number_of_academics': Academics.query.count(),
+        'number_of_papers': Papers.query.count()}
         return render_template('index.html', form=form, total_number=total_number) 
 
 
@@ -78,55 +78,55 @@ def update_paper():
         db.session.commit()
         for aut in Authors.query.filter_by(paper_id=pap.id).all():
             db.session.delete(aut)            
-        Authors = []
-        if form.no_of_Authors.data == '1':
+        authors = []
+        if form.no_of_authors.data == '1':
             author1 = Authors(form.author1.data, pap.id)
             db.session.add(author1)
             db.session.commit()
-            Authors.append(author1)
-        if form.no_of_Authors.data == '2':
+            authors.append(author1)
+        if form.no_of_authors.data == '2':
             author1 = Authors(form.author1.data, pap.id)
             db.session.add(author1)
             db.session.commit()
-            Authors.append(author1)
+            authors.append(author1)
             author2 = Authors(form.author2.data, pap.id)
             db.session.add(author2)
             db.session.commit()
-            Authors.append(author2)
-        if form.no_of_Authors.data == '3':
+            authors.append(author2)
+        if form.no_of_authors.data == '3':
             author1 = Authors(form.author1.data, pap.id)
             db.session.add(author1)
             db.session.commit()
-            Authors.append(author1)
+            authors.append(author1)
             author2 = Authors(form.author2.data, pap.id)
             db.session.add(author2)
             db.session.commit()
-            Authors.append(author2)
+            authors.append(author2)
             author3 = Authors(form.author3.data, pap.id)
             db.session.add(author3)
             db.session.commit()
-            Authors.append(author3)
-        if form.no_of_Authors.data == '4':
+            authors.append(author3)
+        if form.no_of_authors.data == '4':
             author1 = Authors(form.author1.data, pap.id)
             db.session.add(author1)
             db.session.commit()
-            Authors.append(author1)
+            authors.append(author1)
             author2 = Authors(form.author2.data, pap.id)
             db.session.add(author2)
             db.session.commit()
-            Authors.append(author2)
+            authors.append(author2)
             author3 = Authors(form.author3.data, pap.id)
             db.session.add(author3)
             db.session.commit()
-            Authors.append(author3)
+            authors.append(author3)
             author4 = Authors(form.author4.data, pap.id)
             db.session.add(author4)
             db.session.commit()
-            Authors.append(author4)
-        a_Authors = []
-        for author in Authors:
-            a_Authors.append(Academics.query.filter_by(id=author.academic_id).first())
-        return render_template('update_paper.html', pap=pap, Authors=a_Authors)    
+            authors.append(author4)
+        a_authors = []
+        for author in authors:
+            a_authors.append(Academics.query.filter_by(id=author.academic_id).first())
+        return render_template('update_paper.html', pap=pap, authors=a_authors)    
     else:
         init = True
         return render_template('update_paper.html', form=form, init=init)
@@ -151,67 +151,67 @@ def add_academic():
 @app.route('/add_paper', methods = ['GET', 'POST'])
 def add_paper():
     form = AddPaperForm()
-    form.Authors1.choices = [(g.id, g.name) for g in Academics.query.order_by('name')] 
-    form.Authors2.choices = [(g.id, g.name) for g in Academics.query.order_by('name')]
-    form.Authors3.choices = [(g.id, g.name) for g in Academics.query.order_by('name')]
-    form.Authors4.choices = [(g.id, g.name) for g in Academics.query.order_by('name')]
+    form.authors1.choices = [(g.id, g.name) for g in Academics.query.order_by('name')] 
+    form.authors2.choices = [(g.id, g.name) for g in Academics.query.order_by('name')]
+    form.authors3.choices = [(g.id, g.name) for g in Academics.query.order_by('name')]
+    form.authors4.choices = [(g.id, g.name) for g in Academics.query.order_by('name')]
 
     if request.method == 'POST':
         title = form.title.data
         year_published = form.year_published.data
         field_of_study = form.field_of_study.data
         paper = Papers(title, year_published, field_of_study)
-        db.session.add(paper) #work out how to add Authors to child table
+        db.session.add(paper) #work out how to add authors to child table
         db.session.commit()
-        Authors = []
-        if form.no_of_Authors.data == '1':
-            author1 = Authors(form.Authors1.data, paper.id)
+        authors = []
+        if form.no_of_authors.data == '1':
+            author1 = Authors(form.authors1.data, paper.id)
             db.session.add(author1)
             db.session.commit()
-            Authors.append(author1)
-        if form.no_of_Authors.data == '2':
-            author1 = Authors(form.Authors1.data, paper.id)
+            authors.append(author1)
+        if form.no_of_authors.data == '2':
+            author1 = Authors(form.authors1.data, paper.id)
             db.session.add(author1)
             db.session.commit()
-            Authors.append(author1)
-            author2 = Authors(form.Authors2.data, paper.id)
+            authors.append(author1)
+            author2 = Authors(form.authors2.data, paper.id)
             db.session.add(author2)
             db.session.commit()
-            Authors.append(author2)
-        if form.no_of_Authors.data == '3':
-            author1 = Authors(form.Authors1.data, paper.id)
+            authors.append(author2)
+        if form.no_of_authors.data == '3':
+            author1 = Authors(form.authors1.data, paper.id)
             db.session.add(author1)
             db.session.commit()
-            Authors.append(author1)
-            author2 = Authors(form.Authors2.data, paper.id)
+            authors.append(author1)
+            author2 = Authors(form.authors2.data, paper.id)
             db.session.add(author2)
             db.session.commit()
-            Authors.append(author2)
-            author3 = Authors(form.Authors3.data, paper.id)
+            authors.append(author2)
+            author3 = Authors(form.authors3.data, paper.id)
             db.session.add(author3)
             db.session.commit()
-            Authors.append(author3)
-        if form.no_of_Authors.data == '4':
-            author1 = Authors(form.Authors1.data, paper.id)
+            authors.append(author3)
+        if form.no_of_authors.data == '4':
+            author1 = Authors(form.authors1.data, paper.id)
             db.session.add(author1)
             db.session.commit()
-            Authors.append(author1)
-            author2 = Authors(form.Authors2.data, paper.id)
+            authors.append(author1)
+            author2 = Authors(form.authors2.data, paper.id)
             db.session.add(author2)
             db.session.commit()
-            Authors.append(author2)
-            author3 = Authors(form.Authors3.data, paper.id)
+            authors.append(author2)
+            author3 = Authors(form.authors3.data, paper.id)
             db.session.add(author3)
             db.session.commit()
-            Authors.append(author3)
-            author4 = Authors(form.Authors4.data, paper.id)
+            authors.append(author3)
+            author4 = Authors(form.authors4.data, paper.id)
             db.session.add(author4)
             db.session.commit()
-            Authors.append(author4)
-        academic_Authors = []
-        for author in Authors:
-            academic_Authors.append(Academics.query.filter_by(id=author.academic_id).first())
-        return render_template('add_paper.html', paper=paper, academic_Authors=academic_Authors)
+            authors.append(author4)
+        academic_authors = []
+        for author in authors:
+            academic_authors.append(Academics.query.filter_by(id=author.academic_id).first())
+        return render_template('add_paper.html', paper=paper, academic_authors=academic_authors)
     else:
         return render_template('add_paper.html', form=form)
 
