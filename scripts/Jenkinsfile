@@ -29,12 +29,15 @@ pipeline {
 // This stage builds the two containers and pushes to docker hub
         stage('build and push') {
             steps {
+                withCredentials([string(credentialsId: 'SQLPWD', variable: 'password')]) {
+
                 sh """echo $DOCKER_LOGIN_PSW | docker login -u $DOCKER_LOGIN_USR --password-stdin
                 docker build -t corcoran909/webapp .
                 docker push corcoran909/webapp
                 cd db/
-                docker build --build-arg MYSQL_ROOT_PASSWORD=$SQLPWD -t corcoran909/mysql .
+                docker build -t --build-arg $password corcoran909/mysql .
                 docker push corcoran909/mysql"""
+                }
             }
         }
 // This stage copies a compose file into the manager node sshs into manager node of swarm and sets up the docker stack
