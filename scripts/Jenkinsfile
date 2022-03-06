@@ -35,7 +35,7 @@ pipeline {
                 docker build -t corcoran909/webapp .
                 docker push corcoran909/webapp
                 cd db/
-                docker build --build-arg $password -t corcoran909/mysql .
+            docker build --build-arg MYSQL_ROOT_PASSWORD=$QLPWD -t corcoran909/mysql .
                 docker push corcoran909/mysql"""
                 }
             }
