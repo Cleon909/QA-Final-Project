@@ -60,8 +60,13 @@ pipeline {
                 junit 'unittests.xml'
                 cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
 archiveArtifacts artifacts: '*.xml', followSymlinks: false
-                
+                emailext body: 'Your build failed check your code', subject: 'Failed Jenkins build', to: 'corcoran909@gmail.com'
             }
         }
     }   
+    post {
+        failure {
+            mail bcc: '', body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "corcoran909@gmail.com";
+        }
+    }
 }
