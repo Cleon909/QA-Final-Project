@@ -45,7 +45,7 @@ INSERT INTO `academics` SELECT * FROM(
             SELECT 18, 'Count Belisarius', 'Unseen University', 'Magic History' UNION ALL
 			SELECT 19, 'Cyrus The Great', 'Starfleet Academy', 'South Carribean Semiotics' UNION ALL
             SELECT 20, 'Scipio Africanus', 'University of Ithica', 'Foreign Life Gardening') data
-WHERE NOT EXISTS (SELECT NULL FROM 'academics');
+WHERE NOT EXISTS (SELECT NULL FROM academics);
 		
 
 INSERT INTO `papers` SELECT * FROM(
@@ -69,7 +69,7 @@ SELECT 17, 'Dark Spirituality as a Symbol Female', 1930, 'Creationist Cosmologie
 SELECT 18, 'Which can Jump Highe, a Car Flea of a Dog Flea?', 2010, 'Music and the Movement of the Spheres' UNION ALL
 SELECT 19, 'Do Woodpeckers get Headaches?', 2006, 'Mathematics of the Celestial Heavens' UNION ALL
 SELECT 20, 'The propulsion Paramters of Penguin Poop', 2008, 'Ancient Astronauts') data
-WHERE NOT EXISTS (SELECT NULL FROM `papers`);
+WHERE NOT EXISTS (SELECT NULL FROM papers);
 
 
 INSERT INTO `authors` SELECT * FROM(
@@ -102,4 +102,4 @@ SELECT 26, 20, 3 UNION ALL
 SELECT 27, 1, 2 UNION ALL
 SELECT 28, 4, 1) data
 WHERE NOT EXISTS (SELECT NULL 
-	FROM `authors`);
+	FROM authors);
