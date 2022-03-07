@@ -30,7 +30,7 @@ pipeline {
         stage('build and push') {
             steps {
                 sh """echo $DOCKER_LOGIN_PSW | docker login -u $DOCKER_LOGIN_USR --password-stdin
-                docker build -t --build-arg DATABASE_URI=$DATABASE_URI --build-arg SECRET_KEY=$SECRET_KEY -t corcoran909/webapp .
+                docker build --build-arg DATABASE_URI=$DATABASE_URI --build-arg SECRET_KEY=$SECRET_KEY -t corcoran909/webapp .
                 docker push corcoran909/webapp
                 cd db/
             docker build --build-arg MYSQL_ROOT_PASSWORD=$SQLPWD -t corcoran909/mysql .
