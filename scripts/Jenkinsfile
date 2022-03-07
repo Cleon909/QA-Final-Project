@@ -49,7 +49,7 @@ pipeline {
         stage('create nginx load balancer') {
             steps{
                 sh """scp scripts/nginx.conf jenkins@10.0.0.15:
-                ssh jenkins@10.0.0.15 'docker stop nginx'
+                ssh jenkins@10.0.0.15 'docker rm -f nginx'
                 ssh jenkins@10.0.0.15  'docker run -d -p 80:80 --name nginx --mount type=bind,source=/home/jenkins/nginx.conf,target=/etc/nginx/nginx.conf nginx'
                 """
             }
