@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS authors (
     paper_id INTEGER NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (academic_id) REFERENCES academics(id),
-    FOREIGN KEY (paper_id) REFERENCES Papers(id) 
+    FOREIGN KEY (paper_id) REFERENCES papers(id) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `academics` VALUES (1, 'Bob Dole', 'University of Bradford', 'Metaphysics'),(2, 'Gisela Joseph','Zombie College', 'Magic History' ),(3, 'Durga Van As', 'Unseen University', 'Foreign Life Gardening'),
