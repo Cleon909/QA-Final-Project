@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS authors (
     FOREIGN KEY (paper_id) REFERENCES papers(id) 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-LOCK TABLES `academics` AS t1 WRITE, `academics` AS t2 READ;
+
 INSERT INTO `academics` SELECT * FROM(
 			SELECT 1 a, 'Bob Dole' b, 'University of Bradford' c, 'Metaphysics' d UNION ALL
             SELECT 2, 'Gisela Joseph','Zombie College', 'Magic History' UNION ALL
@@ -45,13 +45,9 @@ INSERT INTO `academics` SELECT * FROM(
             SELECT 18, 'Count Belisarius', 'Unseen University', 'Magic History' UNION ALL
 			SELECT 19, 'Cyrus The Great', 'Starfleet Academy', 'South Carribean Semiotics' UNION ALL
             SELECT 20, 'Scipio Africanus', 'University of Ithica', 'Foreign Life Gardening') data
-WHERE NOT EXISTS (SELECT NULL
-					FROM academics AS t2);
-UNLOCK TABLES;
+WHERE NOT EXISTS (SELECT NULL FROM 'academics');
 		
 
-
-LOCK TABLES `papers` AS t1 WRITE, `papers` AS t2 READ;
 INSERT INTO `papers` SELECT * FROM(
 SELECT 1 a, 'Nihilism and dialectic appropriation' b, 1985 c, 'Advanced Semiotics' d UNION ALL 
 SELECT 2, 'Marxist capitalism in the works of Gaiman', 2020, 'The Occult' UNION ALL
@@ -73,11 +69,9 @@ SELECT 17, 'Dark Spirituality as a Symbol Female', 1930, 'Creationist Cosmologie
 SELECT 18, 'Which can Jump Highe, a Car Flea of a Dog Flea?', 2010, 'Music and the Movement of the Spheres' UNION ALL
 SELECT 19, 'Do Woodpeckers get Headaches?', 2006, 'Mathematics of the Celestial Heavens' UNION ALL
 SELECT 20, 'The propulsion Paramters of Penguin Poop', 2008, 'Ancient Astronauts') data
-WHERE NOT EXISTS (SELECT NULL
-					FROM `papers` AS t2);
-UNLOCK TABLES;
+WHERE NOT EXISTS (SELECT NULL FROM `papers`);
 
-LOCK TABLES `authors` AS t1 WRITE, `authors` AS t2 READ;
+
 INSERT INTO `authors` SELECT * FROM(
 SELECT 1 a, 1 b, 7 c UNION ALL 
 SELECT 2, 2, 7 UNION ALL
@@ -108,5 +102,4 @@ SELECT 26, 20, 3 UNION ALL
 SELECT 27, 1, 2 UNION ALL
 SELECT 28, 4, 1) data
 WHERE NOT EXISTS (SELECT NULL 
-	FROM authors AS t2 );
-UNLOCK TABLES
+	FROM `authors`);
