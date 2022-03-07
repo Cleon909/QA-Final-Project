@@ -52,10 +52,8 @@ pipeline {
         // stage('create nginx load balancer'){
         //     steps{
         //         sh """cps  scripts/nginx.conf jenkins@GETAVMWITHIPADDRESS!
-        //         ssh jenkins@GETANIP!
-        //         sleep 3s
-        //         docker run -d -p 80:80 --name nginx --mount type=bind,source=${pwd}/nginx.conf,target=/etc/nginx/nginx.conf nginx
-        //         exit"""
+        //         ssh jenkins@GETANIP!  'docker run -d -p 80:80 --name nginx --mount type=bind,source=${pwd}/nginx.conf,target=/etc/nginx/nginx.conf nginx'
+        //         """
         //     }
         // }
     
