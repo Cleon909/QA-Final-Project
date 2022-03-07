@@ -9,7 +9,8 @@ Links to Jira and Risk assesment go here.
 4. [HTML Templates](#html-templates)
 5. [CI/CD pipeline](#ci/cd-pipeline)
 6. [Docker Deployment](#docker-deployment)
-7. [Project Planning and Version Source Control](#project-planning-and-version-source-control)
+7. [Security and Risk Assessment](#security-and-risk-assessment)
+8. [Project Planning and Version Source Control](#project-planning-and-version-source-control)
 
 
 ## <a name="brief"></a>Brief
@@ -139,12 +140,32 @@ Pipeline process:
 ### <p align="center">Deployment Diagram</p>
 <p align="center"><img src="documentation/Deployed_Components.png"  alt="docker diagram" height="400"/></p>
     
+## <a name='security-and-risk-assesment></a> Security and Risk Assessment
+-   Care was taken to hide any potential sensitive credentials (i.e. database URI, database password, CSRF secert key) by embedding them into jenkins secrets and passing them as environmental variables through the jenkins file into the docker container environments. This is not foolproof as the variables can still be accessed by docker exec and printenv, although if a bad actor has gotten that far into the internal working of the app the secret credentials will be a minor security concern. 
+-   I would have liked ideally to have the three docker swarm nodes to not have any public IPS, and be accessabile only via ssh from the jekins server, or via http from the NGINX server, however there was an initractible problem in which VM's could not be accessed via port 5000 on their private IP address (although they could be pinged, and ssh's into from these addresses), the workaround for this was to give them a public IP address and restrict access to port 5000 to only the IP of the NGINX server. This could be a potential weakness if someone could spoof their IP address.
+-   However all the above security concerns are hytpothetical only as the database itself is completely open for all CRUD functionality to anyone who wished to connect via HTTP. This could be solved via a login service but it was out of scope for this project.
+
+### [Risk Assessment](https://docs.google.com/spreadsheets/d/1OR0j97-njF4Uo9A0Qwf9w5LErSOfL9MrZ83-rRdKCvo/edit?usp=sharing)
+
+[<img src="documentation/risk_assessment.png" alt="risk assessment image" width=600 align='center'>](https://docs.google.com/spreadsheets/d/1OR0j97-njF4Uo9A0Qwf9w5LErSOfL9MrZ83-rRdKCvo/edit?usp=sharing)
 
 
 ## <a name="project-planning-and-version-source-control"></a>Project Planning and Version Source Control
 
-Thr project planning was done on Jira, originally using sprints but that was cumbersum and unwieldy for a team of one. It was difficult to judge what would be a simple task or something that would take hours to make work.  
-in Github I split the dev branch from the main, and then split feature branches from the dev branch. Early on I mistakenly created new feature branches whithout merging the previous features back which caused me a lot of headaches, and merge conflicts, once I realised and tried to merge them alltogether. However this did giver me some good experience of dealing with merge conflicts and motivation to avoid them in the future!
+The project planning was done on Jira, originally using sprints but that was cumbersum and unwieldy for a team of one. It was difficult to judge what would be a simple task or something that would take hours to make work.  
+in Github I split the dev branch from the main, and then split feature branches from the dev branch. Early on I mistakenly created new feature branches whithout merging the previous features back which caused me a lot of headaches, and merge conflicts, once I realised and tried to merge them alltogether. However this did give me some good experience of dealing with merge conflicts and motivation to avoid them in the future!
+
+[<img src="documentation/jira-image.png alt="jira image" with=600 align='center'>](https://corcoran909.atlassian.net/jira/software/projects/QFP/boards/3/roadmap?shared=&atlOrigin=eyJpIjoiMzdmNjMyMjUxNjAxNDZlOGJlMmVkNDlkNjdhYWIyMTAiLCJwIjoiaiJ9)
+
+
+
+
+
+
+
+
+
+
 
 
 tasks to do
