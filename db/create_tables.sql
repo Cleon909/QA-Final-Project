@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS academics (
 
 CREATE TABLE IF NOT EXISTS papers (
     id INTEGER NOT NULL AUTO_INCREMENT,
-    title VARCHAR(200) NOT NULL,
+    title VARCHAR(200) NOT NULL UNIQUE,
     year_published INTEGER,
     field_of_study VARCHAR(150) DEFAULT 'unkown',
     PRIMARY KEY (id)
