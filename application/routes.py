@@ -2,6 +2,7 @@ from flask import render_template, url_for, redirect, request
 from application import app, db
 from application.models import Academics, Papers, Authors
 from application.forms import SearchDatabaseForm, UpdateAcademicForm, UpdatePaperForm, AddAcademicForm, AddPaperForm, DeleteAcademicForm, DeletePaperForm 
+from sqlalchemy.exc import IntegrityError
 
 
 
@@ -157,61 +158,65 @@ def add_paper():
     form.authors4.choices = [(g.id, g.name) for g in Academics.query.order_by('name')]
 
     if request.method == 'POST':
+        duplicate = True
         title = form.title.data
         year_published = form.year_published.data
         field_of_study = form.field_of_study.data
         paper = Papers(title, year_published, field_of_study)
-        db.session.add(paper) #work out how to add authors to child table
-        db.session.commit()
-        authors = []
-        if form.no_of_authors.data == '1':
-            author1 = Authors(form.authors1.data, paper.id)
-            db.session.add(author1)
+        if form.title.data == Papers.query.filter_by(title = form.title.data):
+            return render_template('add_paper.html', duplicate=duplicate)
+        else:    
+            db.session.add(paper) #work out how to add authors to child table
             db.session.commit()
-            authors.append(author1)
-        if form.no_of_authors.data == '2':
-            author1 = Authors(form.authors1.data, paper.id)
-            db.session.add(author1)
-            db.session.commit()
-            authors.append(author1)
-            author2 = Authors(form.authors2.data, paper.id)
-            db.session.add(author2)
-            db.session.commit()
-            authors.append(author2)
-        if form.no_of_authors.data == '3':
-            author1 = Authors(form.authors1.data, paper.id)
-            db.session.add(author1)
-            db.session.commit()
-            authors.append(author1)
-            author2 = Authors(form.authors2.data, paper.id)
-            db.session.add(author2)
-            db.session.commit()
-            authors.append(author2)
-            author3 = Authors(form.authors3.data, paper.id)
-            db.session.add(author3)
-            db.session.commit()
-            authors.append(author3)
-        if form.no_of_authors.data == '4':
-            author1 = Authors(form.authors1.data, paper.id)
-            db.session.add(author1)
-            db.session.commit()
-            authors.append(author1)
-            author2 = Authors(form.authors2.data, paper.id)
-            db.session.add(author2)
-            db.session.commit()
-            authors.append(author2)
-            author3 = Authors(form.authors3.data, paper.id)
-            db.session.add(author3)
-            db.session.commit()
-            authors.append(author3)
-            author4 = Authors(form.authors4.data, paper.id)
-            db.session.add(author4)
-            db.session.commit()
-            authors.append(author4)
-        academic_authors = []
-        for author in authors:
-            academic_authors.append(Academics.query.filter_by(id=author.academic_id).first())
-        return render_template('add_paper.html', paper=paper, academic_authors=academic_authors)
+            authors = []
+            if form.no_of_authors.data == '1':
+                author1 = Authors(form.authors1.data, paper.id)
+                db.session.add(author1)
+                db.session.commit()
+                authors.append(author1)
+            if form.no_of_authors.data == '2':
+                author1 = Authors(form.authors1.data, paper.id)
+                db.session.add(author1)
+                db.session.commit()
+                authors.append(author1)
+                author2 = Authors(form.authors2.data, paper.id)
+                db.session.add(author2)
+                db.session.commit()
+                authors.append(author2)
+            if form.no_of_authors.data == '3':
+                author1 = Authors(form.authors1.data, paper.id)
+                db.session.add(author1)
+                db.session.commit()
+                authors.append(author1)
+                author2 = Authors(form.authors2.data, paper.id)
+                db.session.add(author2)
+                db.session.commit()
+                authors.append(author2)
+                author3 = Authors(form.authors3.data, paper.id)
+                db.session.add(author3)
+                db.session.commit()
+                authors.append(author3)
+            if form.no_of_authors.data == '4':
+                author1 = Authors(form.authors1.data, paper.id)
+                db.session.add(author1)
+                db.session.commit()
+                authors.append(author1)
+                author2 = Authors(form.authors2.data, paper.id)
+                db.session.add(author2)
+                db.session.commit()
+                authors.append(author2)
+                author3 = Authors(form.authors3.data, paper.id)
+                db.session.add(author3)
+                db.session.commit()
+                authors.append(author3)
+                author4 = Authors(form.authors4.data, paper.id)
+                db.session.add(author4)
+                db.session.commit()
+                authors.append(author4)
+            academic_authors = []
+            for author in authors:
+                academic_authors.append(Academics.query.filter_by(id=author.academic_id).first())
+            return render_template('add_paper.html', paper=paper, academic_authors=academic_authors)
     else:
         return render_template('add_paper.html', form=form)
 

@@ -36,5 +36,9 @@
             <p></p>
         {% endfor %}
     {% endif %}
+    {% if duplicate %}
+        <h2>Paper not created</h2>
+        <p><b>Title was a duplicate please alter the paper title.</b></p>
+    {% endif %}
 </div>
 {% endblock body %}
