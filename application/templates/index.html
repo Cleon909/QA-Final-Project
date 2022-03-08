@@ -13,18 +13,18 @@
                     {{ form.name.label }} {{ form.name }}
                     <br>
                     <p></p>
-                    {{ form.submit }}
+                    <div align="right">{{ form.submit }}</div>
                 </form>
             </div>
         </div>
-        <div style="padding-left: 50px">
+        <div style="padding-left:100px">
             <h2>Search for Paper</h2>
             <div class="form">
                 <form method="POST" action="">
                     {{ form.title.label }} {{ form.title }}
                     <br>
                     <br>
-                    {{ form.submit }}
+                    <div align="right">{{ form.submit }}</div>
                 </form>
                 </div>
         </div>
@@ -32,7 +32,6 @@
     <div>
         <h1> Search Results</h1>
         <p><b>Total Number of Academics:</b> {{total_number['number_of_academics']}}<p> 
-        <br>
         <p><b>Total Number of Papers:</b> {{total_number['number_of_papers']}}<p>
         <br>
 
