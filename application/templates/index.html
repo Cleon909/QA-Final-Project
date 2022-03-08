@@ -33,11 +33,9 @@
         <p><b>Total Number of Academics:</b> {{total_number['number_of_academics']}}<p> 
         <p><b>Total Number of Papers:</b> {{total_number['number_of_papers']}}<p>
         <br>
-
         {% if academics_result %}
             <h1>Academic's Details</h1>
             <p><b>Name:</b> {{ academics_result.name }}, <b>Institution:</b> {{ academics_result.current_institution }}, <b>Field of Study:</b> {{ academics_result.field_of_study }}</p>
-            <br>
             <p><b>Papers by Author:</b></p>
             {% for paper in papers_by_author %}
             <p><b>Title:</b>{{ paper.title }} <b>Year Published</b> {{ paper.year_published }} <b>Field of Study</b> {{ paper.field_of_study }}</p>
