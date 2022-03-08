@@ -6,26 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nonsense Academic Paper WebApp</title>
 </head>
-<body>
-    <div class="header" style="background-color:black">
+<body style="font-family: Source Sans Pro, sans-serif">
+    <div class="header" style="background-color:#282624">
         <h1 style="color:white"> Nonsense Academic Database</h1>
         <div id = "links" style="text-align: center; display: flex; justify-content: space-around; color:white">
-            <a href="{{ url_for('index') }}">Home</a>
-            <a href="{{ url_for('update_academic') }}">Update an Academic's Details</a>
-            <a href="{{ url_for('update_paper') }}">Update a Papers Details</a>
-            <a href="{{ url_for('add_academic') }}">Add an Academic</a>
-            <a href="{{ url_for('add_paper') }}">Add a Paper</a>
-            <a href="{{ url_for('delete_paper') }}">Delete a Paper</a>
-            <a href="{{ url_for('delete_academic') }}">Delete an Academic</a>
-            <a href="{{ url_for('about') }}">About</a>
+            <a href="{{ url_for('index') }}"  style='color:white'><p style=color:white>Home</p></a>
+            <a href="{{ url_for('update_academic') }} style=color:white"><p style=color:white>Update an Academic's Details</p></a>
+            <a href="{{ url_for('update_paper') }}"><p style=color:white> Update a Papers Details</p></a>
+            <a href="{{ url_for('add_academic') }}"><p style=color:white>Add an Academic</p></a>
+            <a href="{{ url_for('add_paper') }}"><p style=color:white>Add a Paper</p></a>
+            <a href="{{ url_for('delete_paper') }}"><p style=color:white>Delete a Paper</p></a>
+            <a href="{{ url_for('delete_academic') }}"><p style=color:white>Delete an Academic</p></a>
+            <a href="{{ url_for('about') }}"><p style=color:white>About</p></a>
         </div>
     </div>
     <div class="container">        
         {% block body %}
         {% endblock body %}
     </div>
-    <div id="footer" style="position: fixed; bottom:0%; right:5%">
-        <p>Michael Corcoran</p>
+    <div id="footer" style="position: fixed; bottom:0%; right:5%; background-color:#282624; ">
+        <p style=color:white>Michael Corcoran</p>
     </div>
 </body>
 </html>
