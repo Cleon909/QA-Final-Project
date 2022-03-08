@@ -1,7 +1,7 @@
 {% extends 'layout.html'%}
 
 {% block body %}
-<div style="padding-left:20px"></div>
+<div style="padding-left:40px"></div>
     <h1>Update Academic</h1>
     <br>
     {% if init %}
@@ -21,7 +21,7 @@
             {{ form.field_of_study.label }} {{ form.field_of_study }} <i>     Field of Study will not be changed if field left empty</i>
             <br>
             <p></p>
-            <p align=right>{{ form.submit }}</p>
+            <p padding-left="300px">{{ form.submit }}</p>
         </form>    
     {% endif %}
     {% if acad %}
