@@ -1,19 +1,21 @@
 {% extends 'layout.html'%}
 
 {% block body %}
-{% if form %}
-<h2>Delete a Paper</h2>
-<form method = 'POST'>
-{{ form.hidden_tag() }}
-<br>
-{{ form.title.label }} {{ form.title }}
-<br>
-<p></p>
-{{ form.submit }}
-</form>
-{% endif %}
-{% if deleted %}
-<h2>Paper deleted</h2>
-<p></p>
-{% endif %}
+<div style="padding-left:40px">
+    {% if form %}
+        <h1>Delete a Paper</h1>
+        <form method = 'POST'>
+        {{ form.hidden_tag() }}
+        <br>
+        {{ form.title.label }} {{ form.title }}
+        <br>
+        <p></p>
+        {{ form.submit }}
+        </form>
+    {% endif %}
+    {% if deleted %}
+        <h2>Paper deleted</h2>
+        <p></p>
+    {% endif %}
+</div>
 {% endblock body %}

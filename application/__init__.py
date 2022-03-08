@@ -4,8 +4,11 @@ from os import getenv
 
 app = Flask(__name__)
 
+UPLOAD_FOLDER = 'application/static'
+
 app.config['SQLALCHEMY_DATABASE_URI'] = getenv('DATABASE_URI')
 app.config['SECRET_KEY'] = getenv('SECRET_KEY')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 
 db = SQLAlchemy(app)
