@@ -5,7 +5,6 @@ from application.models import Academics, Papers, Authors
 class TestBase(TestCase):
     def create_app(self):
         app.config.update(SQLALCHEMY_DATABASE_URI="sqlite:///",
-            # SECRET_KEY='Secret key'
             DEBUG=True,
             WTF_CSRF_ENABLES=False
             )
@@ -73,7 +72,13 @@ class TestPostResponse(TestBase):
         auth1 = Authors.query.filter_by(id=2).first()
         assert auth1.academic_id == 1
         assert auth1.paper_id == 2
-        
+
+    def test_create_paper_dup(self):
+        #tests that a paper is created with unique title
+        response = self.client.post('/add_paper',
+        data = {'title':'A Paper', 'year_published':2000, 'field_of_study':'Another Field of Study', 'authors1': 1, 'no_of_authors': '1'})
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Title was a duplicate please alter the paper title.', response.data)
 
     def test_create_paper_2(self):
         #tests that a paper is created with the correct attributes and is also linked to two authors

@@ -163,7 +163,7 @@ def add_paper():
         year_published = form.year_published.data
         field_of_study = form.field_of_study.data
         paper = Papers(title, year_published, field_of_study)
-        if form.title.data == Papers.query.filter_by(title = form.title.data):
+        if Papers.query.filter(Papers.title == title).first():
             return render_template('add_paper.html', duplicate=duplicate)
         else:    
             db.session.add(paper) #work out how to add authors to child table
