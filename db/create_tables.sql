@@ -8,8 +8,8 @@ CREATE TABLE IF NOT EXISTS academics (
 
 CREATE TABLE IF NOT EXISTS papers (
     id INTEGER NOT NULL AUTO_INCREMENT,
-    title VARCHAR(200) NOT NULL UNIQUE,
-    year_published INTEGER,
+    title VARCHAR(200) UNIQUE NOT NULL ,
+    year_published INT,
     field_of_study VARCHAR(150) DEFAULT 'unkown',
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
