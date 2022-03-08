@@ -8,17 +8,7 @@ pipeline {
         APP_RUN = 'True'
         EMAIL_TO = 'corcoran909@gmail.com'
     }
-// This stage creates virtual environment for the python container
     stages {
-        stage('Setup') {
-            steps {
-                sh """sudo apt install python3-venv -y 
-                python3 -m venv venv
-                . ./venv/bin/activate
-                pip3 install -r requirements.txt
-                """
-            }
-        }
 // This stage runs unit tests and saves them to files to be picked up post build 
         stage('Test') {
             steps {
