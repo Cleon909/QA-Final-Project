@@ -5,7 +5,6 @@ pipeline {
         DATABASE_URI = credentials('DATABASE_URI')
         DOCKER_LOGIN = credentials('DOCKER_LOGIN')
         SQLPWD= credentials('SQLPWD')
-        EMAIL_TO = credentials('EMAIL')
     }
     stages {
 //this stage sets up the virtual environment for the unit tests
@@ -62,8 +61,10 @@ pipeline {
                 junit 'unittests.xml'
                 cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
 archiveArtifacts artifacts: '*.xml', followSymlinks: false
-                emailext body: 'Your build $PROJECT_NAME - #$BUILD_NUMBER ran \n\n ${CHANGES} \n\n -------------------------------------------------- \n ${BUILD_LOG, maxLines=100, escapeHtml=false}', subject: 'Jenkins build completed', to: '${EMAIL_TO}'
             }
+        }
+        stage('send email on build status') {
+         emailext body: 'Your build $PROJECT_NAME - #$BUILD_NUMBER ran \n\n ${CHANGES} \n\n -------------------------------------------------- \n ${BUILD_LOG, maxLines=100, escapeHtml=false}', subject: 'Jenkins build completed', to: 'corcoran909@gmail.com'
         }
     }   
 }
