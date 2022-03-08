@@ -6,7 +6,7 @@ services:
     - target: 5000
       published: 5000
     deploy:
-      replicas: 2
+      replicas: 5
   db:
     image: corcoran909/mysql
     deploy:

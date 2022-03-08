@@ -8,12 +8,24 @@ pipeline {
         EMAIL_TO = credentials('EMAIL')
     }
     stages {
+//this stage sets up the virtual environment for the unit tests
+                stage('Setup') {
+            steps {
+                sh """sudo apt install python3-venv -y 
+                python3 -m venv venv
+                . ./venv/bin/activate
+                pip3 install -r requirements.txt
+                """
+            }
+        }
 // This stage runs unit tests and saves them to files to be picked up post build 
         stage('Test') {
             steps {
                 sh """ . ./venv/bin/activate
                 python3 -m pytest --junitxml unittests.xml
-                python3 -m pytest --cov-report xml:coverage.xml --cov=tests/""" 
+                python3 -m pytest --cov-report xml:coverage.xml --cov=tests/
+                deactivate
+                rm -rf /venv""" 
             }
         }
 // This stage builds the two containers and pushes to docker hub
@@ -50,7 +62,7 @@ pipeline {
                 junit 'unittests.xml'
                 cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
 archiveArtifacts artifacts: '*.xml', followSymlinks: false
-                emailext body: 'Your build $PROJECT_NAME - #$BUILD_NUMBER ran \n\n ${CHANGES} \n\n -------------------------------------------------- \n ${BUILD_LOG, maxLines=100, escapeHtml=false}', subject: 'Jenkins build completed', to: '$EMAIL_TO'
+                emailext body: 'Your build $PROJECT_NAME - #$BUILD_NUMBER ran \n\n ${CHANGES} \n\n -------------------------------------------------- \n ${BUILD_LOG, maxLines=100, escapeHtml=false}', subject: 'Jenkins build completed', to: '${EMAIL_TO}'
             }
         }
     }   
