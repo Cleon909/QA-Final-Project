@@ -14,7 +14,6 @@ services:
     ports:
       - target: 3306
       - published: 3006
-    
       
     
   
