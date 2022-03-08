@@ -26,14 +26,16 @@
                     <div align="right">{{ form.submit }}</div>
                 </form>
                 </div>
+                <div align="right"; style='padding-right:50px'>
+                    <p><b>Total Number of Academics:</b> {{total_number['number_of_academics']}}<p> 
+                    <p><b>Total Number of Papers:</b> {{total_number['number_of_papers']}}<p>
+                </div>
         </div>
     </div>
     <div>
-        <h1> Search Results</h1>
-        <p><b>Total Number of Academics:</b> {{total_number['number_of_academics']}}<p> 
-        <p><b>Total Number of Papers:</b> {{total_number['number_of_papers']}}<p>
-        <br>
         {% if academics_result %}
+        <h1> Search Results</h1>
+        <br>
             <h1>Academic's Details</h1>
             <p><b>Name:</b> {{ academics_result.name }}, <b>Institution:</b> {{ academics_result.current_institution }}, <b>Field of Study:</b> {{ academics_result.field_of_study }}</p>
             <p><b>Papers by Author:</b></p>
