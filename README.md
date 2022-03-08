@@ -355,7 +355,7 @@ in Github I split the dev branch from the main, and then split feature branches 
  
  
 
-<p align='center'><img src="documentation/jira-image.png" alt="jira image" with=600></p> 
+<p align='center'><img src="documentation/jira_image.png" alt="jira image" with=600></p> 
 
  
  
