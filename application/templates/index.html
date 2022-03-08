@@ -5,24 +5,28 @@
     <h1>Search Page</h1>
     <br>
     <div style="display:flex">
-        <h2>Search for Academic</h2>
-        <div class = 'form'>
-            <form method="POST" action="">
-                {{ form.hidden_tag() }}
-                {{ form.name.label }} {{ form.name }}
-                <br>
-                <p></p>
-                {{ form.submit }}
-            </form>
+        <div>
+            <h2>Search for Academic</h2>
+            <div class = 'form'>
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    {{ form.name.label }} {{ form.name }}
+                    <br>
+                    <p></p>
+                    {{ form.submit }}
+                </form>
+            </div>
         </div>
-        <h2>Search for Paper</h2>
-        <div class="form">
-            <form method="POST" action="">
-                {{ form.title.label }} {{ form.title }}
-                <br>
-                <br>
-                {{ form.submit }}
-            </form>
+        <div style="padding-left: 50px">
+            <h2>Search for Paper</h2>
+            <div class="form">
+                <form method="POST" action="">
+                    {{ form.title.label }} {{ form.title }}
+                    <br>
+                    <br>
+                    {{ form.submit }}
+                </form>
+                </div>
         </div>
     </div>
     <div>
