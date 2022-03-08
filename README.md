@@ -312,7 +312,7 @@ Pipeline process:
 
 ### <p align="center">Deployment Diagram</p> 
 
-<p align="center"><img src="documentation/Deployed_Components.png"  alt="docker diagram" height="400"/></p> 
+<p align="center"><img src="documentation/Deployed_Components.png"  alt="docker diagram" height="375"/></p> 
 
      
 
