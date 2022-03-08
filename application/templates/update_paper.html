@@ -1,39 +1,41 @@
 {% extends 'layout.html'%}
 
 {% block body %}
-<h1>Update Paper Page</h1>
-<br>
-{% if init %}
-    <h2>Choose Paper to Amend</h2>
-    <form method = 'POST'>
-        {{ form.hidden_tag() }}
-        {{ form.paper_object.label }} {{ form.paper_object }}
-        <br>
-        <p><b>What would you like to Amend?</b></p>
-        {{ form.title.label }} {{ form.title}}
-        <br>
-        <p></p>
-        {{ form.year_published.label }} {{ form.year_published }} 
-        <br>
-        <p></p>
-        {{ form.field_of_study.label }} {{ form.field_of_study }} <i>Field of Study will not be changed if field left blank</i>
-        <br>
-        <p></p>
-        <h3>Updating the paper will delete all existing authors, please resubmit a new list of authors, including any existing authors you want to keep</h3>
-        {{ form.no_of_authors.label }} {{ form.no_of_authors }}
-        <br>
-        <p></p>
-        {{ form.author1.label }} {{ form.author1 }} {{ form.author2 }} {{ form.author3}} {{form.author4}}
-        <br>
-        <p></p>
-        {{ form.submit }}
-    </form>
-{% endif %}
-{% if pap %}
-<h3> Paper Updated: {{ pap.title }}, {{ pap.year_published }},  {{ pap.field_of_study }}</h3>
-<h3>Authors:</h3>
-{% for a in authors %}
-<p>{{ a.name }}</p>
-{% endfor %}
-{% endif %}
+<div style="padding-left:40px">
+    <h1>Update Paper Page</h1>
+    <br>
+    {% if init %}
+        <h2>Choose Paper to Amend</h2>
+        <form method = 'POST'>
+            {{ form.hidden_tag() }}
+            {{ form.paper_object.label }} {{ form.paper_object }}
+            <br>
+            <p><b>What would you like to Amend?</b></p>
+            {{ form.title.label }} {{ form.title}}
+            <br>
+            <p></p>
+            {{ form.year_published.label }} {{ form.year_published }} 
+            <br>
+            <p></p>
+            {{ form.field_of_study.label }} {{ form.field_of_study }} <i>Field of Study will not be changed if field left blank</i>
+            <br>
+            <p></p>
+            <h3>Updating the paper will delete all existing authors, please resubmit a new list of authors, including any existing authors you want to keep</h3>
+            {{ form.no_of_authors.label }} {{ form.no_of_authors }}
+            <br>
+            <p></p>
+            {{ form.author1.label }} {{ form.author1 }} {{ form.author2 }} {{ form.author3}} {{form.author4}}
+            <br>
+            <p></p>
+            {{ form.submit }}
+        </form>
+    {% endif %}
+    {% if pap %}
+        <h3> Paper Updated: {{ pap.title }}, {{ pap.year_published }},  {{ pap.field_of_study }}</h3>
+        <h3>Authors:</h3>
+        {% for a in authors %}
+            <p>{{ a.name }}</p>
+        {% endfor %}
+    {% endif %}
+</div>
 {% endblock body %}

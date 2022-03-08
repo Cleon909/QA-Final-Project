@@ -1,11 +1,10 @@
 {% extends 'layout.html'%}
 
 {% block body %}
-<div style="padding-left:40px"></div>
+<div style="padding-left:40px">
     <h1>Update Academic</h1>
     <br>
     {% if init %}
-    
         <h2>Choose Academic to Amend</h2>
         <form method = 'POST', action = ''>
             {{ form.hidden_tag() }}

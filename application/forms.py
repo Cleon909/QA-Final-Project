@@ -16,7 +16,7 @@ class UpdateAcademicForm(FlaskForm):
     academic_object = SelectField('Academic to Update', choices = []) # should return id of academic object
     
     name = StringField('Name', validators = [Length(max = 50), DataRequired()])
-    current_institution = StringField('Current Insitution', validators = [Length(max = 30)])
+    current_institution = StringField('Current Institution', validators = [Length(max = 30)])
     field_of_study = StringField('Field of Study', validators = [Length(max = 30)])
     submit = SubmitField('Press to submit')
 
