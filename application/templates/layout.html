@@ -5,13 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nonsense Academic Paper WebApp</title>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
 </head>
 <style>
     a {color:white}
 </style>
 <body style="font-family: Source Sans Pro, sans-serif">
     <div class="header" style="background-color:#282624; width:100%; margin: 0 auto">
-        <h1 style="color:white"> Nonsense Academic Database</h1>
+        <h1 style="color:white; font-size:50px"> Nonsense Academic Database</h1>
         <div id = "links" style="text-align: center; display: flex; justify-content: space-around; color:white">
             <a href="{{ url_for('index') }}"  style='color:white'>Home</a>
             <a href="{{ url_for('update_academic') }}">Update an Academic's Details</a>
@@ -27,7 +28,7 @@
         {% block body %}
         {% endblock body %}
     </div>
-    <div id="footer" style=" background-color:#282624; width: 100%">
+    <div id="footer" style="background-color:#282624; position: fixed; bottom:0%; height:50px; width: 100%">
         <p style="color:white; position: fixed; bottom:0%; right:5%;">Michael Corcoran</p>
     </div>
 </body>
