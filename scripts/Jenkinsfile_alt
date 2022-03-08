@@ -8,6 +8,7 @@ pipeline {
         APP_RUN = 'True'
         EMAIL_TO = 'corcoran909@gmail.com'
     }
+    stages {
 // This stage runs unit tests and saves them to files to be picked up post build 
         stage('Test') {
             steps {
