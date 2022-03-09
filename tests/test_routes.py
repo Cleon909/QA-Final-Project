@@ -43,7 +43,7 @@ class TestPostResponse(TestBase):
         data = {'name' : 1})
         self.assertEqual(response.status_code, 200)
         assert len(Academics.query.all()) == 3
-        assert len(Authors.query.all()) == 0
+        assert len(Authors.query.all()) == 1
 
     def test_delete_academic_last_author(self):
         #test deletes the academic object created in setUp() making the paper authorless to make sure system won't delete 

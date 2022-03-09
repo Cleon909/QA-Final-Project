@@ -240,8 +240,8 @@ def delete_academic():
         else:
             db.session.delete(pap)
             db.session.commit() 
-        db.session.delete(a_to_del)
-        db.session.commit()
+            db.session.delete(a_to_del)
+            db.session.commit()
         return render_template ('del_academic.html', deleted=deleted)
     else:
         return render_template('del_academic.html', form=form)
