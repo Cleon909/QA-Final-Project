@@ -10,12 +10,11 @@ pipeline {
         stage('test inside container'){
             steps{ sh """
                 docker build -t corcoran909/webapp:test .
-                docker run -d --entrypoint /bin/bash  --name test_container corcoran909/webapp:test tests/tests.sh
-                sleep 30s
+                docker run --entrypoint /bin/bash  --name test_container corcoran909/webapp:test tests/tests.sh
                 docker cp test_container:unittests.xml /home/jenkins/.jenkins/workspace/Test-Build-Deploy
                 docker cp test_container:coverage.xml /home/jenkins/.jenkins/workspace/Test-Build-Deploy
-                docker stop test_container
-                docker rm test_container
+                // docker stop test_container
+                // docker rm test_container
                 docker rmi corcoran909/webapp:test
                 """
             }
