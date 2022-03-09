@@ -5,7 +5,6 @@ pipeline {
         DATABASE_URI = credentials('DATABASE_URI')
         DOCKER_LOGIN = credentials('DOCKER_LOGIN')
         SQLPWD = credentials('SQLPWD')
-        EMAIL_TO = credentials('EMAIL_TO')
     }
     stages {
 //this stage sets up the virtual environment for the unit tests
@@ -66,7 +65,7 @@ archiveArtifacts artifacts: '*.xml', followSymlinks: false
         }
         stage('send email on build status') {
             steps {
-         emailext body: 'Your build $PROJECT_NAME - #$BUILD_NUMBER ran \n\n ${CHANGES} \n\n -------------------------------------------------- \n ${BUILD_LOG, maxLines=100, escapeHtml=false}', subject: 'Jenkins build completed', to: "{$EMAIL_TO}"
+         emailext body: 'Your build $PROJECT_NAME - #$BUILD_NUMBER ran \n\n ${CHANGES} \n\n -------------------------------------------------- \n ${BUILD_LOG, maxLines=100, escapeHtml=false}', subject: 'Jenkins build completed', to: "$DEFAULT_RECIPIENTS"
             }
         }
     }   
