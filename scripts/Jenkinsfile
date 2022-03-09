@@ -10,7 +10,7 @@ pipeline {
         stage('test inside container'){
             steps{ sh """
                 docker build -t corcoran909/webapp:test .
-                docker run --name test_container --entrypoint /bin/bash tests/tests.sh
+                docker run --name test_container --entrypoint /bin/bash tests/tests.sh corcoran909/webapp:test
                 sleep 30s
                 docker cp test_container:unittests.xml
                 docker cp test_container:coverage.xml
