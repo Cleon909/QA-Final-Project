@@ -1,9 +1,8 @@
 # Academic Journal Database 
 
  
- 
+[<p>Link to 9 min video showing the CRUD operation of the webapp and the CI/CD Pipeline in Operation</p>](https://1drv.ms/u/s!Agf77aE1B_XKfYzJc0lmOFNnlsE?e=yQS0AC) 
 
-Link to video showing functionality and pipeline goes here 
 
  
  
@@ -151,6 +150,8 @@ Link to video showing functionality and pipeline goes here
 -   Integration testing 
 
 -   Login feature to restrict some CRUD functionality to administrators 
+
+-   With a lot more time it could be split in a number of microservices and generate the nonsensical names and paper titles itself 
 
  
 
