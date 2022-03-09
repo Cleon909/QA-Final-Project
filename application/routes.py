@@ -59,15 +59,15 @@ def update_academic():
 
 
 
-@app.route('/update_paper', methods = ['GET', 'POST'])
-def update_paper():
-    form = UpdatePaperForm()
-    form.paper_object.choices = [(g.id, g.title) for g in Papers.query.order_by('title')]
-    choices = [(g.id, g.name) for g in Academics.query.order_by('name')]
-    form.author1.choices = choices
-    form.author2.choices = choices
-    form.author3.choices = choices
-    form.author4.choices = choices
+# @app.route('/update_paper', methods = ['GET', 'POST'])
+# def update_paper():
+#     form = UpdatePaperForm()
+#     form.paper_object.choices = [(g.id, g.title) for g in Papers.query.order_by('title')]
+#     choices = [(g.id, g.name) for g in Academics.query.order_by('name')]
+#     form.author1.choices = choices
+#     form.author2.choices = choices
+#     form.author3.choices = choices
+#     form.author4.choices = choices
 
     if request.method == 'POST':
         duplicate = True
