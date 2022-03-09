@@ -1,0 +1,5 @@
+FROM mysql
+ARG MYSQL_ROOT_PASSWORD
+ENV MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+ENV MYSQL_DATABASE=appdb
+COPY create_tables.sql /docker-entrypoint-initdb.d/

@@ -1,0 +1,24 @@
+{% extends 'layout.html'%}
+{% block body %}
+<div style="padding-left:40px">
+    {% if form %}
+        <h1>Delete an Academic</h1>
+        <h3>Pick Academic to delete</h3>
+        <form method = 'POST'>
+        {{ form.hidden_tag() }}
+        <br>
+        {{ form.name.label }} {{ form.name }}
+        <br>
+        <p></p>
+        {{ form.submit }}
+        </form>
+    {% endif %}
+    {% if deleted %}
+        <h2>Academic Deleted</h2>
+    {% endif %}
+    {% if paper_with_one_author %}
+    <h2>Academic Not Deleted</h2>
+    <p>'Can't delete Academic it will leave a paper without an author please delete <b>{{ paper_with_one_author.title }}</b> first'</p>
+{% endif %}
+</div>
+{% endblock body %}

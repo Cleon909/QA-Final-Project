@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  webapp:
+    image: corcoran909/webapp
+    ports:
+    - target: 5000
+      published: 5000
+    deploy:
+      replicas: 5
+  db:
+    image: corcoran909/mysql
+    deploy:
+      replicas: 1
+    ports:
+      - target: 3306
+      - published: 3006
+      
+    
+  

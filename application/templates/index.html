@@ -1,44 +1,59 @@
 {% extends 'layout.html'%}
 
 {% block body %}
-<h2>Search of Academic</h2>
-    <div class = 'form'>
-        <form method="GET" action="">
-            {{ form.hidden_tag() }}
-            {{ form.name.label }} {{ form.name }}
-            <br>
-            {{ form.current_insitution.label }} {{ form.current_insitution }}
-            <br>
-            {{ form.submit.label }} {{ form.submit }}
-        </form>
+<div style="padding-left:20px">
+    <h1>Search Page</h1>
+    <div style="display:flex; justify-content: start;">
+        <div>
+            <h2>Search for Academic</h2>
+            <div class = 'form'>
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    {{ form.name.label }} {{ form.name }}
+                    <br>
+                    <p></p>
+                    <div align="right">{{ form.submit }}</div>
+                </form>
+            </div>
+        </div>
+        <div style="margin-left:100px">
+            <h2>Search for Paper</h2>
+            <div class="form">
+                <form method="POST" action="">
+                    {{ form.title.label }} {{ form.title }}
+                    <br>
+                    <br>
+                    <div align="right">{{ form.submit }}</div>
+                </form>
+            </div>
+        </div>
+            <div style='margin-left:300px'>
+                <p></p>
+                <p><b>Total Number of Academics:</b> {{total_number['number_of_academics']}}<p> 
+                <p><b>Total Number of Papers:</b> {{total_number['number_of_papers']}}<p>
+            </div>
     </div>
-<h2>Search for Paper</h2>
-<div class="form">
-    <form method="GET" action="">
-        {{ form.hidden_tag() }}
-        {{ form.title.label }} {{ form.title }}
-        <br>
-        {{ form.year_published,label }} {{ form.year_published }}
-        <br>
-        {{ form.impact.label }} {{ form.impact }}
-        <br>
-        {{ form.pfield_of_study.label }} {{ form.pfield_of_study }}
-        <br>
-        {{ form.submit.label}} {{ form.submit}}
-    </form>
+    <div>
+        {% if academics_result %}
+        <h1> Search Results</h1>
+            <h1>Academic's Details</h1>
+            <p><b>Name:</b> {{ academics_result.name }}, <b>Institution:</b> {{ academics_result.current_institution }}, <b>Field of Study:</b> {{ academics_result.field_of_study }}</p>
+            <p><b>Papers by Author:</b></p>
+            {% for paper in papers_by_author %}
+            <p><b>Title:</b>{{ paper.title }} <b>Year Published</b> {{ paper.year_published }} <b>Field of Study</b> {{ paper.field_of_study }}</p>
+            {% endfor %}
+            {% endif %}
+
+            {% if papers_result %}
+        <div>
+            <h1> Paper Details </h1>
+            <p><b>Title:</b> {{ papers_result.title }} <b>Year Published:</b> {{ papers_result.year_published }} <b>Field of Study:</b> {{ papers_result.field_of_study }}</p>
+            <p><b> Authors of Paper </b></p>
+            {% for academic in authors_of_paper %}
+            <p><b>Name:</b> {{ academic.name }}, <b>Institution:</b> {{ academic.current_institution }}, <b>Field of Study</b> {{ academic.field_of_study }}</p>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
 </div>
-<div>
-    <h1> Search Results</h1>
-    <p>Total Number of Academics:</p>
-    {{ f"Total Number of Academics: {Total_number['number_of_academics']}" }}
-    {{ f"Total Number of Papers: {Total_number['number_of_papers']} }}
-    <h1>Search Results</h1>
-    {{ for result in Academics.query.filter_by(name=form.name.data),filter_by(current_institution=form.current_institution.data),filter_by(field_of_study=form.field_of_study.data).all() }}
-    {{ f"name: {result.name}, Institution: {result.current_institution, Field of Study: {result.field_of_study}} }}
-    {{ endfor }}
-
-</div>
-
-
-
 {% endblock body %}

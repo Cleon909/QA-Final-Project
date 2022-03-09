@@ -1,4 +1,30 @@
 {% extends 'layout.html'%}
 
 {% block body %}
+<div style="padding-left:40px">
+    <h1>Update Academic</h1>
+    <br>
+    {% if init %}
+        <h2>Choose Academic to Amend</h2>
+        <form method = 'POST', action = ''>
+            {{ form.hidden_tag() }}
+            {{ form.academic_object.label }} {{ form.academic_object }}
+            <br>
+            <p><b>What would you like to Amend?</b></p>
+            {{ form.name.label }} {{ form.name}}
+            <br>
+            <p></p>
+            {{ form.current_institution.label }} {{ form.current_institution }} <i>     Institute will not be changed if field left empty</i>
+            <br>
+            <p></p>
+            {{ form.field_of_study.label }} {{ form.field_of_study }} <i>     Field of Study will not be changed if field left empty</i>
+            <br>
+            <p></p>
+            <p padding-left="300px">{{ form.submit }}</p>
+        </form>    
+    {% endif %}
+    {% if acad %}
+        <h2>Academic Updated: {{ acad.name }}, {{ acad.current_institution }}, {{ acad.field_of_study }}</h1>
+    {% endif %}
+</div>
 {% endblock body %}
