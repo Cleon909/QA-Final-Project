@@ -232,16 +232,17 @@ def delete_academic():
     last_author = 0
     if request.method == 'POST':
         a_to_del = Academics.query.filter_by(id=form.name.data).first()
-        pap_to_del = Authors.query.filter_by(academic_id=form.name.data)
-        for pap in pap_to_del:
-            if len(Authors.query.filter(Authors.academic_id == a_to_del.id).all()) == 1:
-                last_author = Papers.query.filter_by(id = pap.paper_id).first()
+        aut_to_del = Authors.query.filter_by(academic_id=form.name.data)
+        for aut in aut_to_del:
+            if len(Authors.query.filter(Authors.paper_id == aut.paper_id)) == 1:
+                last_author = aut
                 return render_template ('del_academic.html', last_author = last_author)
-        else:
-            db.session.delete(pap)
-            db.session.commit() 
-            db.session.delete(a_to_del)
-            db.session.commit()
+            else:
+                for aut in aut_to_del:           
+                    db.session.delete(aut)
+                    db.session.commit() 
+                db.session.delete(a_to_del)
+                db.session.commit()
         return render_template ('del_academic.html', deleted=deleted)
     else:
         return render_template('del_academic.html', form=form)
