@@ -234,7 +234,7 @@ def delete_academic():
         aut_to_del = Authors.query.filter_by(academic_id=form.name.data)
         for aut in aut_to_del:
             if len(Authors.query.filter_by(paper_id = aut.paper_id).all()) == 1:
-                return render_template ('del_academic.html', last_author = aut)
+                return render_template ('del_academic.html', paper_with_one_author = Authors.query.filter_by(paper_id = aut.paper_id).first())
             else:
                 for aut in aut_to_del:           
                     db.session.delete(aut)
