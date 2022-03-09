@@ -234,7 +234,7 @@ def delete_academic():
         a_to_del = Academics.query.filter_by(id=form.name.data).first()
         pap_to_del = Authors.query.filter_by(academic_id=form.name.data)
         for pap in pap_to_del:
-            if len(Authors.query.filter(Authors.academic_id == a_to_del)) == 1:
+            if len(Authors.query.filter(Authors.academic_id == a_to_del).all()) == 1:
                 last_author = Papers.query.filter_by(id = pap.paper_id).first()
                 return render_template ('del_academic.html', last_author = last_author)
         else:
