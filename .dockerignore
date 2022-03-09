@@ -1,0 +1,8 @@
+db/
+scripts/
+tests/
+.dockerignore
+create.py
+documentation/
+*.md
+Dockerfile
