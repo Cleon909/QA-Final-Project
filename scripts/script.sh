@@ -36,10 +36,19 @@ sudo usermod -aG docker jenkins
 version=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | jq -r '.tag_name')
 sudo curl -L "https://github.com/docker/compose/releases/download/${version}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 #restart jenkins to allow user changes to take effect and enable it as a service
+# download chrome for use with integration testing
+sudo apt install chromium-browser -y
+# download selenium chrome-driver
+sudo apt install wget unzip -y
+version=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$(chromium-browser --version | grep -oP 'Chromium \K\d+'))
+sudo wget https://chromedriver.storage.googleapis.com/${version}/chromedriver_linux64.zip
+sudo unzip chromedriver_linux64.zip -d /usr/bin
+rm chromedriver_linux64.zip
+#enable jenkins as a daemon
 sudo systemctl daemon-reload
 sudo systemctl enable jenkins
 sudo systemctl restart jenkins
-#displays paaword for setup
+#displays password for setup
 sudo su - jenkins << EOF
 until [ -f .jenkins/secrets/initialAdminPassword ]; do
     sleep 1

@@ -24,3 +24,4 @@ pytest-cov
 PyMySQL
 cryptography
 sqlalchemy_utils
+selenium
