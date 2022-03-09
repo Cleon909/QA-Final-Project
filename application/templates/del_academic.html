@@ -18,7 +18,7 @@
     {% endif %}
     {% if paper_with_one_author %}
     <h2>Academic Not Deleted</h2>
-    <p>'Can't delete Academic it will leave a paper without an author please delete {{ last_author.title }} first'</p>
+    <p>'Can't delete Academic it will leave a paper without an author please delete {{ paper_with_one_author.title }} first'</p>
 {% endif %}
 </div>
 {% endblock body %}
