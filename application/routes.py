@@ -229,14 +229,12 @@ def delete_academic():
     form = DeleteAcademicForm()
     form.name.choices = [(g.id, g.name) for g in Academics.query.order_by('name')]
     deleted = True
-    last_author = 0
     if request.method == 'POST':
         a_to_del = Academics.query.filter_by(id=form.name.data).first()
         aut_to_del = Authors.query.filter_by(academic_id=form.name.data)
         for aut in aut_to_del:
             if len(Authors.query.filter_by(paper_id = aut.paper_id).all()) == 1:
-                last_author = aut
-                return render_template ('del_academic.html', last_author = last_author)
+                return render_template ('del_academic.html', last_author = aut)
             else:
                 for aut in aut_to_del:           
                     db.session.delete(aut)
