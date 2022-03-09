@@ -98,7 +98,7 @@ Link to video showing functionality and pipeline goes here
  
  
 
-### The application was designed to fulfil the must have features as given by the brief: 
+**The application was designed to fulfil the must have features as given by the brief:** 
 
 -   Two tables with a relationship between them 
 
@@ -115,7 +115,7 @@ Link to video showing functionality and pipeline goes here
  
  
 
-### It also has some features that went above the basic brief but add functionality(should have): 
+**It also has some features that went above the basic brief but add functionality(should have):** 
 
 -   Ability for the user to update every attribute for an object in both tables 
 
@@ -127,12 +127,16 @@ Link to video showing functionality and pipeline goes here
 
 -   NGINX used as a load balancer/reverse proxy sat on a different machine 
 
--   Jenkins updates developer via email   
+-   Jenkins updates developer via email
+
+-   Database pre-populated with some data to search for and look at
+
+-   Logic in the flask app recognises if deleting an academic will leave a paper without an author and blocks it, it also recognises if a paper being created or deleted has the same name as another paper and prevents it before the database returns an error.       
 
  
  
 
-### If there was more time or the database would ever actually be used here are some features it could have: 
+**If there was more time or the database would ever actually be used here are some features it could have:** 
 
 -   Ability to filter search results, i.e. all papers from a certain year, or all authors in certain field of study. 
 
@@ -140,20 +144,17 @@ Link to video showing functionality and pipeline goes here
 
 -   ability to hyperlink names of objects to a search for that attribute 
 
--   run tests in a container rather than on jenkins server 
+-   run tests in a container rather than on jenkins server - tried to implement this but couldn't get the Jenkins server to recognise failed tests (i.e. it passed the stage as long as the container was built and run).  
 
 -   Docker volume to persist database data 
 
--   Integration testing# 
+-   Integration testing 
 
 -   Login feature to restrict some CRUD functionality to administrators 
 
--   Database pre-populated with some data to search for and look at 
-
- 
  
 
-### There were some initial ideas I had on the design of the web application that I decided where unnecessary or out of scope of project(Will not have): 
+ **There were some initial ideas I had on the design of the web application that I decided where unnecessary or out of scope of project(Will not have):** 
 
 -   Impact (a measure of how important a paper is in its field) dropped as it added little 
 
@@ -179,7 +180,7 @@ I originally planned for a few different attributes to each table to add a bit o
  
  
 
-### <p align="center">Original Entity Relationship Diagram</p> 
+### <p align="center">**Original Entity Relationship Diagram**</p> 
 
  
  
@@ -272,7 +273,7 @@ Perquisites:
  
  
 
-### <p align="center">CI/CD Pipeline Diagram</P> 
+### <p align="center">**CI/CD Pipeline Diagram**</P> 
 
 <p align="center"><img src='documentation/ci_pipeline.png' alt="ci pipeline diagram" width=600></p> 
 
@@ -301,7 +302,7 @@ Pipeline process:
  
  
 
-### <a name="docker-deployment"></a>Docker deployment 
+## <a name="docker-deployment"></a>Docker deployment 
 
 -   Docker will be installed on 4 VM's, three to be part of a docker swarm and another to be a load balancer and reverse proxy running NGINX 
 
