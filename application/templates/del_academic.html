@@ -16,5 +16,9 @@
     {% if deleted %}
         <h2>Academic Deleted</h2>
     {% endif %}
+    {% if last_author %}
+    <h2>Academic Not Deleted</h2>
+    <p>'Can\'t delete Academic it will leave a paper without an author please delete {{ last_author.title }} first'</p>
+{% endif %}
 </div>
 {% endblock body %}

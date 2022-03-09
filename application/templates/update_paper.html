@@ -37,5 +37,9 @@
             <p>{{ a.name }}</p>
         {% endfor %}
     {% endif %}
+    {% if duplicate %}
+        <h3>Paper Not Updated</h3>
+            <p>Title was a duplicate, please choose another title</p>
+    {% endif %}
 </div>
 {% endblock body %}

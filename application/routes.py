@@ -70,9 +70,13 @@ def update_paper():
     form.author4.choices = choices
 
     if request.method == 'POST':
+        duplicate = True
         pap = Papers.query.get(form.paper_object.data)
         if form.title.data != '':
-            pap.title = form.title.data
+            if form.title.data != pap.title and Papers.query.filter(Papers.title == form.title.data).first():
+                return render_template('update_paper.html', duplicate = duplicate)
+            else:
+                pap.title = form.title.data      
         if form.field_of_study.data != '':
             pap.field_of_study = form.field_of_study.data
         pap.year_published = form.year_published.data
@@ -225,11 +229,17 @@ def delete_academic():
     form = DeleteAcademicForm()
     form.name.choices = [(g.id, g.name) for g in Academics.query.order_by('name')]
     deleted = True
+    last_author = 0
     if request.method == 'POST':
+        a_to_del = Academics.query.filter_by(id=form.name.data).first()
         pap_to_del = Authors.query.filter_by(academic_id=form.name.data)
         for pap in pap_to_del:
-            db.session.delete(pap) 
-        a_to_del = Academics.query.filter_by(id=form.name.data).first()
+            if len(Authors.query.filter(Authors.academic_id == a_to_del)) == 1:
+                last_author = Papers.query.filter_by(id = pap.paper_id).first()
+                return render_template ('del_academic.html', last_author = last_author)
+        else:
+            db.session.delete(pap)
+            db.session.commit() 
         db.session.delete(a_to_del)
         db.session.commit()
         return render_template ('del_academic.html', deleted=deleted)

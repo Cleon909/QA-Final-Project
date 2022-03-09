@@ -35,13 +35,23 @@ class TestBase(TestCase):
 class TestPostResponse(TestBase):
     
     def test_delete_academic(self):
-        #test deletes the academic object created in setUp() and checks no objects are found
+        #first adds an author to the paper to make sure paper isn't authorless then test deletes the academic object created in setUp() and checks no objects are found
+        author2 = Authors(2,1)
+        db.session.add(author2)
+        db.session.commit()
         response = self.client.post('/delete_academic',
         data = {'name' : 1})
         self.assertEqual(response.status_code, 200)
         assert len(Academics.query.all()) == 3
-        assert len(Authors.query.all()) == 0
-    
+        assert len(Authors.query.all()) == 1
+
+    def test_delete_academic_last_author(self):
+        #test deletes the academic object created in setUp() making the paper authorless to make sure system won't delete 
+        response = self.client.post('/delete_academic',
+        data = {'name' : 1})
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Academic Not Deleted', response.data)
+
     def test_delete_paper(self):
         #test deletes the paper and author objects created in setUp() and checks no objects are found
         response = self.client.post('/delete_paper',
@@ -146,6 +156,19 @@ class TestPostResponse(TestBase):
         assert acad.name == 'Different Name'
         assert acad.current_institution == 'Different Institution'
         assert acad.field_of_study == 'Different FOD'
+
+    def test_update_paper_duplicate(self): 
+        #tests that updates to papers which duplicates a title are rejected (first needs to add a 2nd paper to duplicate )
+        paper2 = Papers('PaperB', '2000', 'Another field of study')
+        author2 = Authors(1,2)
+        db.session.add(paper2)
+        db.session.add(author2)
+        db.session.commit()
+        response = self.client.post('/update_paper',
+        data = {'paper_object': '1', 'title':'PaperB', 'year_published':'1900', 'field_of_study':'Different FOD', 'no_of_authors':'1', 'author1':'3'})
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Paper Not Updated', response.data)
+      
 
     def test_update_paper_1(self):
         #tests that updates to papers fields and linked authors are saved into database
