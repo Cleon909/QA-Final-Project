@@ -2,7 +2,7 @@
 
  
 [<p>Link to 9 min video showing the CRUD operation of the webapp and the CI/CD Pipeline in Operation</p>](https://1drv.ms/u/s!Agf77aE1B_XKfYzJc0lmOFNnlsE?e=yQS0AC) 
-
+[<p>Link to a short 4:30min video showing some of the CRUD operation of the webapp and the CI/CD Pipeline in Operation</p>](https://1drv.ms/u/s!Agf77aE1B_XKfuysmK6z_J5crxU?e=OgZkGx) 
 
  
  
