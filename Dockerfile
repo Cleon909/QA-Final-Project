@@ -1,8 +1,0 @@
-FROM python:3.10
-copy . .
-ARG SECRET_KEY
-ARG DATABASE_URI
-ENV SECRET_KEY=$SECRET_KEY
-ENV DATABASE_URI=$DATABASE_URI
-RUN pip install -r requirements.txt
-ENTRYPOINT ["python3", "app.py"]

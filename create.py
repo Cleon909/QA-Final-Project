@@ -1,15 +1,7 @@
 from application import db
 from application.models import Academics, Papers, Authors
-import sqlalchemy
-import sqlalchemy_utils
-import pymysql
-from os import getenv
 
-
-if not sqlalchemy_utils.functions.database_exists(getenv('DATABASE_URI')):
-    sqlalchemy_utils.functions.create_database(getenv("DATABASE_URI"))
-
-
+db.drop_all()
 db.create_all()
 
 academic1 = Academics('Bob Dole', 'University of Bradford', 'Metaphysics')

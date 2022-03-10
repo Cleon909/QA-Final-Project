@@ -6,8 +6,8 @@ app = Flask(__name__)
 
 UPLOAD_FOLDER = 'application/static'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = getenv('DATABASE_URI')
-app.config['SECRET_KEY'] = getenv('SECRET_KEY')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SECRET_KEY'] = 'secret key'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False 
 

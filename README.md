@@ -1,10 +1,13 @@
 # Academic Journal Database 
 
- 
-[<p>Link to 9 min video showing the CRUD operation of the webapp and the CI/CD Pipeline in Operation</p>](https://1drv.ms/u/s!Agf77aE1B_XKfYzJc0lmOFNnlsE?e=yQS0AC) 
-[<p>Link to a short 4:30min video showing some of the CRUD operation of the webapp and the CI/CD Pipeline in Operation</p>](https://1drv.ms/u/s!Agf77aE1B_XKfuysmK6z_J5crxU?e=OgZkGx) 
+ <b>This branch contains a stripped down version of the web app for running on local machine, without any of the pipeline scripts.  
+ You will need python installed on your machine, along with pip and venv.  
+ Using a bash terminal create a virtual environment with [python -m venv venv] activate it with [source venv/scripts/activate] (for a windows machine, in linux replace scripts with bin.  
+ run [pip install -r requirements.txt] to install necessary modules.
+ run [python create.py] first to set up the database then [python app.py] to run the app. the terminal will display the local IP address to access the app on your machine</b>
 
- 
+[<p>Link to 9 min video showing the CRUD operation of the webapp and the CI/CD Pipeline in Operation</p>](https://1drv.ms/u/s!Agf77aE1B_XKfYzJc0lmOFNnlsE?e=yQS0AC) 
+[<p>Link to a short 4:30min video showing some of the CRUD operation of the webapp and the CI/CD Pipeline in Operation</p>](https://1drv.ms/u/s!Agf77aE1B_XKfuysmK6z_J5crxU?e=OgZkGx)  
  
 
 ## Contents 
