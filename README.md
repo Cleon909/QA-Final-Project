@@ -362,7 +362,7 @@ in Github I split the dev branch from the main, and then split feature branches 
  
  
 
-[<p align='center'>Link to Jira Board</p>](https://corcoran909.atlassian.net/jira/software/projects/QFP/boards/3/roadmap?shared=&atlOrigin=eyJpIjoiMzdmNjMyMjUxNjAxNDZlOGJlMmVkNDlkNjdhYWIyMTAiLCJwIjoiaiJ9) 
+[<p align='center'>Link to Invite for Jira Board (will only be avaialbe until the 10th of April 2022</p>](https://id.atlassian.com/invite/p/jira-software?id=P2viWtRxTPGvon5o5lRumQ) 
  
  
  
