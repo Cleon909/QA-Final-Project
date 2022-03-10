@@ -2,7 +2,7 @@
 
  <b>This branch contains a stripped down version of the web app for running on local machine, without any of the pipeline scripts.  
  You will need python installed on your machine, along with pip and venv.  
- Using a bash terminal create a virtual environment with [python -m venv venv] activate it with [source venv/scripts/activate] (for a windows machine, in linux replace scripts with bin.  
+ Using a bash terminal create a virtual environment with [python -m venv venv] activate it with [source venv/scripts/activate] (for a windows machine, in linux replace scripts with bin.)  
  run [pip install -r requirements.txt] to install necessary modules.
  run [python create.py] first to set up the database then [python app.py] to run the app. the terminal will display the local IP address to access the app on your machine</b>
 
