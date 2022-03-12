@@ -382,27 +382,26 @@ in Github I split the dev branch from the main, and then split feature branches 
  -  python virtual environment
 
  1. clone the correct branch by entering the following into bash
-
- '''sh
+ '''sh  
  git clone -b run_on_local_machine https://github.com/Cleon909/QA_final_project.git
  '''
 
 2. cd into the QA_final_project folder and create a virtual environment for the python modules
-'''sh  
+```sh  
 python -m venv venv
 source venv/bin(or Scripts on windows)/activate
 pip install -r requirement.txt
-'''
+```
 
 3. create the database  
-'''sh  
+```sh  
 python create.db
-'''
+```
 
 4. run the app  
-'''sh  
+```sh  
 python app.py
-'''
+```
 
 5. The terminal will give you the ip address to enter into your browser to view the app.
 
