@@ -19,11 +19,13 @@
 
 5. [CI/CD pipeline](#ci/cd-pipeline) 
 
-6. [Docker Deployment](#docker-deployment) 
+6. [Unit Tests](#unit-tests)
 
-7. [Security and Risk Assessment](#security-and-risk-assessment) 
+7. [Docker Deployment](#docker-deployment) 
 
-8. [Project Planning and Version Source Control](#project-planning-and-version-source-control) 
+8. [Security and Risk Assessment](#security-and-risk-assessment) 
+
+9. [Project Planning and Version Source Control](#project-planning-and-version-source-control) 
 
  
  
@@ -283,7 +285,7 @@ Perquisites:
  
  
 
-Pipeline process:   
+## Pipeline process:   
 
 -   Git sends an changes to the dev branch to Jenkins 
 
@@ -300,7 +302,14 @@ Pipeline process:
 - Jenkins sends email to developer (me) with console log of build  
 
  
- 
+ ## <a name="unit-tests"></a> Unit Tests
+ -  The unit tests are run in the jenkins machine using a Python virutal environment. The tests provide 100% coverage, with the reports for the unit tests and coverage placed into xml files and published in the jenkins pipeline with Junit and Cobertura. 
+
+### <p align='center'> Test Results from Jenkins Pipeline</p>
+
+ <p align='center'><img src="documentation/test_results.png" alt="test result image" width=250></p> 
+
+ -  As the unit tests only tests the functions in the routes.py file (and the code they depend on) they don't pick up any problems with the SQL database itself. If the SQL image is created successfully, but the database has a problem neither the pipeline or the tests will pick this up. This is mentioned in the risk assessment. 
  
 
 ## <a name="docker-deployment"></a>Docker deployment 
