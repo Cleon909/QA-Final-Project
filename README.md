@@ -302,7 +302,7 @@ Perquisites:
 
  
  ## <a name="unit-tests"></a> Unit Tests
- -  The unit tests are run in the jenkins machine using a Python virutal environment. The tests provide 100% coverage, with the reports for the unit tests and coverage placed into xml files and published in the jenkins pipeline with Junit and Cobertura. 
+ -  The unit tests are run in the jenkins machine using a Python virtual environment. The tests provide 100% coverage, with the reports for the unit tests and coverage placed into xml files and published in the jenkins pipeline with JUnit and Cobertura. 
 
 ### <p align='center'> Test Results from Jenkins Pipeline</p>
 
@@ -388,20 +388,19 @@ in Github I split the dev branch from the main, and then split feature branches 
  '''
 
 2. cd into the QA_final_project folder and create a virtual environment for the python modules
-
-'''sh
+'''sh  
 python -m venv venv
 source venv/bin(or Scripts on windows)/activate
 pip install -r requirement.txt
 '''
 
 3. create the database  
-'''sh
+'''sh  
 python create.db
 '''
 
 4. run the app  
-'''sh
+'''sh  
 python app.py
 '''
 
