@@ -389,7 +389,16 @@ in Github I split the dev branch from the main, and then split feature branches 
 2. cd into the QA_final_project folder and create a virtual environment for the python modules
 ```sh  
 python -m venv venv
-source venv/bin(or Scripts on windows)/activate
+```
+for windows
+```sh
+source venv/Scripts/activate
+```
+for linux
+```sh
+source venv/bin/activate
+```
+```sh
 pip install -r requirement.txt
 ```
 
