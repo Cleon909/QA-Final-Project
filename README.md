@@ -306,8 +306,8 @@ Perquisites:
 
 ### <p align='center'> Test Results from Jenkins Pipeline</p>
 
- <p align='center'><img src="documentation/test_results.png" alt="test result image" width=250></p> 
-
+<p align='center'><img src="documentation/test_results.png" alt="test result image" width=250></p> 
+<p align='center'><img src="documentation/test_coverage.png" alt="test coverage image" width=250></p>
  -  As the unit tests only tests the functions in the routes.py file (and the code they depend on) they don't pick up any problems with the SQL database itself. If the SQL image is created successfully, but the database has a problem neither the pipeline or the tests will pick this up. This is mentioned in the risk assessment. 
  
 
