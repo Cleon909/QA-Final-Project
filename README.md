@@ -4,8 +4,7 @@
 [<p>Link to 9 min video showing the CRUD operation of the webapp and the CI/CD Pipeline in Operation</p>](https://1drv.ms/u/s!Agf77aE1B_XKfYzJc0lmOFNnlsE?e=yQS0AC) 
 [<p>Link to a short 4:30min video showing some of the CRUD operation of the webapp and the CI/CD Pipeline in Operation</p>](https://1drv.ms/u/s!Agf77aE1B_XKfuysmK6z_J5crxU?e=OgZkGx) 
 
- The run_on_local_machine branch contains a stripped down version of the webapp which runs the database with SQLlite.
- 
+ The run_on_local_machine branch contains a stripped down version of the webapp which runs the database with SQLlite. To see intructions on how to run it see [Instructions](#instructions) at the end of the readme.
 
 ## Contents 
 
@@ -303,7 +302,7 @@ Perquisites:
 
  
  ## <a name="unit-tests"></a> Unit Tests
- -  The unit tests are run in the jenkins machine using a Python virutal environment. The tests provide 100% coverage, with the reports for the unit tests and coverage placed into xml files and published in the jenkins pipeline with Junit and Cobertura. 
+ -  The unit tests are run in the jenkins machine using a Python virtual environment. The tests provide 100% coverage, with the reports for the unit tests and coverage placed into xml files and published in the jenkins pipeline with JUnit and Cobertura. 
 
 ### <p align='center'> Test Results from Jenkins Pipeline</p>
 
@@ -374,8 +373,51 @@ in Github I split the dev branch from the main, and then split feature branches 
 [<p align='center'>Link to Invite for Jira Board (will only be avaialbe until the 10th of April 2022</p>](https://id.atlassian.com/invite/p/jira-software?id=P2viWtRxTPGvon5o5lRumQ) 
  
  
+ # <a name='instructions'></a>Instructions to run Application on local machine.
  
- 
+ Programs you will need.
+ -  GIT
+ -  Python
+ -  pip normally bundled with python
+ -  python virtual environment
+
+ 1. clone the correct branch by entering the following into bash
+ '''sh  
+ git clone -b run_on_local_machine https://github.com/Cleon909/QA_final_project.git
+ '''
+
+2. cd into the QA_final_project folder and create a virtual environment for the python modules
+create a venv
+```sh  
+python -m venv venv
+```
+activate the venv 
+    
+for windows
+```sh
+source venv/Scripts/activate
+```
+for linux
+```sh
+source venv/bin/activate
+```
+install modules
+```sh
+pip install -r requirement.txt
+```
+
+3. create the database  
+```sh  
+python create.db
+```
+
+4. run the app  
+```sh  
+python app.py
+```
+
+5. The terminal will give you the ip address to enter into your browser to view the app.
+
  
  
  
